@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,132 @@
     <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
+<style>
+    .transaction {
+        background-color: #F8F8F8;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .tab-container {
+        background-color: #F1F1FA;
+        border-radius: 21px;
+    }
+
+    .tab-item {
+        padding: 12px 0;
+        text-align: center;
+        width: 50%;
+    }
+
+    .tab-item.active {
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+    }
+</style>
+
 <body>
-    <h1 class="text-center">Trang thống kê</h1>
+    <div class="container">
+        <div class="title d-flex justify-content-between mt-5 mb-3">
+            <span>
+                <i class="fa-solid fa-chevron-left"></i>
+            </span>
+            <h5>Thống kê</h5>
+            <span>
+                <i class="fa-solid fa-download"></i>
+            </span>
+        </div>
+        <div class="tab-container d-flex justify-content-between mb-3">
+            <div class="tab-item active">
+                <span>Chi tiêu</span>
+            </div>
+            <div class="tab-item">
+                <span>Thu nhập</span>
+            </div>
+        </div>
+
+        <div class="duration-selection text-end">
+            <select style="padding: 6px 10px; border-radius: 8px; width: 30%;">
+                <option value="day">Ngày</option>
+                <option selected value="month">Tháng</option>
+                <option value="year">Năm</option>
+            </select>
+        </div>
+
+        <div class="chart">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="type-selection mt-2 w-50">
+                <select style="padding: 6px 10px; border-radius: 8px; width: 60%;">
+                    <option selected value="transaction">Giao dịch</option>
+                    <option value="category">Danh mục</option>
+                </select>
+            </div>
+            <div class="icon" style="
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+            border-radius: 8px;
+        ">
+                <i class="fa-solid fa-arrow-down-wide-short"></i>
+            </div>
+        </div>
+        <div class="transaction-list mt-5">
+            <div class="d-flex justify-content-between align-items-center transaction">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/FB.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">Ăn uống</span>
+                        <span class="text-start text-secondary w-100">Cơm trưa</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">30.0000 đ</span>
+                    <span class="text-end text-secondary">11:30 12-10-23</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/shopping.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">Ăn uống</span>
+                        <span class="text-start text-secondary w-100">Cơm trưa</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">30.0000 đ</span>
+                    <span class="text-end text-secondary">11:30 12-10-23</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/shopping.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">Mua sắm</span>
+                        <span class="text-start text-secondary w-100">Áo khoác</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">230.0000 đ</span>
+                    <span class="text-end text-secondary">20:12 10-10-23</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="navbar"></div>
 </body>
 
@@ -20,4 +145,60 @@
             document.getElementById('navbar').innerHTML = data;
         });
 </script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var data = {
+            labels: [
+                "Mua sắm",
+                "Đi lại",
+                "Ăn uống"
+            ],
+            datasets: [
+                {
+                    data: [50, 15, 35],
+                    backgroundColor: [
+                        "#FCAC12",
+                        "#7F3DFF",
+                        "#FD3C4A"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FCAC12",
+                        "#7F3DFF",
+                        "#FD3C4A"
+                    ]
+                }]
+        };
+        var promisedDeliveryChart = new Chart(document.getElementById('myChart'), {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                legend: {
+                    display: false
+                }
+            }
+        });
+        Chart.pluginService.register({
+            beforeDraw: function (chart) {
+                var width = chart.chart.width,
+                    height = chart.chart.height,
+                    ctx = chart.chart.ctx;
+
+                ctx.restore();
+                var fontSize = (height / 200).toFixed(2);
+                ctx.font = fontSize + "em sans-serif";
+                ctx.textBaseline = "middle";
+                var text = "3.230.000 đ",
+                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                    textY = height / 2;
+                ctx.fillText(text, textX, textY);
+
+                ctx.save();
+            }
+        });
+    }
+</script>
+
 </html>
