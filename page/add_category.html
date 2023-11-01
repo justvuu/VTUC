@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm danh mục</title>
+    <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<style>
+    .transaction {
+        background-color: #F8F8F8;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .tab-container {
+        background-color: #F1F1FA;
+        border-radius: 21px;
+    }
+
+    .tab-item {
+        padding: 12px 0;
+        text-align: center;
+        width: 50%;
+    }
+
+    .tab-item.active {
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+    }
+
+    .icon-button {
+        padding: 5px 20px;
+        border-radius: 8px;
+        background: transparent;
+        border: 0.2px solid lightgray;
+        cursor: pointer;
+        transition: border-color 0.2s; 
+    }
+
+    .icon-button:focus {
+        border: 2px solid #665D5D; 
+    }
+
+    .color-button {
+        border: 2px solid transparent;
+        padding: 20px 36px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+        position: relative;
+    }
+
+    .color-button:focus::before {
+        content: "✔";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 26px;
+        color: #FFFFFF;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .btn-add {
+        width: 100%;
+        height: 49px;
+        background-color: #29756F;
+        opacity: 0.5;
+        color: #FFFFFF;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        margin-top: 32px;
+    }
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="title d-flex justify-content-between mt-5 mb-3">
+            <a href="/page/categories.html" class="text-dark text-decoration-none"> Hủy </a>
+            <h5>Thêm danh mục</h5>
+            <span></span>
+        </div>
+        <div class="tab-container d-flex justify-content-between mb-3">
+            <div class="tab-item active">
+                <span>Chi tiêu</span>
+            </div>
+            <div class="tab-item">
+                <span>Thu nhập</span>
+            </div>
+        </div>
+
+        <form>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Tên danh mục:</label>
+                <input type="text" class="form-control" id="name" placeholder="Nhập tên danh mục">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Mô tả:</label>
+                <input type="text" class="form-control" placeholder="Nhập mô tả">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Biểu tượng:</label>
+                <div class="icon-select">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-around">
+                            <button type="button" class="icon-button" data-icon="icon1">
+                                <img src="../assets/images/restaurant.png" alt="Biểu tượng 1">
+                            </button>
+                        
+                            <button type="button" class="icon-button " data-icon="icon2">
+                                <img src="../assets/images/shopping-bag.png" alt="Biểu tượng 2">
+                            </button>
+                        
+                            <button type="button" class="icon-button" data-icon="icon3">
+                                <img src="../assets/images/car.png" alt="Biểu tượng 3">
+                            </button>
+        
+                            <button type="button" class="icon-button" data-icon="icon4">
+                                <img src="../assets/images/recurring-bill.png" alt="Biểu tượng 3">
+                            </button>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-around mt-3">
+                            <button type="button" class="icon-button" data-icon="icon5">
+                                <img src="../assets/images/salary.png" alt="Biểu tượng 3">
+                            </button>
+        
+                            <button type="button" class="icon-button" data-icon="icon6">
+                                <img src="../assets/images/phone.png" alt="Biểu tượng 3">
+                            </button>
+
+                            <button type="button" class="icon-button" data-icon="icon7">
+                                <img src="../assets/images/clothes.png" alt="Biểu tượng 3">
+                            </button>
+        
+                            <button type="button" class="icon-button" data-icon="icon8">
+                                <img src="../assets/images/music.png" alt="Biểu tượng 3">
+                            </button>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-around mt-3">
+                            <button type="button" class="icon-button" data-icon="icon9">
+                                <img src="../assets/images/saving.png" alt="Biểu tượng 3">
+                            </button>
+        
+                            <button type="button" class="icon-button" data-icon="icon10">
+                                <img src="../assets/images/internet.png" alt="Biểu tượng 3">
+                            </button>
+
+                            <button type="button" class="icon-button" data-icon="icon11">
+                                <img src="../assets/images/game.png" alt="Biểu tượng 3">
+                            </button>
+        
+                            <button type="button" class="icon-button" data-icon="icon12">
+                                <img src="../assets/images/image 8.png" alt="Biểu tượng 3">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Màu sắc:</label>
+                <div class="icon-select">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-around">
+                            <button type="button" class="color-button" data-color="color1" style="background: #B08B46;">
+                            </button>
+                        
+                            <button type="button" class="color-button" data-color="color2" style="background: #FCAC12;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color3" style="background: #A31D24;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color4" style="background: #FD3C4A;">
+                            </button>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-around mt-3">
+                            <button type="button" class="color-button" data-color="color5" style="background: #9321C8;">
+                            </button>
+                        
+                            <button type="button" class="color-button" data-color="color6" style="background: #0077FF;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color7" style="background: #00A86B;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color8" style="background: #F088F9;">
+                            </button>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-around mt-3">
+                            <button type="button" class="color-button" data-color="color9" style="background: #F18E33;">
+                            </button>
+                        
+                            <button type="button" class="color-button" data-color="color10" style="background: #7F3DFF;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color11" style="background: #55F7E3;">
+                            </button>
+
+                            <button type="button" class="color-button" data-color="color12" style="background: #F9F135;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            
+            <button type="submit" class="btn-add">Thêm</button>
+          </form>
+
+    <div id="navbar"></div>
+</body>
+
+<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<script>
+    fetch('../components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        });
+</script>
+
+
+</html>
