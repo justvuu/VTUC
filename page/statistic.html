@@ -32,6 +32,16 @@
         border-radius: 31px;
         color: white;
     }
+
+    /* .navbar {
+        background-color: #fff;
+        color: #29756f;
+        padding: 10px;
+      }
+      
+      .nav-link.text-center.highlight {
+        font-weight: bold;
+      } */
 </style>
 
 <body>
@@ -46,16 +56,16 @@
             </span>
         </div>
         <div class="tab-container d-flex justify-content-between mb-3">
-            <div class="tab-item active">
+            <div id="tab-expense" class="tab-item active">
                 <span>Chi tiêu</span>
             </div>
-            <div class="tab-item">
+            <div id="tab-invoice" class="tab-item">
                 <span>Thu nhập</span>
             </div>
         </div>
 
-        <div class="duration-selection text-end">
-            <select style="padding: 6px 10px; border-radius: 8px; width: 30%;">
+        <div class="text-end">
+            <select id="range-selection" style="padding: 6px 10px; border-radius: 8px; width: 30%;">
                 <option value="day">Ngày</option>
                 <option selected value="month">Tháng</option>
                 <option value="year">Năm</option>
@@ -67,8 +77,8 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center">
-            <div class="type-selection mt-2 w-50">
-                <select style="padding: 6px 10px; border-radius: 8px; width: 60%;">
+            <div class="mt-2 w-50">
+                <select id="type-selection" style="padding: 6px 10px; border-radius: 8px; width: 60%;">
                     <option selected value="transaction">Giao dịch</option>
                     <option value="category">Danh mục</option>
                 </select>
@@ -81,7 +91,7 @@
                 <i class="fa-solid fa-arrow-down-wide-short"></i>
             </div>
         </div>
-        <div class="transaction-list mt-5">
+        <div id="transaction-list" class="mt-5">
             <div class="d-flex justify-content-between align-items-center transaction">
                 <div class="left-side d-flex align-items-center">
                     <div class="icon me-3">
@@ -102,7 +112,7 @@
             <div class="d-flex justify-content-between align-items-center transaction mt-3">
                 <div class="left-side d-flex align-items-center">
                     <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/shopping.png" alt="meal">
+                        <img style="width: 50px;" src="../assets/images/FB.png" alt="meal">
                     </div>
                     <div class="content d-flex align-items-center flex-column">
                         <span class="text-start w-100 fw-bolder">Ăn uống</span>
@@ -143,7 +153,11 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            const statistic_nav = document.getElementById("statistic-nav");
+            statistic_nav.setAttribute("src", "../assets/images/analysis_active.svg");
         });
+
+
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
@@ -199,6 +213,161 @@
             }
         });
     }
+
+    const expense_tab = document.getElementById("tab-expense");
+    const invoice_tab = document.getElementById("tab-invoice");
+    const transaction_list = document.getElementById("transaction-list");
+    const range_selection = document.getElementById("range-selection");
+    const type_selection = document.getElementById("type-selection");
+
+    const invoice_data = [
+        {
+            'category': 'Tiền lương',
+            'description': 'Sola tech tháng 9',
+            'amount': '32.000.000',
+            'date': '12:12 05-10-23',
+            'image': 'money'
+        },
+
+        {
+            'category': 'Tiền thưởng',
+            'description': 'Tăng ca',
+            'amount': '1.000.000',
+            'date': '21:32 06-10-23',
+            'image': 'award'
+        },
+    ];
+
+    const expense_data = [
+        {
+            'category': 'Ăn uống',
+            'description': 'Cơm trưa',
+            'amount': '20.000',
+            'date': '12:32 10-10-23',
+            'image': 'FB'
+        },
+        {
+            'category': 'Ăn uống',
+            'description': 'Cơm tối',
+            'amount': '25.000',
+            'date': '21:12 10-10-23',
+            'image': 'FB'
+        },
+        {
+            'category': 'Mua sắm',
+            'description': 'Áo khoác',
+            'amount': '1.000.000',
+            'date': '21:32 09-10-23',
+            'image': 'shopping'
+        },
+    ];
+
+    const day_transaction_expense_data = [
+        {
+            'category': 'Mua sắm',
+            'description': 'Áo khoác',
+            'amount': '1.000.000',
+            'date': '21:32 09-10-23',
+            'image': 'shopping'
+        },
+        {
+            'category': 'Mua sắm',
+            'description': 'Áo khoác',
+            'amount': '1.000.000',
+            'date': '12:00 09-10-23',
+            'image': 'shopping'
+        },
+        {
+            'category': 'Mua sắm',
+            'description': 'Áo khoác',
+            'amount': '1.000.000',
+            'date': '10:12 09-10-23',
+            'image': 'shopping'
+        },
+    ]
+
+    invoice_tab.addEventListener("click", () => {
+        if (!invoice_tab.classList.contains("active")) {
+            invoice_tab.classList.add("active");
+            expense_tab.classList.remove("active");
+            transaction_list.innerHTML = '';
+            invoice_data.forEach(transaction => {
+                transaction_list.innerHTML += `
+                <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
+                        <span class="text-start text-secondary w-100">${transaction.description}</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
+                    <span class="text-end text-secondary">${transaction.date}</span>
+                </div>
+            </div>
+                `;
+            });
+        };
+    });
+
+    expense_tab.addEventListener("click", () => {
+        if (!expense_tab.classList.contains("active")) {
+            expense_tab.classList.add("active");
+            invoice_tab.classList.remove("active");
+            transaction_list.innerHTML = '';
+            expense_data.forEach(transaction => {
+                transaction_list.innerHTML += `
+                <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
+                        <span class="text-start text-secondary w-100">${transaction.description}</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
+                    <span class="text-end text-secondary">${transaction.date}</span>
+                </div>
+            </div>
+                `;
+            });
+        };
+    });
+
+    range_selection.addEventListener("change", () => {
+        const selectedOption = range_selection.options[range_selection.selectedIndex];
+        if (selectedOption.value == 'day') {
+            transaction_list.innerHTML = '';
+            day_transaction_expense_data.forEach(transaction => {
+                transaction_list.innerHTML += `
+                <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                <div class="left-side d-flex align-items-center">
+                    <div class="icon me-3">
+                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
+                    </div>
+                    <div class="content d-flex align-items-center flex-column">
+                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
+                        <span class="text-start text-secondary w-100">${transaction.description}</span>
+                    </div>
+                </div>
+
+                <div class="right-side d-flex align-items-center flex-column">
+                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
+                    <span class="text-end text-secondary">${transaction.date}</span>
+                </div>
+            </div>
+                `;
+            });
+        }
+    })
 </script>
 
 </html>
