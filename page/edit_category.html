@@ -4,12 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm danh mục</title>
+    <title>Sửa danh mục</title>
     <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <style>
+
+    .transaction {
+        background-color: #F8F8F8;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
     .tab-container {
         background-color: #F1F1FA;
         border-radius: 21px;
@@ -28,7 +35,7 @@
     }
 
     .icon-button {
-      padding: 5px 20px;
+        padding: 5px 20px;
         border-radius: 8px;
         background: transparent;
         border: 0.2px solid lightgray;
@@ -71,26 +78,13 @@
         opacity: 0.5;
         pointer-events: none;
     }
-
-    .form-container {
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
-}
-    .form-container.hidden {
-        opacity: 0;
-        transform: translateY(-20px);
-        pointer-events: none; /* Ngăn không cho người dùng tương tác khi form bị ẩn */
-    }
-
 </style>
 
 <body>
     <div class="container">
         <div class="title d-flex justify-content-between mt-5 mb-3">
-            <a href="/page/categories.html" class="text-dark text-decoration-none"> Hủy </a>
-            <h5>Thêm danh mục</h5>
+            <a href="#" class="text-dark text-decoration-none"> Hủy </a>
+            <h5>Sửa danh mục</h5>
             <span></span>
         </div>
         <div class="tab-container d-flex justify-content-between mb-3">
@@ -102,14 +96,15 @@
             </div>
         </div>
 
-        <form class="form1">
+        <form>
             <div class="mb-3">
                 <label class="form-label fw-bold">Tên danh mục:</label>
-                <input type="text" class="form-control" id="name" placeholder="Nhập tên danh mục">
+                <input type="text" class="form-control" id="name" value="Điện nước">
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold">Mô tả:</label>
-                <input type="text" class="form-control" id="description" placeholder="Nhập mô tả">
+                <input type="text" class="form-control" id="description" placeholder="Chưa có mô tả">
+
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold">Biểu tượng:</label>
@@ -128,7 +123,7 @@
                                 <img src="../assets/images/car.svg" alt="car">
                             </button>
         
-                            <button type="button" class="icon-button" data-icon="recurring_bill">
+                            <button type="button" class="icon-button selected-icon" data-icon="recurring_bill">
                                 <img src="../assets/images/recurring_bill.svg" alt="recurring_bill">
                             </button>
                         </div>
@@ -204,20 +199,20 @@
                             <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2" style="background: #F18E33;">
                             </button>
                         
-                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
+                            <button type="button" class="color-button selected-color" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
                             </button>
 
                             <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2" style="background: #55F7E3;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#F8FBD1" style="background: #F9F135;">
+                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#FFF6C6" style="background: #F9F135;">
                             </button>
                         </div>
                     </div>
                 </div>
               </div>
             
-            <button type="submit" class="btn-add inactive-btn">Thêm</button>
+            <button type="submit" class="btn-add inactive-btn">Lưu</button>
           </form>
 
     <div id="navbar"></div>
@@ -324,7 +319,7 @@
 
        
     // --------------lấy loại danh mục khi chuyển tab 
-    // Biến lưu trạng thái loại danh mục 
+    // Biến lưu trạng thái form
     let selectedCategoryType = 'expense';
 
     // Bắt sự kiện khi tab được chọn
@@ -345,7 +340,7 @@
 
     // ----------- thêm mới 1 danh mục và lưu vào local storage
     addButton.addEventListener('click', function() {
-        const name = document.getElementById('name').value.trim();
+        const name = document.getElementById('name').value;
         const description = document.getElementById('description').value || null;
         const icon = selectedIconButton.dataset.icon;
 

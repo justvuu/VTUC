@@ -26,9 +26,11 @@
 <body>
     <div class="container">
         <div class="title d-flex justify-content-between mt-5 mb-3">
-            <span>
+            <a href="/page/setting.html" class="text-dark text-decoration-none">
                 <i class="fa-solid fa-chevron-left"></i>
-            </span>
+            </a>
+                
+         
             <h5>Danh mục</h5>
             <a href="/page/add_category.html" class="text-dark">
                 <i class="fa-solid fa-plus"></i>
@@ -48,32 +50,6 @@
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
         });
-</script>
-
-<script type="text/javascript">
-    window.onload = function () {
-        var data = {
-            labels: [
-                "Mua sắm",
-                "Đi lại",
-                "Ăn uống"
-            ],
-            datasets: [
-                {
-                    data: [50, 15, 35],
-                    backgroundColor: [
-                        "#FCAC12",
-                        "#7F3DFF",
-                        "#FD3C4A"
-                    ],
-                    hoverBackgroundColor: [
-                        "#FCAC12",
-                        "#7F3DFF",
-                        "#FD3C4A"
-                    ]
-                }]
-        };
-    }
 </script>
 
 <script>

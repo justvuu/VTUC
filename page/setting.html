@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiết lập</title>
+    <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<style>
+    .user_img {
+        width: 90%;
+    }
+
+    .directional {
+        text-decoration: none;
+        color: black;
+        font-weight: 100;
+    }
+
+    .seperate {
+        margin: 25px;
+        border: 1px solid rgb(231, 230, 230);
+    }
+
+
+    .btn {
+        padding: 12px 0;
+        text-align: center;
+        width: 50%;
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+        font-weight: 500;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="title d-flex justify-content-center mt-5 mb-3">
+            <h5>Thiết lập</h5>
+        </div>
+        <div class="info row mx-3 align-items-center">
+            <div class="col-2 px-0">
+                <img class="user_img" src="../assets/images/user.svg" alt="" srcset="">
+            </div>
+            <div class="col-9 px-2">
+                <span class="w-100 fw-bolder">Vu Nguyen Tuan</span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-5 mx-4">
+            <div class="left-side d-flex align-items-center">
+                <div class="icon me-3">
+                    <i class="fas fa-user fa-lg"></i>
+                </div>
+                <div class="content d-flex align-items-center flex-column">
+                    <span class="text-start w-100">Thông tin cá nhân</span>
+                </div>
+            </div>
+            <div class="right-side d-flex align-items-center flex-column">
+                <a href="#" class="directional">
+                    <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-5 mx-4">
+            <div class="left-side d-flex align-items-center">
+                <div class="icon me-3">
+                    <i class="fas fa-lock fa-lg"></i>
+                </div>
+                <div class="content d-flex align-items-center flex-column">
+                    <span class="text-start w-100">Đổi mật khẩu</span>
+                </div>
+            </div>
+            <div class="right-side d-flex align-items-center flex-column">
+                <a href="#" class="directional">
+                    <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-5 mx-4">
+            <div class="left-side d-flex align-items-center">
+                <div class="icon me-3">
+                    <i class="fas fa-light fa-table-cells-large fa-lg"></i>
+                </div>
+                <div class="content d-flex align-items-center flex-column">
+                    <span class="text-start w-100">Danh mục</span>
+                </div>
+            </div>
+            <div class="right-side d-flex align-items-center flex-column">
+                <a href="/page/categories.html" class="directional">
+                    <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="seperate">
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4 mx-4">
+            <div class="left-side d-flex align-items-center">
+                <div class="icon me-3">
+                    <i class="fas fa-circle-question fa-lg"></i>
+                </div>
+                <div class="content d-flex align-items-center flex-column">
+                    <span class="text-start w-100">Trợ giúp</span>
+                </div>
+            </div>
+            <div class="right-side d-flex align-items-center flex-column">
+                <a href="#" class="directional">
+                    <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-5 mx-4">
+            <div class="left-side d-flex align-items-center">
+                <div class="icon me-3">
+                    <i class="fas fa-triangle-exclamation fa-lg"></i>
+                </div>
+                <div class="content d-flex align-items-center flex-column">
+                    <span class="text-start w-100">Báo cáo</span>
+                </div>
+            </div>
+            <div class="right-side d-flex align-items-center flex-column">
+                <a href="#" class="directional">
+                    <i class="fa-solid fa-chevron-up fa-rotate-90"></i>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            <button type="button" class="btn">Đăng xuất</button>
+        </div>
+    </div>
+    <div id="navbar"></div>
+</body>
+
+<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<script>
+    fetch('../components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+            const user_nav = document.getElementById("user-nav");
+            user_nav.setAttribute("src", "../assets/images/user_active.svg");
+        });
+</script>
+
+
+</html>
