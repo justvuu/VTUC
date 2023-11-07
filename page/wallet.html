@@ -400,6 +400,8 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            const wallet_nav = document.getElementById("wallet-nav");
+            wallet_nav.setAttribute("src", "../assets/images/wallet_active.svg");
         });
 </script>
 </html>
