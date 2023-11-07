@@ -1,26 +1,85 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-bottom">
+<style>
+    /* CSS styles for Navbar */
+    .navbar {
+        color: white;
+        padding: 10px;
+    }
+    .button {
+        
+    }
+    .button.highlight {
+        background-color:  #29756f;
+        padding: 5px;
+    }
+    .button:hover {
+        border-radius: 5px;
+        background-color: #29756f;
+    }
+
+</style>
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-bottom">
     <div class="container">
         <div class="row w-100">
             <div class="col-3">
-                <a class="nav-link text-light text-center" style="font-size: 26px;" href="/">
-                    <i class="fa-solid fa-house"></i>
+                
+                    <a class="nav-link text-center" id="home-link" style="font-size: 26px;" href="/">
+                        <button class="button">
+                        <svg width="30" height="31" viewBox="0 0 30 31" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.275 4.0502L4.5375 9.3002C3.4125 10.1752 2.5 12.0377 2.5 13.4502V22.7127C2.5 25.6127 4.8625 27.9877 7.7625 27.9877H22.2375C25.1375 27.9877 27.5 25.6127 27.5 22.7252V13.6252C27.5 12.1127 26.4875 10.1752 25.25 9.3127L17.525 3.9002C15.775 2.6752 12.9625 2.7377 11.275 4.0502Z" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 22.9873V19.2373" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    </a>
+                
+            </div>
+            <div class="button col-3">
+                <a class="nav-link text-center" id="wallet-link" style="font-size: 26px;" href="/page/wallet.html">
+                    <svg width="31" height="31" viewBox="0 0 31 31" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M28.1665 15.5V21.75C28.1665 25.5 25.6665 28 21.9165 28H9.4165C5.6665 28 3.1665 25.5 3.1665 21.75V15.5C3.1665 12.1 5.2165 9.725 8.404 9.325C8.729 9.275 9.0665 9.25 9.4165 9.25H21.9165C22.2415 9.25 22.554 9.26248 22.854 9.31248C26.079 9.68748 28.1665 12.075 28.1665 15.5Z" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22.8558 9.3125C22.5558 9.2625 22.2433 9.25001 21.9183 9.25001H9.41826C9.06826 9.25001 8.73076 9.27501 8.40576 9.32501C8.58076 8.97501 8.83076 8.65001 9.13076 8.35001L13.1933 4.275C14.9058 2.575 17.6808 2.575 19.3933 4.275L21.5808 6.48752C22.3808 7.27502 22.8058 8.275 22.8558 9.3125Z" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M28.1665 16.125H24.4165C23.0415 16.125 21.9165 17.25 21.9165 18.625C21.9165 20 23.0415 21.125 24.4165 21.125H28.1665" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </a>
             </div>
-            <div class="col-3">
-                <a class="nav-link text-light text-center" style="font-size: 26px;" href="/page/wallet.html">
-                    <i class="fa-solid fa-wallet"></i>
+            <div class="button col-3">
+                <a class="nav-link text-center" id="statistical-link" style="font-size: 26px;" href="/page/statistic.html">
+                    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.2334 15.5C26.4834 15.5 27.8334 14.25 26.6334 10.15C25.8209 7.38748 23.4459 5.01248 20.6834 4.19998C16.5834 2.99998 15.3334 4.34998 15.3334 7.59998V11.2C15.3334 14.25 16.5834 15.5 19.0834 15.5H23.2334Z" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25.3334 18.8752C24.1709 24.6627 18.6209 28.8627 12.3084 27.8377C7.57091 27.0752 3.75841 23.2627 2.98341 18.5252C1.97091 12.2377 6.14591 6.6877 11.9084 5.5127" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </a>
             </div>
-            <div class="col-3">
-                <a class="nav-link text-light text-center" style="font-size: 26px;" href="http://127.0.0.1:5500/page/statistic.html">
-                    <i class="fa-solid fa-chart-pie"></i>
-                </a>
-            </div>
-            <div class="col-3">
-                <a class="nav-link text-light text-center" style="font-size: 26px;" href="#">
-                    <i class="fa-solid fa-user"></i>
+            <div class="button col-3">
+                <a class="nav-link text-center" id="user-link" style="font-size: 26px;" href="#">
+                    <svg width="30" height="31" viewBox="0 0 30 31" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 15.5C18.4518 15.5 21.25 12.7018 21.25 9.25C21.25 5.79822 18.4518 3 15 3C11.5482 3 8.75 5.79822 8.75 9.25C8.75 12.7018 11.5482 15.5 15 15.5Z" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25.7374 28C25.7374 23.1625 20.9249 19.25 14.9999 19.25C9.07495 19.25 4.26245 23.1625 4.26245 28" stroke="#9DB2CE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </a>
             </div>
         </div>
     </div>
 </nav>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy đối tượng Navbar và các liên kết
+        const homeLink = document.getElementById("home-link");
+        const walletLink = document.getElementById("wallet-link");
+        const statisticalLink = document.getElementById("statistical-link");
+        const userLink = document.getElementById("user-link");
+
+        // Lấy địa chỉ trang hiện tại
+        const currentLocation = window.location.pathname;
+
+        // Kiểm tra địa chỉ trang và thêm lớp "highlight" cho liên kết tương ứng
+        if (currentLocation === "/") {
+            homeLink.classList.add("highlight");
+        } else if (currentLocation === "/page/wallet.html") {
+            walletLink.classList.add("highlight");
+        } else if (currentLocation === "/page/statistic.html") {
+            statisticalLink.classList.add("highlight");
+        } else {
+            userLink.classList.add("highlight");
+        }
+    });
+</script>
