@@ -10,6 +10,13 @@
 </head>
 
 <style>
+
+    .transaction {
+        background-color: #F8F8F8;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
     .tab-container {
         background-color: #F1F1FA;
         border-radius: 21px;
@@ -28,7 +35,7 @@
     }
 
     .icon-button {
-      padding: 5px 20px;
+        padding: 5px 20px;
         border-radius: 8px;
         background: transparent;
         border: 0.2px solid lightgray;
@@ -71,19 +78,6 @@
         opacity: 0.5;
         pointer-events: none;
     }
-
-    .form-container {
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
-}
-    .form-container.hidden {
-        opacity: 0;
-        transform: translateY(-20px);
-        pointer-events: none; /* Ngăn không cho người dùng tương tác khi form bị ẩn */
-    }
-
 </style>
 
 <body>
@@ -102,7 +96,7 @@
             </div>
         </div>
 
-        <form class="form1">
+        <form>
             <div class="mb-3">
                 <label class="form-label fw-bold">Tên danh mục:</label>
                 <input type="text" class="form-control" id="name" placeholder="Nhập tên danh mục">
@@ -110,6 +104,7 @@
             <div class="mb-3">
                 <label class="form-label fw-bold">Mô tả:</label>
                 <input type="text" class="form-control" id="description" placeholder="Nhập mô tả">
+
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold">Biểu tượng:</label>
