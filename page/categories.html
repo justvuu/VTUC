@@ -55,39 +55,30 @@
 </script>
 
 <script>
-    function getCategories() {
+   function getCategories() {
+    const storedCategories = localStorage.getItem('categories');
+
+    if (storedCategories) {
+        return JSON.parse(storedCategories);
+    } else {
         const categories = [
-            {name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType : "expense"},
-            {name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FDD5D7", categoryType : "expense"},
-            {name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType : "expense"},
-            {name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense"},  
-            {name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income"},  
+            { name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType: "expense" },
+            { name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FDD5D7", categoryType: "expense" },
+            { name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType: "expense" },
+            { name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense" },
+            { name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income" },
         ];
+        localStorage.setItem('categories', JSON.stringify(categories));
 
-        const categoriesJSON = localStorage.getItem('categories', JSON.stringify(categories));
-            return JSON.parse(categoriesJSON);
-
+        return categories;
     }
-
-   
-
+}
 
     function renderCategories() {
         const categories = getCategories();
         const categoryList = document.querySelector('.category-list');
 
-        // Xóa tất cả các danh mục hiện có trên giao diện (nếu có)
         categoryList.innerHTML = '';
-
-
-        
-
-        function changeIconColor(svg, color) {
-            const paths = svg.querySelectorAll('path');
-            paths.forEach((path) => {
-                path.setAttribute('fill', color);
-            });
-        }
 
         categories.forEach((category) => {
             const svgPath = `../assets/images/${category.icon}.svg`;
