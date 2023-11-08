@@ -51,6 +51,8 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            const user_nav = document.getElementById("user-nav");
+            user_nav.setAttribute("src", "../assets/images/user_active.svg");
         });
 </script>
 

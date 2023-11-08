@@ -18,6 +18,8 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            const home_nav = document.getElementById("home-nav");
+            home_nav.setAttribute("src", "../assets/images/home_active.svg");
         });
 </script>
 </html>
