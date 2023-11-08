@@ -80,7 +80,7 @@ function renderCategories() {
 
     categoryList.innerHTML = '';
 
-    categories.forEach((category, index) => {
+    categories.forEach((category) => {
         const svgPath = `../assets/images/${category.icon}.svg`;
         fetch(svgPath)
             .then(response => response.text())
@@ -113,7 +113,7 @@ function renderCategories() {
                     <div class="d-flex align-items-center">
                         <div class="icon me-3 d-flex justify-content-center align-items-center"
                             style="background-color: ${category.iconBgColor};">
-                            <img src=${dataURL} alt="">
+                            <img src=${dataURL} alt="" style="width:30px; height:30px;">
                         </div>
                         <span class="text-start fw-bolder" style="font-size: 18px;">${category.name}</span>
                     </div>

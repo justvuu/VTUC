@@ -108,7 +108,7 @@
 
             <div class="form-group mb-4">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Mô tả:</label>
-                <input type="text" class="form-control" id="description" readonly>
+                <input type="text" class="form-control fst-italic" id="description" readonly>
             </div>
             <div class="form-group">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Biểu tượng:</label>
@@ -171,7 +171,7 @@
 
     document.getElementById('category_name').value = selectedCategory.name;
     document.getElementById('category_type').textContent = selectedCategory.categoryType != "expense" ? "Thu nhập" : "Chi tiêu";
-    document.getElementById('description').value = selectedCategory.description != null ? selectedCategory.description : "Không có mô tả";
+    document.getElementById('description').value = selectedCategory.description != null ? selectedCategory.description : "(Không có mô tả)";
 
     const iconDiv = document.querySelector('.iconDiv');
     const svgPath = `../assets/images/${selectedCategory.icon}.svg`;
@@ -196,7 +196,7 @@
             iconDiv.innerHTML = `
                         <div class="icon me-3 d-flex justify-content-center align-items-center"
                             style="background-color: ${selectedCategory.iconBgColor};">
-                            <img src=${dataURL} alt="">
+                            <img src=${dataURL} alt=""  style="width:30px; height:30px;">
                         </div>
                     `;
 

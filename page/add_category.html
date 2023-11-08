@@ -7,6 +7,7 @@
     <title>Thêm danh mục</title>
     <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 
 <style>
@@ -16,24 +17,19 @@
         border-radius: 16px;
     }
 
-    .tab-container {
-        background-color: #F1F1FA;
-        border-radius: 21px;
+    .form-check-input[type="radio"] {
+        width: 20px;
+        height: 20px;
     }
 
-    .tab-item {
-        padding: 12px 0;
-        text-align: center;
-        width: 50%;
+    .form-check-label {
+        display: flex;
+        margin-left: 5px;
+        margin-top: 2px;
+        align-items: center;
     }
 
-    .tab-item.active {
-        background-color: #29756F;
-        border-radius: 31px;
-        color: white;
-    }
-
-    .icon-button {
+    .icon-select {
         padding: 5px 20px;
         border-radius: 8px;
         background: transparent;
@@ -42,16 +38,16 @@
         transition: border-color 0.2s;
     }
 
-    .icon-button img {
+    .icon-select img {
         width: 28px;
         height: 28px;
     }
 
     .selected-icon {
-        border: 2px solid #000000;
+        border: 1.5px solid #000000;
     }
 
-    .color-button {
+    .color-select {
         border: 0.2px solid lightgray;
         padding: 20px 36px;
         border-radius: 8px;
@@ -60,7 +56,7 @@
     }
 
     .selected-color {
-        border: 2px solid #000000;
+        border: 1.5px solid #000000;
     }
 
     .btn-add {
@@ -113,58 +109,58 @@
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold">Biểu tượng:</label>
-                <div class="icon-select">
+                <div class="icon">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-around">
-                            <button type="button" class="icon-button" data-icon="restaurant">
+                            <div class="icon-select" data-icon="restaurant">
                                 <img src="../assets/images/restaurant.svg" alt="restaurant">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="shopping_bag">
+                            <div class="icon-select" data-icon="shopping_bag">
                                 <img src="../assets/images/shopping_bag.svg" alt="shopping_bag">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="car">
+                            <div class="icon-select" data-icon="car">
                                 <img src="../assets/images/car.svg" alt="car">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="recurring_bill">
+                            <div class="icon-select" data-icon="recurring_bill">
                                 <img src="../assets/images/recurring_bill.svg" alt="recurring_bill">
-                            </button>
+                            </div>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="icon-button" data-icon="salary">
+                            <div class="icon-select" data-icon="salary">
                                 <img src="../assets/images/salary.svg" alt="salary">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="backpack">
+                            <div class="icon-select" data-icon="backpack">
                                 <img src="../assets/images/backpack.svg" alt="backpack">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="medicine">
+                            <div class="icon-select" data-icon="medicine">
                                 <img src="../assets/images/medicine.svg" alt="medicine">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="music">
+                            <div class="icon-select" data-icon="music">
                                 <img src="../assets/images/music.svg" alt="music">
-                            </button>
+                            </div>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="icon-button" data-icon="house">
+                            <div class="icon-select" data-icon="house">
                                 <img src="../assets/images/house.svg" alt="house">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="internet">
+                            <div class="icon-select" data-icon="internet">
                                 <img src="../assets/images/internet.svg" alt="internet">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="game">
+                            <div class="icon-select" data-icon="game">
                                 <img src="../assets/images/game.svg" alt="game">
-                            </button>
+                            </div>
 
-                            <button type="button" class="icon-button" data-icon="phone">
+                            <div class="icon-select" data-icon="phone">
                                 <img src="../assets/images/phone.svg" alt="phone">
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,58 +168,58 @@
 
             <div class="mb-3">
                 <label class="form-label fw-bold">Màu sắc:</label>
-                <div class="icon-select">
+                <div class="icon">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-around">
-                            <button type="button" class="color-button" data-icon-color="#B08B46" data-bg-color="#ECD4A7"
+                            <div class="color-select" data-icon-color="#B08B46" data-bg-color="#ECD4A7"
                                 style="background: #B08B46;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#FCAC12" data-bg-color="#FEEED0"
+                            <div class="color-select" data-icon-color="#FCAC12" data-bg-color="#FEEED0"
                                 style="background: #FCAC12;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#A31D24" data-bg-color="#FFA9A9"
+                            <div class="color-select" data-icon-color="#A31D24" data-bg-color="#FFA9A9"
                                 style="background: #A31D24;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7"
+                            <div class="color-select" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7"
                                 style="background: #FD3C4A;">
-                            </button>
+                            </div>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#9321C8" data-bg-color="#FFC1F9"
+                            <div class="color-select" data-icon-color="#9321C8" data-bg-color="#FFC1F9"
                                 style="background: #9321C8;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#0077FF" data-bg-color="#BDDCFF"
+                            <div class="color-select" data-icon-color="#0077FF" data-bg-color="#BDDCFF"
                                 style="background: #0077FF;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#00A86B" data-bg-color="#CFFAEA"
+                            <div class="color-select" data-icon-color="#00A86B" data-bg-color="#CFFAEA"
                                 style="background: #00A86B;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#F088F9" data-bg-color="#FFDBFB"
+                            <div class="color-select" data-icon-color="#F088F9" data-bg-color="#FFDBFB"
                                 style="background: #F088F9;">
-                            </button>
+                            </div>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2"
+                            <div class="color-select" data-icon-color="#F18E33" data-bg-color="#FFD7B2"
                                 style="background: #F18E33;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF"
+                            <div class="color-select" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF"
                                 style="background: #7F3DFF;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2"
+                            <div class="color-select" data-icon-color="#55F7E3" data-bg-color="#D2F4F2"
                                 style="background: #55F7E3;">
-                            </button>
+                            </div>
 
-                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#F8FBD1"
+                            <div class="color-select" data-icon-color="#F9F135" data-bg-color="#F8FBD1"
                                 style="background: #F9F135;">
-                            </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -236,6 +232,7 @@
 </body>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     fetch('../components/navbar.html')
         .then(response => response.text())
@@ -252,8 +249,8 @@
     const incomeRadio = document.getElementById('incomeRadio');
     const nameInput = document.getElementById('name');
     const descriptionInput = document.getElementById('description');
-    const iconButtons = document.querySelectorAll('.icon-button');
-    const colorButtons = document.querySelectorAll('.color-button');
+    const iconButtons = document.querySelectorAll('.icon-select');
+    const colorButtons = document.querySelectorAll('.color-select');
     const addButton = document.querySelector('.btn-add');
 
     // lưu trạng thái các trường dl
@@ -391,18 +388,29 @@
 
         const categories = getCategories();
 
-        let idMax = getMaxCategoryId();
-        const newCategory = {
-            id: idMax + 1,
-            name: name,
-            description: description,
-            icon: icon,
-            iconColor: iconColor,
-            iconBgColor: iconBgColor,
-            categoryType: selectedCategoryType,
-        };
-        categories.push(newCategory);
-        saveCategories(categories);
+        // Kiểm tra xem tên danh mục đã tồn tại trong danh sách chưa
+        const isNameDuplicate = categories.some(category => category.name.toLowerCase() === name.toLowerCase());
+
+        if (isNameDuplicate) {
+            // Hiển thị thông báo lỗi nếu tên danh mục bị trùng
+            toastr.error('Tên danh mục đã bị trùng', 'Lỗi');
+        } else {
+            let idMax = getMaxCategoryId();
+            const newCategory = {
+                id: idMax + 1,
+                name: name,
+                description: description,
+                icon: icon,
+                iconColor: iconColor,
+                iconBgColor: iconBgColor,
+                categoryType: selectedCategoryType,
+            };
+            categories.push(newCategory);
+            saveCategories(categories);
+
+            toastr.success('Tạo danh mục "' + name + '" thành công');
+
+        }
 
         // reset
         document.getElementById('expenseRadio').checked = true;
