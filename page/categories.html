@@ -74,44 +74,56 @@
     }
 }
 
-    function renderCategories() {
-        const categories = getCategories();
-        const categoryList = document.querySelector('.category-list');
+function renderCategories() {
+    const categories = getCategories();
+    const categoryList = document.querySelector('.category-list');
 
-        categoryList.innerHTML = '';
+    categoryList.innerHTML = '';
 
-        categories.forEach((category) => {
-            const svgPath = `../assets/images/${category.icon}.svg`;
-            fetch(svgPath)
-                .then(response => response.text())
-                .then(svgText => {
-                    const parser = new DOMParser();
-                    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+    categories.forEach((category, index) => {
+        const svgPath = `../assets/images/${category.icon}.svg`;
+        fetch(svgPath)
+            .then(response => response.text())
+            .then(svgText => {
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
 
-                    const paths = svgDoc.querySelectorAll('path');
-                    paths.forEach(path => {
-                        path.setAttribute('fill', category.iconColor); // Change 'red' to your desired color
-                    });
-
-                    const svgString = new XMLSerializer().serializeToString(svgDoc);
-                    const encodedSVG = btoa(svgString);
-                    const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
-
-                    const img = new Image();
-                    img.src = dataURL;
-
-                    categoryList.innerHTML += `
-                    <div class="d-flex justify-content-between align-items-center category">
-                        <div class="d-flex align-items-center">
-                            <div class="icon me-3 d-flex justify-content-center align-items-center"
-                                style="background-color: ${category.iconBgColor};">
-                                <img src=${dataURL} alt="">
-                            </div>
-                            <span class="text-start fw-bolder" style="font-size: 18px;">${category.name}</span>
-                        </div>
-                    </div>
-                    `;
+                const paths = svgDoc.querySelectorAll('path');
+                paths.forEach(path => {
+                    path.setAttribute('fill', category.iconColor); // Change 'red' to your desired color
                 });
+
+                const svgString = new XMLSerializer().serializeToString(svgDoc);
+                const encodedSVG = btoa(svgString);
+                const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+
+                const img = new Image();
+                img.src = dataURL;
+
+                // Tạo một div danh mục và gán sự kiện click cho nó
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'd-flex justify-content-between align-items-center category';
+                categoryDiv.setAttribute('data-category-index', index); // Đặt thuộc tính data-category-index
+                categoryDiv.style.cursor = 'pointer';
+                categoryDiv.addEventListener('click', function() {
+                    const categoryIndex = this.getAttribute('data-category-index');
+                    const detailCategoryURL = `/page/detail_category.html?categoryIndex=${categoryIndex}`;
+                    window.location.href = detailCategoryURL;
+                });
+
+                categoryDiv.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <div class="icon me-3 d-flex justify-content-center align-items-center"
+                            style="background-color: ${category.iconBgColor};">
+                            <img src=${dataURL} alt="">
+                        </div>
+                        <span class="text-start fw-bolder" style="font-size: 18px;">${category.name}</span>
+                    </div>
+                `;
+
+                // Thêm div danh mục vào danh sách danh mục
+                categoryList.appendChild(categoryDiv);
+            });
         });
     }
 

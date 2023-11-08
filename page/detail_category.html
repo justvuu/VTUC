@@ -28,6 +28,12 @@
         bottom: -344px;
     }
 
+    .icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+    }
+
     .modal {
         display: none;
         position: fixed;
@@ -54,7 +60,7 @@
         margin-top: 20px;
     }
 
-    #confirmButton{
+    #confirmButton {
         background-color: #fd626d;
         color: white;
         width: 30%;
@@ -65,7 +71,7 @@
         margin-right: 3px;
     }
 
-    #cancelButton{
+    #cancelButton {
         background-color: #ccc3c3;
         color: white;
         width: 30%;
@@ -80,32 +86,33 @@
 <body>
     <div class="container">
         <div class="title d-flex justify-content-between mt-5 mb-3">
-            <span>
+            <a href="/page/categories.html" class="text-dark text-decoration-none">
                 <i class="fa-solid fa-chevron-left"></i>
-            </span>
+            </a>
             <h5>Chi tiết</h5>
-            <a href="/page/add_category.html" class="text-dark">
+            <a class="text-dark edit">
                 <i class="fas fa-pencil fa-lg"></i>
             </a>
         </div>
 
         <form>
-            <div class="form-group mb-4">
-                <label for="category_name" class="text-start w-100 fw-bolder mb-1">Tên danh mục:</label>
-                <input type="text" class="form-control" id="category_name" placeholder="Category Name" value="Điện nước"
-                    readonly>
-            </div>
             <div class="form-group d-flex">
                 <p class="text-start fw-bolder">Loại danh mục: &nbsp;</p>
-                <span>Chi tiêu</span>
+                <span id="category_type"></span>
             </div>
+
+            <div class="form-group mb-4">
+                <label for="category_name" class="text-start w-100 fw-bolder mb-1">Tên danh mục:</label>
+                <input type="text" class="form-control" id="category_name" placeholder="Category Name" readonly>
+            </div>
+
             <div class="form-group mb-4">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Mô tả:</label>
-                <input type="text" class="form-control" id="disc" placeholder="Không có mô tả">
+                <input type="text" class="form-control" id="description" readonly>
             </div>
             <div class="form-group">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Biểu tượng:</label>
-                <img style="width: 60px; height: 60px;" src="../assets/images/recurring bill.jpg" alt="bill">
+                <div class="iconDiv"></div>
             </div>
             <div class="fixed-button">
                 <button type="button" class="btn w-100 mt-4">Xóa</button>
@@ -135,6 +142,62 @@
             document.getElementById('navbar').innerHTML = data;
         });
 
+    // lấy ds danh mục trong local storage
+    function getCategories() {
+        const categoriesJSON = localStorage.getItem('categories');
+        if (categoriesJSON) {
+            return JSON.parse(categoriesJSON);
+        } else {
+            return [];
+        }
+    }
+
+    // Lấy tham số truy vấn categoryIndex từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryIndex = urlParams.get('categoryIndex');
+
+    const editCategoryURL = `/page/edit_category.html?categoryIndex=${categoryIndex}`;
+    document.querySelector('.edit').href = editCategoryURL;
+
+    // Lấy danh sách danh mục từ localStorage
+    const categories = getCategories();
+
+    const selectedCategory = categories[categoryIndex];
+
+    document.getElementById('category_name').value = selectedCategory.name;
+    document.getElementById('category_type').textContent = selectedCategory.categoryType != "expense" ? "Thu nhập" : "Chi tiêu";
+    document.getElementById('description').value = selectedCategory.description != null ? selectedCategory.description : "Không có mô tả";
+
+    const iconDiv = document.querySelector('.iconDiv');
+    const svgPath = `../assets/images/${selectedCategory.icon}.svg`;
+    fetch(svgPath)
+        .then(response => response.text())
+        .then(svgText => {
+            const parser = new DOMParser();
+            const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+            const paths = svgDoc.querySelectorAll('path');
+            paths.forEach(path => {
+                path.setAttribute('fill', selectedCategory.iconColor);
+            });
+
+            const svgString = new XMLSerializer().serializeToString(svgDoc);
+            const encodedSVG = btoa(svgString);
+            const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+
+            const img = new Image();
+            img.src = dataURL;
+
+            iconDiv.innerHTML = `
+                        <div class="icon me-3 d-flex justify-content-center align-items-center"
+                            style="background-color: ${selectedCategory.iconBgColor};">
+                            <img src=${dataURL} alt="">
+                        </div>
+                    `;
+
+        });
+
+
 
     const modal = document.getElementById("myModal");
     const confirmButton = document.getElementById("confirmButton");
@@ -154,6 +217,7 @@
     });
 
 </script>
+
 
 
 
