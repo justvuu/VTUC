@@ -202,8 +202,6 @@
 
         });
 
-
-
     const modal = document.getElementById("myModal");
     const confirmButton = document.getElementById("confirmButton");
     const cancelButton = document.getElementById("cancelButton");
@@ -217,13 +215,16 @@
     });
 
     confirmButton.addEventListener("click", () => {
-        modal.style.display = "none";
-        window.location.href = "/page/categories.html";
-    });
+    modal.style.display = "none";
+
+    const updatedCategories = categories.filter((category) => category.id !== selectedCategory.id);
+    
+    localStorage.setItem('categories', JSON.stringify(updatedCategories));
+
+    window.location.href = "/page/categories.html";
+});
+
 
 </script>
-
-
-
 
 </html>
