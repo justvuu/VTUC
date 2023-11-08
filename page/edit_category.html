@@ -83,7 +83,7 @@
 <body>
     <div class="container">
         <div class="title d-flex justify-content-between mt-5 mb-3">
-            <a href="#" class="text-dark text-decoration-none"> Hủy </a>
+            <a class="text-dark text-decoration-none back"> Hủy </a>
             <h5>Sửa danh mục</h5>
             <span></span>
         </div>
@@ -93,7 +93,7 @@
                 <label class="form-label fw-bold">Loại danh mục:</label>
                 <div class="d-flex gap-5">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio" value="expense" checked>
+                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio" value="expense">
                         <label class="form-check-label" for="expenseRadio">Chi tiêu</label>
                     </div>
                     <div class="form-check">
@@ -105,11 +105,11 @@
             
             <div class="mb-3">
                 <label class="form-label fw-bold">Tên danh mục:</label>
-                <input type="text" class="form-control" id="name" value="Điện nước">
+                <input type="text" class="form-control" id="name">
             </div>
             <div class="mb-3">
                 <label class="form-label fw-bold">Mô tả:</label>
-                <input type="text" class="form-control" id="description" placeholder="Chưa có mô tả">
+                <input type="text" class="form-control" id="description">
 
             </div>
             <div class="mb-3">
@@ -129,7 +129,7 @@
                                 <img src="../assets/images/car.svg" alt="car">
                             </button>
         
-                            <button type="button" class="icon-button selected-icon" data-icon="recurring_bill">
+                            <button type="button" class="icon-button" data-icon="recurring_bill">
                                 <img src="../assets/images/recurring_bill.svg" alt="recurring_bill">
                             </button>
                         </div>
@@ -205,7 +205,7 @@
                             <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2" style="background: #F18E33;">
                             </button>
                         
-                            <button type="button" class="color-button selected-color" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
+                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
                             </button>
 
                             <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2" style="background: #55F7E3;">
@@ -233,17 +233,78 @@
             const user_nav = document.getElementById("user-nav");
             user_nav.setAttribute("src", "../assets/images/user_active.svg");
         });
+
+        
+    // lấy ds danh mục trong local storage
+    function getCategories() {
+        const categoriesJSON = localStorage.getItem('categories');
+        if (categoriesJSON) {
+            return JSON.parse(categoriesJSON);
+        } else {
+            return [];
+        }
+    }
+
+    // Lấy tham số truy vấn categoryIndex từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryIndex = urlParams.get('categoryIndex');
+
+    const detailCategoryURL = `/page/detail_category.html?categoryIndex=${categoryIndex}`;
+    document.querySelector('.back').href = detailCategoryURL;
+
+    // Lấy danh sách danh mục từ localStorage
+    const categories = getCategories(); 
+
+    const selectedCategory = categories[categoryIndex];
+
+
 </script>
 
 <script>
     // -------------- các sự kiện diễn ra của các trường nhập dữ liệu thêm mới 
+    const expenseRadio = document.getElementById('expenseRadio');
+    const incomeRadio = document.getElementById('incomeRadio');
     const nameInput = document.getElementById('name');
+    const descriptionInput = document.getElementById('description');
     const iconButtons = document.querySelectorAll('.icon-button');
     const colorButtons = document.querySelectorAll('.color-button');
     const addButton = document.querySelector('.btn-add');
 
+    if(selectedCategory.categoryType == "expense") {
+        expenseRadio.checked = true;
+    } else {
+        incomeRadio.checked = true;
+    }
+
+    nameInput.value = selectedCategory.name;
+
+    if(selectedCategory.description != null) {
+        descriptionInput.value = selectedCategory.description
+    } else {
+        descriptionInput.placeholder = "Chưa có mô tả";
+    }
+
+    iconButtons.forEach((button) => {
+        const icon = button.getAttribute("data-icon");
+
+        if(icon == selectedCategory.icon) {
+            button.classList.add('selected-icon');
+        }
+    });
+
+    colorButtons.forEach((button) => {
+        const iconColor = button.getAttribute("data-icon-color");
+        const iconBgColor = button.getAttribute("data-bg-color");
+
+        if(iconColor == selectedCategory.iconColor && iconBgColor == selectedCategory.iconBgColor) {
+            button.classList.add('selected-color');
+        }
+    });
+
+
     // lưu trạng thái các trường dl
     const fields = {
+        type: false,
         name: false,
         icon: false,
     };
@@ -258,6 +319,26 @@
         }
     };
 
+    let selectedCategoryType = 'expense'; // Mặc định là 'Chi tiêu'
+    fields.type = 'expense';
+    // Bắt sự kiện khi radio button được chọn
+    expenseRadio.addEventListener('change', () => {
+        if (expenseRadio.checked) {
+            selectedCategoryType = 'expense';
+            fields.type = 'expense';
+        }
+        checkFields();
+    });
+
+    incomeRadio.addEventListener('change', () => {
+        if (incomeRadio.checked) {
+            selectedCategoryType = 'income';
+            fields.type = 'income';
+        }
+        checkFields();
+    });
+
+
     // Bắt sự kiện khi trường tên danh mục thay đổi
     nameInput.addEventListener('input', () => {
         fields.name = nameInput.value.trim() !== '';
@@ -265,7 +346,7 @@
     });
 
     // ----------bắt sự kiện khi nút icon được chọn 
-    let selectedIconButton = null; // Biến lưu trạng thái nút màu được chọn
+    let selectedIconButton = null; // Biến lưu trạng thái nút icon được chọn
     iconButtons.forEach((button) => {
         button.addEventListener('click', () => {
             if (selectedIconButton === button) {
@@ -323,29 +404,11 @@
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
-       
-    // --------------lấy loại danh mục khi chuyển tab 
-    // Biến lưu trạng thái form
-    let selectedCategoryType = 'expense';
-
-    // Bắt sự kiện khi tab được chọn
-        document.querySelectorAll('.tab-item').forEach((tab) => {
-            tab.addEventListener('click', () => {
-                // Loại bỏ lớp "active" khỏi tất cả các tab
-            document.querySelectorAll('.tab-item').forEach((item) => {
-                item.classList.remove('active');
-            });
-                
-            // Thêm lớp "active" cho tab được chọn
-            tab.classList.add('active');
-
-            selectedCategoryType = tab.getAttribute('data-category-type');
-        });
-    });
-
+    
     // ----------- thêm mới 1 danh mục và lưu vào local storage
     addButton.addEventListener('click', function() {
-        const name = document.getElementById('name').value;
+       
+        const name = document.getElementById('name').value.trim();
         const description = document.getElementById('description').value || null;
         const icon = selectedIconButton.dataset.icon;
 
@@ -370,17 +433,14 @@
         saveCategories(categories);
 
         // reset
-        reset();
+        document.getElementById('expenseRadio').checked = true;
+        document.getElementById('incomeRadio').checked = false;
+        name = '';
+        description = '';
+        selectedIconButton.classList.remove('selected-icon');
+        if(selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
+        document.querySelector('.btn-add').classList.add('inactive-btn');
     });
-
-    // // reset 
-    // function reset(){
-    //     document.getElementById('name').value = '';
-    //     document.getElementById('description').value = '';
-    //     selectedIconButton.classList.remove('selected-icon');
-    //     selectedColorButton.classList.remove('selected-color');
-    //     document.querySelector('.btn-add').classList.add('inactive-btn');
-    // }
 </script>
 
 </html>
