@@ -154,15 +154,20 @@
 
     // Lấy tham số truy vấn categoryIndex từ URL
     const urlParams = new URLSearchParams(window.location.search);
-    const categoryIndex = urlParams.get('categoryIndex');
+    const categoryId = urlParams.get('categoryId');
 
-    const editCategoryURL = `/page/edit_category.html?categoryIndex=${categoryIndex}`;
+    const editCategoryURL = `/page/edit_category.html?categoryId=${categoryId}`;
     document.querySelector('.edit').href = editCategoryURL;
 
     // Lấy danh sách danh mục từ localStorage
     const categories = getCategories();
 
-    const selectedCategory = categories[categoryIndex];
+    let selectedCategory = null;
+    categories.forEach((category) => {
+        if(category.id == categoryId){
+            selectedCategory = category;
+        }
+    })
 
     document.getElementById('category_name').value = selectedCategory.name;
     document.getElementById('category_type').textContent = selectedCategory.categoryType != "expense" ? "Thu nhập" : "Chi tiêu";

@@ -10,7 +10,6 @@
 </head>
 
 <style>
-
     .transaction {
         background-color: #F8F8F8;
         padding: 15px;
@@ -40,7 +39,7 @@
         background: transparent;
         border: 0.2px solid lightgray;
         cursor: pointer;
-        transition: border-color 0.2s; 
+        transition: border-color 0.2s;
     }
 
     .icon-button img {
@@ -49,7 +48,7 @@
     }
 
     .selected-icon {
-        border: 2px solid #000000; 
+        border: 2px solid #000000;
     }
 
     .color-button {
@@ -61,7 +60,7 @@
     }
 
     .selected-color {
-        border: 2px solid #000000; 
+        border: 2px solid #000000;
     }
 
     .btn-add {
@@ -92,11 +91,13 @@
                 <label class="form-label fw-bold">Loại danh mục:</label>
                 <div class="d-flex gap-5">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio" value="expense" checked>
+                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio"
+                            value="expense" checked>
                         <label class="form-check-label" for="expenseRadio">Chi tiêu</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="categoryType" id="incomeRadio" value="income">
+                        <input class="form-check-input" type="radio" name="categoryType" id="incomeRadio"
+                            value="income">
                         <label class="form-check-label" for="incomeRadio">Thu nhập</label>
                     </div>
                 </div>
@@ -118,15 +119,15 @@
                             <button type="button" class="icon-button" data-icon="restaurant">
                                 <img src="../assets/images/restaurant.svg" alt="restaurant">
                             </button>
-                        
+
                             <button type="button" class="icon-button" data-icon="shopping_bag">
                                 <img src="../assets/images/shopping_bag.svg" alt="shopping_bag">
                             </button>
-                        
+
                             <button type="button" class="icon-button" data-icon="car">
                                 <img src="../assets/images/car.svg" alt="car">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="recurring_bill">
                                 <img src="../assets/images/recurring_bill.svg" alt="recurring_bill">
                             </button>
@@ -135,7 +136,7 @@
                             <button type="button" class="icon-button" data-icon="salary">
                                 <img src="../assets/images/salary.svg" alt="salary">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="backpack">
                                 <img src="../assets/images/backpack.svg" alt="backpack">
                             </button>
@@ -143,7 +144,7 @@
                             <button type="button" class="icon-button" data-icon="medicine">
                                 <img src="../assets/images/medicine.svg" alt="medicine">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="music">
                                 <img src="../assets/images/music.svg" alt="music">
                             </button>
@@ -152,7 +153,7 @@
                             <button type="button" class="icon-button" data-icon="house">
                                 <img src="../assets/images/house.svg" alt="house">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="internet">
                                 <img src="../assets/images/internet.svg" alt="internet">
                             </button>
@@ -160,66 +161,78 @@
                             <button type="button" class="icon-button" data-icon="game">
                                 <img src="../assets/images/game.svg" alt="game">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="phone">
                                 <img src="../assets/images/phone.svg" alt="phone">
                             </button>
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
 
-              <div class="mb-3">
+            <div class="mb-3">
                 <label class="form-label fw-bold">Màu sắc:</label>
                 <div class="icon-select">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-around">
-                            <button type="button" class="color-button" data-icon-color="#B08B46" data-bg-color="#ECD4A7" style="background: #B08B46;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#FCAC12" data-bg-color="#FEEED0" style="background: #FCAC12;">
+                            <button type="button" class="color-button" data-icon-color="#B08B46" data-bg-color="#ECD4A7"
+                                style="background: #B08B46;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#A31D24" data-bg-color="#FFA9A9" style="background: #A31D24;">
+                            <button type="button" class="color-button" data-icon-color="#FCAC12" data-bg-color="#FEEED0"
+                                style="background: #FCAC12;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7" style="background: #FD3C4A;">
+                            <button type="button" class="color-button" data-icon-color="#A31D24" data-bg-color="#FFA9A9"
+                                style="background: #A31D24;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7"
+                                style="background: #FD3C4A;">
                             </button>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#9321C8" data-bg-color="#FFC1F9" style="background: #9321C8;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#0077FF" data-bg-color="#BDDCFF" style="background: #0077FF;">
+                            <button type="button" class="color-button" data-icon-color="#9321C8" data-bg-color="#FFC1F9"
+                                style="background: #9321C8;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#00A86B" data-bg-color="#CFFAEA" style="background: #00A86B;">
+                            <button type="button" class="color-button" data-icon-color="#0077FF" data-bg-color="#BDDCFF"
+                                style="background: #0077FF;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#F088F9" data-bg-color="#FFDBFB" style="background: #F088F9;">
+                            <button type="button" class="color-button" data-icon-color="#00A86B" data-bg-color="#CFFAEA"
+                                style="background: #00A86B;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#F088F9" data-bg-color="#FFDBFB"
+                                style="background: #F088F9;">
                             </button>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2" style="background: #F18E33;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
+                            <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2"
+                                style="background: #F18E33;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2" style="background: #55F7E3;">
+                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF"
+                                style="background: #7F3DFF;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#F8FBD1" style="background: #F9F135;">
+                            <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2"
+                                style="background: #55F7E3;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#F8FBD1"
+                                style="background: #F9F135;">
                             </button>
                         </div>
                     </div>
                 </div>
-              </div>
-            
-            <button type="submit" class="btn-add inactive-btn">Thêm</button>
-          </form>
+            </div>
 
-    <div id="navbar"></div>
+            <button type="submit" class="btn-add inactive-btn">Thêm</button>
+        </form>
+
+        <div id="navbar"></div>
 </body>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
@@ -253,7 +266,7 @@
     // ktra xem có đủ điều kiện để kích hoạt nút Thêm ko
     function checkFields() {
         const isAllFieldsValid = Object.values(fields).every((valid) => valid);
-        if(isAllFieldsValid) {
+        if (isAllFieldsValid) {
             addButton.classList.remove('inactive-btn');
         } else {
             addButton.classList.add('inactive-btn');
@@ -326,18 +339,34 @@
             }
         });
     });
-  
+
 </script>
 
 <script>
     // lấy ds danh mục trong local storage
     function getCategories() {
         const categoriesJSON = localStorage.getItem('categories');
-        if(categoriesJSON) {
+        if (categoriesJSON) {
             return JSON.parse(categoriesJSON);
         } else {
             return [];
         }
+    }
+    // lấy ra id lớn nhất 
+    function getMaxCategoryId() {
+        const categories = getCategories();
+        if (categories.length === 0) {
+            return 0;
+        }
+
+        let maxId = 0;
+        categories.forEach((category) => {
+            if (maxId < category.id) {
+                maxId = category.id;
+            }
+        });
+
+        return maxId;
     }
 
     // lưu ds danh mục vào Local Storage
@@ -345,10 +374,10 @@
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
-    
+
     // ----------- thêm mới 1 danh mục và lưu vào local storage
-    addButton.addEventListener('click', function() {
-       
+    addButton.addEventListener('click', function () {
+
         const name = document.getElementById('name').value.trim();
         const description = document.getElementById('description').value || null;
         const icon = selectedIconButton.dataset.icon;
@@ -359,8 +388,12 @@
             iconColor = selectedColorButton.dataset.iconColor;
             iconBgColor = selectedColorButton.dataset.bgColor;
         }
-     
+
+        const categories = getCategories();
+
+        let idMax = getMaxCategoryId();
         const newCategory = {
+            id: idMax + 1,
             name: name,
             description: description,
             icon: icon,
@@ -368,8 +401,6 @@
             iconBgColor: iconBgColor,
             categoryType: selectedCategoryType,
         };
-
-        const categories = getCategories();
         categories.push(newCategory);
         saveCategories(categories);
 
@@ -379,7 +410,7 @@
         name = '';
         description = '';
         selectedIconButton.classList.remove('selected-icon');
-        if(selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
+        if (selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
         document.querySelector('.btn-add').classList.add('inactive-btn');
     });
 </script>
