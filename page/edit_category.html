@@ -87,16 +87,22 @@
             <h5>Sửa danh mục</h5>
             <span></span>
         </div>
-        <div class="tab-container d-flex justify-content-between mb-3">
-            <div class="tab-item active" data-category-type="expense">
-                <span>Chi tiêu</span>
-            </div>
-            <div class="tab-item" data-category-type="income">
-                <span>Thu nhập</span>
-            </div>
-        </div>
 
         <form>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Loại danh mục:</label>
+                <div class="d-flex gap-5">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio" value="expense" checked>
+                        <label class="form-check-label" for="expenseRadio">Chi tiêu</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="categoryType" id="incomeRadio" value="income">
+                        <label class="form-check-label" for="incomeRadio">Thu nhập</label>
+                    </div>
+                </div>
+            </div>
+            
             <div class="mb-3">
                 <label class="form-label fw-bold">Tên danh mục:</label>
                 <input type="text" class="form-control" id="name" value="Điện nước">
@@ -334,7 +340,6 @@
             tab.classList.add('active');
 
             selectedCategoryType = tab.getAttribute('data-category-type');
-            reset();
         });
     });
 
@@ -368,14 +373,14 @@
         reset();
     });
 
-    // reset 
-    function reset(){
-        document.getElementById('name').value = '';
-        document.getElementById('description').value = '';
-        selectedIconButton.classList.remove('selected-icon');
-        selectedColorButton.classList.remove('selected-color');
-        document.querySelector('.btn-add').classList.add('inactive-btn');
-    }
+    // // reset 
+    // function reset(){
+    //     document.getElementById('name').value = '';
+    //     document.getElementById('description').value = '';
+    //     selectedIconButton.classList.remove('selected-icon');
+    //     selectedColorButton.classList.remove('selected-color');
+    //     document.querySelector('.btn-add').classList.add('inactive-btn');
+    // }
 </script>
 
 </html>
