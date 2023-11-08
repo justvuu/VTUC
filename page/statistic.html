@@ -51,7 +51,7 @@
                 <i class="fa-solid fa-chevron-left"></i>
             </span>
             <h5>Thống kê</h5>
-            <span>
+            <span data-bs-toggle="modal" data-bs-target="#exportModal">
                 <i class="fa-solid fa-download"></i>
             </span>
         </div>
@@ -83,71 +83,75 @@
                     <option value="category">Danh mục</option>
                 </select>
             </div>
-            <div class="icon" style="
-            border: 1px solid #ccc;
-            padding: 6px 10px;
-            border-radius: 8px;
-        ">
+            <div id="sort-btn" class="icon" style="
+                    border: 1px solid #ccc;
+                    padding: 6px 10px;
+                    border-radius: 8px;
+                ">
                 <i class="fa-solid fa-arrow-down-wide-short"></i>
             </div>
         </div>
         <div id="transaction-list" class="mt-5">
-            <div class="d-flex justify-content-between align-items-center transaction">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/FB.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">Ăn uống</span>
-                        <span class="text-start text-secondary w-100">Cơm trưa</span>
-                    </div>
-                </div>
 
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">30.0000 đ</span>
-                    <span class="text-end text-secondary">11:30 12-10-23</span>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content m-auto" style="width: 90%; border-radius: 8px;">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center font-weight-bold" id="exampleModalLabel">Xuất thống kê</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center m-0 p-0">Bạn có chắc chắn muốn xuất thống kê?</p>
+                </div>
+                <div class="modal-footer justify-content-center" style="border: none;">
+                    <button
+                        style="width: 100px; height: 45px; border-radius: 8px; background-color: #438883; color: white;"
+                        type="button" data-bs-dismiss="modal" class="btn">Đồng ý</button>
+                    <button
+                        style="width: 100px; height: 45px; border-radius: 8px; background-color: #CCC3C3; color: white;"
+                        type="button" class="btn" data-bs-dismiss="modal">Huỷ</button>
+    
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="d-flex justify-content-between align-items-center transaction mt-3">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/FB.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">Ăn uống</span>
-                        <span class="text-start text-secondary w-100">Cơm trưa</span>
-                    </div>
-                </div>
+    <button type="button" class="btn btn-primary" id="myButton">Show Success Alert</button>
 
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">30.0000 đ</span>
-                    <span class="text-end text-secondary">11:30 12-10-23</span>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center transaction mt-3">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/shopping.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">Mua sắm</span>
-                        <span class="text-start text-secondary w-100">Áo khoác</span>
-                    </div>
-                </div>
-
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">230.0000 đ</span>
-                    <span class="text-end text-secondary">20:12 10-10-23</span>
-                </div>
+    <!-- Toast container -->
+    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #409a17;">Thành công</strong>
             </div>
         </div>
     </div>
     <div id="navbar"></div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+
+<script>
+    // Wait for the document to be ready
+    $(document).ready(function () {
+        $('#myButton').click(function () {
+            var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+            myToast.show();
+
+            // Close the toast after 2 seconds
+            setTimeout(function () {
+                myToast.hide();
+            }, 2000);
+        });
+    });
+</script>
 <script>
     fetch('../components/navbar.html')
         .then(response => response.text())
@@ -156,8 +160,6 @@
             const statistic_nav = document.getElementById("statistic-nav");
             statistic_nav.setAttribute("src", "../assets/images/analysis_active.svg");
         });
-
-
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
@@ -214,103 +216,185 @@
         });
     }
 
+
+
     const expense_tab = document.getElementById("tab-expense");
     const invoice_tab = document.getElementById("tab-invoice");
     const transaction_list = document.getElementById("transaction-list");
     const range_selection = document.getElementById("range-selection");
     const type_selection = document.getElementById("type-selection");
+    const sort_btn = document.getElementById("sort-btn");
 
-    const invoice_data = [
-        {
-            'category': 'Tiền lương',
-            'description': 'Sola tech tháng 9',
-            'amount': '32.000.000',
-            'date': '12:12 05-10-23',
-            'image': 'money'
-        },
 
-        {
-            'category': 'Tiền thưởng',
-            'description': 'Tăng ca',
-            'amount': '1.000.000',
-            'date': '21:32 06-10-23',
-            'image': 'award'
-        },
-    ];
+    var crrType = "transaction";
+    var crrRange = "month";
+    var crrTab = "expense";
+    var crrData = [];
+    var crrAmount = 0;
+    var crrSort = "asc";
 
-    const expense_data = [
-        {
-            'category': 'Ăn uống',
-            'description': 'Cơm trưa',
-            'amount': '20.000',
-            'date': '12:32 10-10-23',
-            'image': 'FB'
-        },
-        {
-            'category': 'Ăn uống',
-            'description': 'Cơm tối',
-            'amount': '25.000',
-            'date': '21:12 10-10-23',
-            'image': 'FB'
-        },
-        {
-            'category': 'Mua sắm',
-            'description': 'Áo khoác',
-            'amount': '1.000.000',
-            'date': '21:32 09-10-23',
-            'image': 'shopping'
-        },
-    ];
+    const getAllExpenses = () => {
+        crrData = JSON.parse(localStorage.getItem('expenses')) || [];
+    }
 
-    const day_transaction_expense_data = [
-        {
-            'category': 'Mua sắm',
-            'description': 'Áo khoác',
-            'amount': '1.000.000',
-            'date': '21:32 09-10-23',
-            'image': 'shopping'
-        },
-        {
-            'category': 'Mua sắm',
-            'description': 'Áo khoác',
-            'amount': '1.000.000',
-            'date': '12:00 09-10-23',
-            'image': 'shopping'
-        },
-        {
-            'category': 'Mua sắm',
-            'description': 'Áo khoác',
-            'amount': '1.000.000',
-            'date': '10:12 09-10-23',
-            'image': 'shopping'
-        },
-    ]
+    const getAllIncomes = () => {
+        crrData = JSON.parse(localStorage.getItem('income')) || [];
+    }
+
+    const renderData = (data, isUpdateData) => {
+        if (isUpdateData) crrData = data;
+        transaction_list.innerHTML = '';
+        data.forEach(transaction => {
+            const svgPath = `../assets/images/${transaction.category.icon}.svg`;
+            fetch(svgPath)
+                .then(response => response.text())
+                .then(svgText => {
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+                    const paths = svgDoc.querySelectorAll('path');
+                    paths.forEach(path => {
+                        path.setAttribute('fill', transaction.category.iconColor); // Change 'red' to your desired color
+                    });
+
+                    const svgString = new XMLSerializer().serializeToString(svgDoc);
+                    const encodedSVG = btoa(svgString);
+                    const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+
+                    const img = new Image();
+                    img.src = dataURL;
+
+                    transaction_list.innerHTML += `
+                            <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                                <div class="left-side d-flex align-items-center">
+                                        <div class="icon me-3 d-flex justify-content-center align-items-center"
+                                style="background-color: ${transaction.category.iconBgColor}; width: 60px; height: 60px; border-radius: 18px;">
+                                <img src=${dataURL} alt="">
+                            </div>
+                                    <div class="content d-flex align-items-center flex-column">
+                                        <span class="text-start w-100 fw-bolder">${transaction.category.name}</span>
+                                        <span class="text-start text-secondary w-100">${transaction.note}</span>
+                                    </div>
+                                </div>
+
+                                <div class="right-side d-flex align-items-center flex-column">
+                                    <span class="text-end w-100 fw-bolder text-danger">${parseFloat(transaction.money).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                    <span class="text-end text-secondary">${transaction.date}</span>
+                                </div>
+                            </div>
+                `;
+                });
+        });
+    }
+
+    const renderCategory = () => {
+        var data = [];
+        var categories = {};
+        crrData.forEach(item => {
+            const categoryId = item.category.id;
+            const money = parseInt(item.money);
+
+            if (categories[categoryId]) {
+                categories[categoryId].amount += money;
+            } else {
+                categories[categoryId] = {
+                    amount: money,
+                    detail: item.category
+                };
+            }
+        });
+        for (const key in categories) {
+            if (categories.hasOwnProperty(key)) {
+                const value = categories[key];
+                const new_item = {
+                    category: value['detail'],
+                    money: value['amount'],
+                    note: '',
+                    date: ''
+                }
+                data.push(new_item);
+            }
+        }
+
+        renderData(data, true);
+    }
+
+    const renderByDay = () => {
+        if (crrTab == "expense") getAllExpenses();
+        else getAllIncomes();
+        var data = [];
+        var categories = {};
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = today.getMonth() + 1;
+        const todayDay = today.getDate();
+
+        const todayDateString = `${todayDay}-${todayMonth + 1}-${todayYear}`;
+        crrData.forEach(item => {
+            const value = item.date.split("-");
+            if (parseInt(value[0]) == parseInt(todayDay) && parseInt(value[1]) == parseInt(todayMonth) && parseInt(value[2]) == parseInt(todayYear)) {
+                data.push(item);
+            }
+        });
+        crrData = data;
+        // renderData(data, true);
+    }
+
+    const renderByMonth = () => {
+        if (crrTab == "expense") getAllExpenses();
+        else getAllIncomes();
+        var data = [];
+        var categories = {};
+        const today = new Date();
+        const todayYear = today.getFullYear();
+        const todayMonth = today.getMonth() + 1;
+        const todayDay = today.getDate();
+
+        const todayDateString = `${todayDay}-${todayMonth + 1}-${todayYear}`;
+        crrData.forEach(item => {
+            const value = item.date.split("-");
+            if (parseInt(value[1]) == parseInt(todayMonth) && parseInt(value[2]) == parseInt(todayYear)) {
+                data.push(item);
+            }
+        });
+        crrData = data;
+        // renderData(data, true);
+    }
+
+    const renderByYear = () => {
+        if (crrTab == "expense") getAllExpenses();
+        else getAllIncomes();
+        var data = [];
+        var categories = {};
+        const today = new Date();
+        const todayYear = today.getFullYear();
+
+        crrData.forEach(item => {
+            const value = item.date.split("-");
+            if (parseInt(value[2]) == parseInt(todayYear)) {
+                data.push(item);
+            }
+        });
+
+        crrData = data;
+        // renderData(data, true);
+    }
+
+    crrData = JSON.parse(localStorage.getItem('expenses')) || [];
+    renderByMonth();
+    renderData(crrData, true);
 
     invoice_tab.addEventListener("click", () => {
         if (!invoice_tab.classList.contains("active")) {
             invoice_tab.classList.add("active");
             expense_tab.classList.remove("active");
-            transaction_list.innerHTML = '';
-            invoice_data.forEach(transaction => {
-                transaction_list.innerHTML += `
-                <div class="d-flex justify-content-between align-items-center transaction mt-3">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
-                        <span class="text-start text-secondary w-100">${transaction.description}</span>
-                    </div>
-                </div>
+            crrTab = "income";
+            if (crrRange == "day") renderByDay();
+            else if (crrRange == "month") renderByMonth();
+            else if (crrRange == "year") renderByYear();
 
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
-                    <span class="text-end text-secondary">${transaction.date}</span>
-                </div>
-            </div>
-                `;
-            });
+            if (crrType == "category") renderCategory();
+            else renderData(crrData, true);
         };
     });
 
@@ -319,55 +403,77 @@
             expense_tab.classList.add("active");
             invoice_tab.classList.remove("active");
             transaction_list.innerHTML = '';
-            expense_data.forEach(transaction => {
-                transaction_list.innerHTML += `
-                <div class="d-flex justify-content-between align-items-center transaction mt-3">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
-                        <span class="text-start text-secondary w-100">${transaction.description}</span>
-                    </div>
-                </div>
+            crrTab = "expense";
+            // getAllExpenses();
+            if (crrRange == "day") renderByDay();
+            else if (crrRange == "month") renderByMonth();
+            else if (crrRange == "year") renderByYear();
 
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
-                    <span class="text-end text-secondary">${transaction.date}</span>
-                </div>
-            </div>
-                `;
-            });
+            if (crrType == "category") renderCategory();
+            else renderData(crrData, true);
         };
     });
 
+    type_selection.addEventListener("change", () => {
+        const typeSelection = type_selection.options[type_selection.selectedIndex];
+        crrType = typeSelection.value;
+
+        if (crrType == "category") {
+            renderCategory();
+        }
+        else {
+            if (crrRange == "day") renderByDay();
+            else if (crrRange == "month") renderByMonth();
+            else if (crrRange == "year") renderByYear();
+            renderData(crrData, true);
+        }
+
+    })
+
     range_selection.addEventListener("change", () => {
         const selectedOption = range_selection.options[range_selection.selectedIndex];
-        if (selectedOption.value == 'day') {
-            transaction_list.innerHTML = '';
-            day_transaction_expense_data.forEach(transaction => {
-                transaction_list.innerHTML += `
-                <div class="d-flex justify-content-between align-items-center transaction mt-3">
-                <div class="left-side d-flex align-items-center">
-                    <div class="icon me-3">
-                        <img style="width: 50px;" src="../assets/images/${transaction.image}.png" alt="meal">
-                    </div>
-                    <div class="content d-flex align-items-center flex-column">
-                        <span class="text-start w-100 fw-bolder">${transaction.category}</span>
-                        <span class="text-start text-secondary w-100">${transaction.description}</span>
-                    </div>
-                </div>
+        const value = selectedOption.value;
+        crrRange = value;
+        if (value == 'day') {
+            renderByDay();
+            if (crrType == "category") renderCategory();
+            else renderData(crrData, true);
+        }
+        else if (value == "month") {
+            renderByMonth();
+            if (crrType == "category") renderCategory();
+            else renderData(crrData, true);
+        }
+        else if (value == "year") {
+            renderByYear();
+            if (crrType == "category") renderCategory();
+            else renderData(crrData, true);
+        }
+    })
 
-                <div class="right-side d-flex align-items-center flex-column">
-                    <span class="text-end w-100 fw-bolder text-danger">${transaction.amount} đ</span>
-                    <span class="text-end text-secondary">${transaction.date}</span>
-                </div>
-            </div>
-                `;
-            });
+    sort_btn.addEventListener("click", () => {
+        if (crrSort == "desc") crrSort = "asc";
+        else crrSort = "desc";
+        if (crrSort == "desc") {
+            renderData(crrData.slice().sort((a, b) => parseInt(b.money) - parseInt(a.money)), true);
+        }
+        else {
+            renderData(crrData.slice().sort((a, b) => parseInt(a.money) - parseInt(b.money)), true);
         }
     })
 </script>
+
+<script>
+    document.getElementById('showToast').addEventListener('click', function () {
+        var successToast = new bootstrap.Toast(document.getElementById('successToast'));
+        successToast.show();
+        setTimeout(function () {
+            successToast.hide();
+        }, 2000); // Adjust the timeout duration (in milliseconds) as needed
+    });
+</script>
+
+
+
 
 </html>
