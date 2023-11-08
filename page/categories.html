@@ -62,11 +62,11 @@
         return JSON.parse(storedCategories);
     } else {
         const categories = [
-            { name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType: "expense" },
-            { name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FDD5D7", categoryType: "expense" },
-            { name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType: "expense" },
-            { name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense" },
-            { name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income" },
+            { id: 1, name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType: "expense" },
+            { id: 2, name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FFD7B2", categoryType: "expense" },
+            { id: 3, name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType: "expense" },
+            { id: 4, name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense" },
+            { id: 5, name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income" },
         ];
         localStorage.setItem('categories', JSON.stringify(categories));
 
@@ -103,11 +103,9 @@ function renderCategories() {
                 // Tạo một div danh mục và gán sự kiện click cho nó
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'd-flex justify-content-between align-items-center category';
-                categoryDiv.setAttribute('data-category-index', index); // Đặt thuộc tính data-category-index
                 categoryDiv.style.cursor = 'pointer';
                 categoryDiv.addEventListener('click', function() {
-                    const categoryIndex = this.getAttribute('data-category-index');
-                    const detailCategoryURL = `/page/detail_category.html?categoryIndex=${categoryIndex}`;
+                    const detailCategoryURL = `/page/detail_category.html?categoryId=${category.id}`;
                     window.location.href = detailCategoryURL;
                 });
 

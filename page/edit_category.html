@@ -10,7 +10,6 @@
 </head>
 
 <style>
-
     .transaction {
         background-color: #F8F8F8;
         padding: 15px;
@@ -40,7 +39,7 @@
         background: transparent;
         border: 0.2px solid lightgray;
         cursor: pointer;
-        transition: border-color 0.2s; 
+        transition: border-color 0.2s;
     }
 
     .icon-button img {
@@ -49,7 +48,7 @@
     }
 
     .selected-icon {
-        border: 2px solid #000000; 
+        border: 2px solid #000000;
     }
 
     .color-button {
@@ -61,10 +60,10 @@
     }
 
     .selected-color {
-        border: 2px solid #000000; 
+        border: 2px solid #000000;
     }
 
-    .btn-add {
+    .btn-edit {
         width: 100%;
         height: 49px;
         background-color: #29756F;
@@ -93,16 +92,18 @@
                 <label class="form-label fw-bold">Loại danh mục:</label>
                 <div class="d-flex gap-5">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio" value="expense">
+                        <input class="form-check-input" type="radio" name="categoryType" id="expenseRadio"
+                            value="expense">
                         <label class="form-check-label" for="expenseRadio">Chi tiêu</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="categoryType" id="incomeRadio" value="income">
+                        <input class="form-check-input" type="radio" name="categoryType" id="incomeRadio"
+                            value="income">
                         <label class="form-check-label" for="incomeRadio">Thu nhập</label>
                     </div>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <label class="form-label fw-bold">Tên danh mục:</label>
                 <input type="text" class="form-control" id="name">
@@ -120,15 +121,15 @@
                             <button type="button" class="icon-button" data-icon="restaurant">
                                 <img src="../assets/images/restaurant.svg" alt="restaurant">
                             </button>
-                        
+
                             <button type="button" class="icon-button" data-icon="shopping_bag">
                                 <img src="../assets/images/shopping_bag.svg" alt="shopping_bag">
                             </button>
-                        
+
                             <button type="button" class="icon-button" data-icon="car">
                                 <img src="../assets/images/car.svg" alt="car">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="recurring_bill">
                                 <img src="../assets/images/recurring_bill.svg" alt="recurring_bill">
                             </button>
@@ -137,7 +138,7 @@
                             <button type="button" class="icon-button" data-icon="salary">
                                 <img src="../assets/images/salary.svg" alt="salary">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="backpack">
                                 <img src="../assets/images/backpack.svg" alt="backpack">
                             </button>
@@ -145,7 +146,7 @@
                             <button type="button" class="icon-button" data-icon="medicine">
                                 <img src="../assets/images/medicine.svg" alt="medicine">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="music">
                                 <img src="../assets/images/music.svg" alt="music">
                             </button>
@@ -154,7 +155,7 @@
                             <button type="button" class="icon-button" data-icon="house">
                                 <img src="../assets/images/house.svg" alt="house">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="internet">
                                 <img src="../assets/images/internet.svg" alt="internet">
                             </button>
@@ -162,66 +163,78 @@
                             <button type="button" class="icon-button" data-icon="game">
                                 <img src="../assets/images/game.svg" alt="game">
                             </button>
-        
+
                             <button type="button" class="icon-button" data-icon="phone">
                                 <img src="../assets/images/phone.svg" alt="phone">
                             </button>
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
 
-              <div class="mb-3">
+            <div class="mb-3">
                 <label class="form-label fw-bold">Màu sắc:</label>
                 <div class="icon-select">
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-around">
-                            <button type="button" class="color-button" data-icon-color="#B08B46" data-bg-color="#ECD4A7" style="background: #B08B46;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#FCAC12" data-bg-color="#FEEED0" style="background: #FCAC12;">
+                            <button type="button" class="color-button" data-icon-color="#B08B46" data-bg-color="#ECD4A7"
+                                style="background: #B08B46;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#A31D24" data-bg-color="#FFA9A9" style="background: #A31D24;">
+                            <button type="button" class="color-button" data-icon-color="#FCAC12" data-bg-color="#FEEED0"
+                                style="background: #FCAC12;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7" style="background: #FD3C4A;">
+                            <button type="button" class="color-button" data-icon-color="#A31D24" data-bg-color="#FFA9A9"
+                                style="background: #A31D24;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#FD3C4A" data-bg-color="#FDD5D7"
+                                style="background: #FD3C4A;">
                             </button>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#9321C8" data-bg-color="#FFC1F9" style="background: #9321C8;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#0077FF" data-bg-color="#BDDCFF" style="background: #0077FF;">
+                            <button type="button" class="color-button" data-icon-color="#9321C8" data-bg-color="#FFC1F9"
+                                style="background: #9321C8;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#00A86B" data-bg-color="#CFFAEA" style="background: #00A86B;">
+                            <button type="button" class="color-button" data-icon-color="#0077FF" data-bg-color="#BDDCFF"
+                                style="background: #0077FF;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#F088F9" data-bg-color="#FFDBFB" style="background: #F088F9;">
+                            <button type="button" class="color-button" data-icon-color="#00A86B" data-bg-color="#CFFAEA"
+                                style="background: #00A86B;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#F088F9" data-bg-color="#FFDBFB"
+                                style="background: #F088F9;">
                             </button>
                         </div>
                         <div class="col-md-12 d-flex justify-content-around mt-3">
-                            <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2" style="background: #F18E33;">
-                            </button>
-                        
-                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF" style="background: #7F3DFF;">
+                            <button type="button" class="color-button" data-icon-color="#F18E33" data-bg-color="#FFD7B2"
+                                style="background: #F18E33;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2" style="background: #55F7E3;">
+                            <button type="button" class="color-button" data-icon-color="#7F3DFF" data-bg-color="#EEE5FF"
+                                style="background: #7F3DFF;">
                             </button>
 
-                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#FFF6C6" style="background: #F9F135;">
+                            <button type="button" class="color-button" data-icon-color="#55F7E3" data-bg-color="#D2F4F2"
+                                style="background: #55F7E3;">
+                            </button>
+
+                            <button type="button" class="color-button" data-icon-color="#F9F135" data-bg-color="#FFF6C6"
+                                style="background: #F9F135;">
                             </button>
                         </div>
                     </div>
                 </div>
-              </div>
-            
-            <button type="submit" class="btn-add inactive-btn">Lưu</button>
-          </form>
+            </div>
 
-    <div id="navbar"></div>
+            <button type="submit" class="btn-edit inactive-btn">Lưu</button>
+        </form>
+
+        <div id="navbar"></div>
 </body>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
@@ -234,7 +247,7 @@
             user_nav.setAttribute("src", "../assets/images/user_active.svg");
         });
 
-        
+
     // lấy ds danh mục trong local storage
     function getCategories() {
         const categoriesJSON = localStorage.getItem('categories');
@@ -247,15 +260,21 @@
 
     // Lấy tham số truy vấn categoryIndex từ URL
     const urlParams = new URLSearchParams(window.location.search);
-    const categoryIndex = urlParams.get('categoryIndex');
+    const categoryId = urlParams.get('categoryId');
 
-    const detailCategoryURL = `/page/detail_category.html?categoryIndex=${categoryIndex}`;
+    const detailCategoryURL = `/page/detail_category.html?categoryId=${categoryId}`;
     document.querySelector('.back').href = detailCategoryURL;
 
     // Lấy danh sách danh mục từ localStorage
-    const categories = getCategories(); 
+    const categories = getCategories();
 
-    const selectedCategory = categories[categoryIndex];
+    let selectedCategory = null;
+    categories.forEach((category) => {
+        if (category.id == categoryId) {
+            selectedCategory = category;
+        }
+    })
+
 
 
 </script>
@@ -268,9 +287,9 @@
     const descriptionInput = document.getElementById('description');
     const iconButtons = document.querySelectorAll('.icon-button');
     const colorButtons = document.querySelectorAll('.color-button');
-    const addButton = document.querySelector('.btn-add');
+    const editButton = document.querySelector('.btn-edit');
 
-    if(selectedCategory.categoryType == "expense") {
+    if (selectedCategory.categoryType == "expense") {
         expenseRadio.checked = true;
     } else {
         incomeRadio.checked = true;
@@ -278,54 +297,78 @@
 
     nameInput.value = selectedCategory.name;
 
-    if(selectedCategory.description != null) {
+    if (selectedCategory.description != null) {
         descriptionInput.value = selectedCategory.description
     } else {
         descriptionInput.placeholder = "Chưa có mô tả";
     }
 
+    let btnIconDefault = null;
     iconButtons.forEach((button) => {
         const icon = button.getAttribute("data-icon");
 
-        if(icon == selectedCategory.icon) {
+        if (icon == selectedCategory.icon) {
             button.classList.add('selected-icon');
+            btnIconDefault = button;
         }
     });
 
+    let btnColorDefault = null;
     colorButtons.forEach((button) => {
         const iconColor = button.getAttribute("data-icon-color");
         const iconBgColor = button.getAttribute("data-bg-color");
 
-        if(iconColor == selectedCategory.iconColor && iconBgColor == selectedCategory.iconBgColor) {
+        if (iconColor == selectedCategory.iconColor && iconBgColor == selectedCategory.iconBgColor) {
             button.classList.add('selected-color');
+            btnColorDefault = button;
         }
     });
 
 
-    // lưu trạng thái các trường dl
-    const fields = {
-        type: false,
-        name: false,
-        icon: false,
-    };
-
-    // ktra xem có đủ điều kiện để kích hoạt nút Thêm ko
+    // ktra xem có đủ điều kiện để kích hoạt nút Lưu ko
     function checkFields() {
-        const isAllFieldsValid = Object.values(fields).every((valid) => valid);
-        if(isAllFieldsValid) {
-            addButton.classList.remove('inactive-btn');
+        let check = false;
+        let isValue = false;
+        if (nameInput.value.trim() != '' && selectedIconButton != null && selectedCategoryType != null) {
+            isValue = true;
+        }
+
+        if (nameInput.value.trim() != selectedCategory.name && nameInput.value.trim() != '' && isValue == true) {
+            check = true;
+        }
+
+        if (selectedCategory.categoryType == "expense" && incomeRadio.checked == true && isValue == true) {
+            chech = true;
+        }
+
+        if (selectedCategory.categoryType == "income" && expenseRadio.checked == true && isValue == true) {
+            check = true;
+        }
+
+        if (descriptionInput.value.trim() != selectedCategory.description && isValue == true) {
+            check = true;
+        }
+
+        if (btnIconDefault != selectedIconButton && selectedIconButton != null && isValue == true) {
+            check = true;
+        }
+
+        if (btnColorDefault != selectedColorButton && isValue == true) {
+            check = true;
+        }
+
+        if (check) {
+            editButton.classList.remove('inactive-btn');
         } else {
-            addButton.classList.add('inactive-btn');
+            editButton.classList.add('inactive-btn');
         }
     };
 
     let selectedCategoryType = 'expense'; // Mặc định là 'Chi tiêu'
-    fields.type = 'expense';
     // Bắt sự kiện khi radio button được chọn
     expenseRadio.addEventListener('change', () => {
         if (expenseRadio.checked) {
             selectedCategoryType = 'expense';
-            fields.type = 'expense';
         }
         checkFields();
     });
@@ -333,7 +376,6 @@
     incomeRadio.addEventListener('change', () => {
         if (incomeRadio.checked) {
             selectedCategoryType = 'income';
-            fields.type = 'income';
         }
         checkFields();
     });
@@ -341,19 +383,18 @@
 
     // Bắt sự kiện khi trường tên danh mục thay đổi
     nameInput.addEventListener('input', () => {
-        fields.name = nameInput.value.trim() !== '';
         checkFields();
     });
 
     // ----------bắt sự kiện khi nút icon được chọn 
-    let selectedIconButton = null; // Biến lưu trạng thái nút icon được chọn
+    let selectedIconButton = btnIconDefault; // Biến lưu trạng thái nút icon được chọn
     iconButtons.forEach((button) => {
         button.addEventListener('click', () => {
             if (selectedIconButton === button) {
                 // Nếu ấn vào icon đang được focus, hủy focus
                 selectedIconButton.classList.remove('selected-icon');
                 selectedIconButton = null;
-                fields.icon = false;
+
             } else {
                 // Nếu ấn vào icon khác, hủy focus icon cũ và focus icon mới
                 if (selectedIconButton) {
@@ -361,20 +402,22 @@
                 }
                 selectedIconButton = button;
                 selectedIconButton.classList.add('selected-icon');
-                fields.icon = true;
+
             }
             checkFields();
         });
     });
 
-    // ----------bắt sự kiện khi nút màu được chọn 
-    let selectedColorButton = null; // Biến lưu trạng thái nút màu được chọn
+    // ----------bắt sự kiện khi nút màu được chọn
+    let selectedColorButton = btnColorDefault;
+
     colorButtons.forEach((button) => {
         button.addEventListener('click', () => {
             if (selectedColorButton === button) {
                 // Nếu ấn vào màu đang được focus, hủy focus
                 selectedColorButton.classList.remove('selected-color');
                 selectedColorButton = null;
+
             } else {
                 // Nếu ấn vào icon khác, hủy focus icon cũ và focus icon mới
                 if (selectedColorButton) {
@@ -383,16 +426,14 @@
                 selectedColorButton = button;
                 selectedColorButton.classList.add('selected-color');
             }
+            checkFields();
         });
     });
-  
-</script>
 
-<script>
     // lấy ds danh mục trong local storage
     function getCategories() {
         const categoriesJSON = localStorage.getItem('categories');
-        if(categoriesJSON) {
+        if (categoriesJSON) {
             return JSON.parse(categoriesJSON);
         } else {
             return [];
@@ -404,10 +445,10 @@
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
-    
-    // ----------- thêm mới 1 danh mục và lưu vào local storage
-    addButton.addEventListener('click', function() {
-       
+
+    // ----------- sửa 1 danh mục và lưu vào local storage
+    editButton.addEventListener('click', function () {
+        event.preventDefault();
         const name = document.getElementById('name').value.trim();
         const description = document.getElementById('description').value || null;
         const icon = selectedIconButton.dataset.icon;
@@ -418,28 +459,17 @@
             iconColor = selectedColorButton.dataset.iconColor;
             iconBgColor = selectedColorButton.dataset.bgColor;
         }
-     
-        const newCategory = {
-            name: name,
-            description: description,
-            icon: icon,
-            iconColor: iconColor,
-            iconBgColor: iconBgColor,
-            categoryType: selectedCategoryType,
-        };
 
-        const categories = getCategories();
-        categories.push(newCategory);
+        selectedCategory.categoryType = selectedCategoryType;
+        selectedCategory.name = name;
+        selectedCategory.description = description;
+        selectedCategory.icon = icon;
+        selectedCategory.iconColor = iconColor;
+        selectedCategory.iconBgColor = iconBgColor;
+
         saveCategories(categories);
 
-        // reset
-        document.getElementById('expenseRadio').checked = true;
-        document.getElementById('incomeRadio').checked = false;
-        name = '';
-        description = '';
-        selectedIconButton.classList.remove('selected-icon');
-        if(selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
-        document.querySelector('.btn-add').classList.add('inactive-btn');
+        document.querySelector('.btn-edit').classList.add('inactive-btn');
     });
 </script>
 
