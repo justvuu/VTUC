@@ -56,10 +56,10 @@
             </span>
         </div>
         <div class="tab-container d-flex justify-content-between mb-3">
-            <div id="tab-expense" class="tab-item active">
+            <div id="tab-expense" class="tab-item active" style="margin: 3px 2px; transition: ease 200ms;">
                 <span>Chi tiêu</span>
             </div>
-            <div id="tab-invoice" class="tab-item">
+            <div id="tab-invoice" class="tab-item" style="margin: 3px 2px; transition: ease 200ms">
                 <span>Thu nhập</span>
             </div>
         </div>
@@ -95,7 +95,7 @@
 
         </div>
     </div>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -114,44 +114,31 @@
                     <button
                         style="width: 100px; height: 45px; border-radius: 8px; background-color: #CCC3C3; color: white;"
                         type="button" class="btn" data-bs-dismiss="modal">Huỷ</button>
-    
+
                 </div>
             </div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" id="myButton">Show Success Alert</button>
+    <!-- <button type="button" class="btn btn-primary" id="myButton">Show Success Alert</button> -->
 
     <!-- Toast container -->
-    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
-        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+    <div class="toast-container position-fixed top-0 end-0"
+        style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+            style="border-radius: 8px;">
             <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
                 <strong class="me-auto" style="color: #409a17;">Thành công</strong>
             </div>
         </div>
     </div>
-    <div id="navbar"></div>
+    <div style="margin-top: 100px;" id="navbar"></div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
-
-<script>
-    // Wait for the document to be ready
-    $(document).ready(function () {
-        $('#myButton').click(function () {
-            var myToast = new bootstrap.Toast(document.getElementById('myToast'));
-            myToast.show();
-
-            // Close the toast after 2 seconds
-            setTimeout(function () {
-                myToast.hide();
-            }, 2000);
-        });
-    });
-</script>
 <script>
     fetch('../components/navbar.html')
         .then(response => response.text())
@@ -164,28 +151,29 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
 <script type="text/javascript">
-    window.onload = function () {
+
+    const expense_tab = document.getElementById("tab-expense");
+    const invoice_tab = document.getElementById("tab-invoice");
+    const transaction_list = document.getElementById("transaction-list");
+    const range_selection = document.getElementById("range-selection");
+    const type_selection = document.getElementById("type-selection");
+    const sort_btn = document.getElementById("sort-btn");
+
+
+    var crrType = "transaction";
+    var crrRange = "month";
+    var crrTab = "expense";
+    var crrData = [];
+    var crrAmount = 0;
+    var crrSort = "asc";
+    var crrDatasets = {};
+
+    const renderChart = (value, datasets, labels) => {
         var data = {
-            labels: [
-                "Mua sắm",
-                "Đi lại",
-                "Ăn uống"
-            ],
-            datasets: [
-                {
-                    data: [50, 15, 35],
-                    backgroundColor: [
-                        "#FCAC12",
-                        "#7F3DFF",
-                        "#FD3C4A"
-                    ],
-                    hoverBackgroundColor: [
-                        "#FCAC12",
-                        "#7F3DFF",
-                        "#FD3C4A"
-                    ]
-                }]
+            labels,
+            datasets
         };
+        // document.getElementById('myChart').innerHTML = '';
         var promisedDeliveryChart = new Chart(document.getElementById('myChart'), {
             type: 'doughnut',
             data: data,
@@ -206,9 +194,10 @@
                 var fontSize = (height / 200).toFixed(2);
                 ctx.font = fontSize + "em sans-serif";
                 ctx.textBaseline = "middle";
-                var text = "3.230.000 đ",
+                var text = parseFloat(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }),
                     textX = Math.round((width - ctx.measureText(text).width) / 2),
                     textY = height / 2;
+                ctx.clearRect(0, 0, width, height);
                 ctx.fillText(text, textX, textY);
 
                 ctx.save();
@@ -216,22 +205,70 @@
         });
     }
 
+    const updateDatasets = () => {
+        var data = [];
+        var categories = {};
+        crrData.forEach(item => {
+            const categoryId = item.category.id;
+            const money = parseInt(item.money);
+
+            if (categories[categoryId]) {
+                categories[categoryId].amount += money;
+            } else {
+                categories[categoryId] = {
+                    amount: money,
+                    detail: item.category
+                };
+            }
+        });
+        for (const key in categories) {
+            if (categories.hasOwnProperty(key)) {
+                const value = categories[key];
+                const new_item = {
+                    category: value['detail'],
+                    money: value['amount'],
+                    note: '',
+                    date: ''
+                }
+                data.push(new_item);
+            }
+        }
+
+        var amount_data = [];
+        var bg_colors = [];
+        var labels = [];
+        var total_amount = 0;
+        data.forEach(item => {
+            total_amount += item.money;
+        })
+
+        data.forEach(item => {
+            amount_data.push(Math.round((item.money / total_amount) * 100));
+            bg_colors.push(item.category.iconColor);
+            labels.push(item.category.name);
+        })
+
+        const datasets = [
+            {
+                data: amount_data,
+                backgroundColor: bg_colors,
+            }];
+            console.log(datasets);
+        renderChart(total_amount, datasets, labels);
+    }
+
+    window.onload = function () {
+        crrData = JSON.parse(localStorage.getItem('expenses')) || [];
+        renderByMonth();
+        renderData(crrData, true);
+
+        updateDatasets();
+
+    }
 
 
-    const expense_tab = document.getElementById("tab-expense");
-    const invoice_tab = document.getElementById("tab-invoice");
-    const transaction_list = document.getElementById("transaction-list");
-    const range_selection = document.getElementById("range-selection");
-    const type_selection = document.getElementById("type-selection");
-    const sort_btn = document.getElementById("sort-btn");
 
 
-    var crrType = "transaction";
-    var crrRange = "month";
-    var crrTab = "expense";
-    var crrData = [];
-    var crrAmount = 0;
-    var crrSort = "asc";
 
     const getAllExpenses = () => {
         crrData = JSON.parse(localStorage.getItem('expenses')) || [];
@@ -265,10 +302,10 @@
                     img.src = dataURL;
 
                     transaction_list.innerHTML += `
-                            <div class="d-flex justify-content-between align-items-center transaction mt-3">
+                            <div class="d-flex justify-content-between align-items-center transaction mt-3" >
                                 <div class="left-side d-flex align-items-center">
                                         <div class="icon me-3 d-flex justify-content-center align-items-center"
-                                style="background-color: ${transaction.category.iconBgColor}; width: 60px; height: 60px; border-radius: 18px;">
+                                style="background-color: ${transaction.category.iconBgColor}; width: 60px; height: 60px; border-radius: 18px; transition: all 1s">
                                 <img src=${dataURL} alt="">
                             </div>
                                     <div class="content d-flex align-items-center flex-column">
@@ -380,9 +417,9 @@
         // renderData(data, true);
     }
 
-    crrData = JSON.parse(localStorage.getItem('expenses')) || [];
-    renderByMonth();
-    renderData(crrData, true);
+    // crrData = JSON.parse(localStorage.getItem('expenses')) || [];
+    // renderByMonth();
+    // renderData(crrData, true);
 
     invoice_tab.addEventListener("click", () => {
         if (!invoice_tab.classList.contains("active")) {
@@ -396,6 +433,7 @@
             if (crrType == "category") renderCategory();
             else renderData(crrData, true);
         };
+        updateDatasets();
     });
 
     expense_tab.addEventListener("click", () => {
@@ -412,6 +450,7 @@
             if (crrType == "category") renderCategory();
             else renderData(crrData, true);
         };
+        updateDatasets();
     });
 
     type_selection.addEventListener("change", () => {
@@ -438,16 +477,19 @@
             renderByDay();
             if (crrType == "category") renderCategory();
             else renderData(crrData, true);
+            updateDatasets();
         }
         else if (value == "month") {
             renderByMonth();
             if (crrType == "category") renderCategory();
             else renderData(crrData, true);
+            updateDatasets();
         }
         else if (value == "year") {
             renderByYear();
             if (crrType == "category") renderCategory();
             else renderData(crrData, true);
+            updateDatasets();
         }
     })
 
@@ -461,16 +503,6 @@
             renderData(crrData.slice().sort((a, b) => parseInt(a.money) - parseInt(b.money)), true);
         }
     })
-</script>
-
-<script>
-    document.getElementById('showToast').addEventListener('click', function () {
-        var successToast = new bootstrap.Toast(document.getElementById('successToast'));
-        successToast.show();
-        setTimeout(function () {
-            successToast.hide();
-        }, 2000); // Adjust the timeout duration (in milliseconds) as needed
-    });
 </script>
 
 
