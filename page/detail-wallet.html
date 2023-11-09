@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
     <!-- <h1 class="text-center header">Nhập chi tiêu</h1> -->
@@ -23,12 +25,14 @@
                 <i class="fa-solid fa-pencil" style="cursor: pointer;" id="saveTransaction"></i>
             </span>
         </div>
-        <div style="width: 100%; background: #F1F1FA;border-radius: 32px;  height: 56px; position: relative">
-            <div style="width: 100%; left: 4.36px; top: 4px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
-                <button id="btnChi"  class="btn-switch active-switch" style="flex: 1 1 0; height: 48px; padding: 8px; border: none; border-radius: 32px; justify-content: center; align-items: center; gap: 10px; display: flex; background: #29756F; color: #FCFCFC; font-size: 16px;">Chi tiêu</button>
-                <button id="btnTieu" class="btn-switch" style="flex: 1 1 0; height: 48px; padding: 8px; border: none; border-radius: 32px; justify-content: center; align-items: center; gap: 10px; display: flex; background: #F1F1FA; color: #000000; font-size: 16px;">Thu nhập</button>
+        <div class="tab-container d-flex justify-content-between mb-3">
+            <div id="tab-expense" class="tab-item active">
+                <span>Chi tiêu</span>
             </div>
-          </div>
+            <div id="tab-invoice" class="tab-item">
+                <span>Thu nhập</span>
+            </div>
+        </div>
     </div>
 
     <div class="container mt-4" id="content1">
@@ -40,11 +44,9 @@
                 </div>    
             </div>
             <div class="col-9 d-flex">
-                <!-- <div class="d-flex"> -->
-                    <button id="decrementDate1" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
-                    <input  type="text" id="datePicker1" class="form-control input-date text-center" value="1-11-2023" readonly>
-                    <button id="incrementDate1" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
-                <!-- </div> -->
+                <button id="decrementDate1" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
+                <input  type="text" id="datePicker1" class="form-control input-date text-center" value="1-11-2023" readonly>
+                <button id="incrementDate1" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
             </div>
         </div>
 
@@ -161,88 +163,88 @@
         </div>
     </div>
       
+     <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #409a17;">Thêm giao dịch thành công</strong>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast-warning" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #d9e222;">Thêm giao dịch thành công</strong>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p class="mb-2">Bạn có chắc chắn muốn xóa giao dịch mục?</p>
+            <p class="mb-2 text-center w-100 fw-bolder">Xóa giao dịch</p>
+            <div class="modal-buttons mt-2">
+                <button type="button" class="btn" id="confirmButton">Đồng ý</button>
+                <button type="button" class="btn" id="cancelButton">Hủy</button>
+            </div>
+        </div>
+    </div>
+
     <div id="navbar">
         
     </div>
 </body>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<script>
+    $(function() {
+      $("#datePicker1").datepicker({
+        dateFormat: 'd-m-yy',
+        onSelect: function(dateText, inst) {
+          // Xử lý khi người dùng chọn ngày
+        }
+      });
+
+
+      $("#datePicker2").datepicker({
+        dateFormat: 'd-m-yy',
+        onSelect: function(dateText, inst) {
+          // Xử lý khi người dùng chọn ngày
+        }
+      });
+
+
+// code còn lại của bạn ở đây
+// ...
+
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Code của bạn để lấy dữ liệu từ storage và gán vào input đã được bảo quản nguyên trạng
+    });
+</script>
 
 <script>
 
         document.addEventListener("DOMContentLoaded", function () {
 
+            var url = new URL(window.location.href);
 
-        document.getElementById('saveTransaction').addEventListener('click', function () {
-            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            var urlParams = url.searchParams;
 
-            const editingTransactionId = expenses.find(expense => expense.id === 3);
-            const noteInput1 = document.getElementById('note');
-            const noteInput2 = document.getElementById('note-income');
-            const moneyInput1 = document.getElementById('money');
-            const moneyInput2 = document.getElementById('money-income');
+            var categoryId = urlParams.get('categoryId');
 
-            let updatedTransaction = null;
+            var codeName = urlParams.get('codeName');
 
-            if (editingTransactionId) {
-                if (noteInput1.value && moneyInput1.value) {
-                    updatedTransaction = {
-                        id: editingTransactionId.id,
-                        date: datePicker1.value,
-                        category: JSON.parse(localStorage.getItem('clickCate')),
-                        note: noteInput1.value,
-                        money: moneyInput1.value
-                    };
-                } else if (noteInput2.value && moneyInput2.value) {
-                    updatedTransaction = {
-                        id: editingTransactionId.id,
-                        date: datePicker2.value,
-                        category: JSON.parse(localStorage.getItem('clickCate')),
-                        note: noteInput2.value,
-                        money: moneyInput2.value
-                    };
-                }
-                // console.log(editingTransactionId);
 
-                if (updatedTransaction) {
-                    // Lưu giao dịch đã chỉnh sửa vào danh sách giao dịch (expenses)
-                    expenses.forEach((expense, index) => {
-                        if (expense.id === editingTransactionId.id) {
-                            expenses[index] = updatedTransaction;
-                        }
-                    });
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
 
-                    console.log(expenses);
-                    // Lưu danh sách giao dịch mới vào Local Storage
-                    localStorage.setItem('expenses', JSON.stringify(expenses));
-
-                }
-            }
-        });
-
-        document.getElementById('btnDeleteExpense').addEventListener('click', function () {
-            let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
             console.log(expenses);
-            // Xác định giao dịch bạn muốn xóa (có thể sử dụng id hoặc thông tin định danh khác)
-            const expenseIdToDelete = 3; // Ví dụ: bạn cần thay đổi id theo giao dịch bạn muốn xóa
 
-            // Tìm và xóa giao dịch khỏi danh sách chi tiêu (expenses)
-            expenses = expenses.filter(expense => expense.id !== expenseIdToDelete);
-
-            // Lưu danh sách chi tiêu đã cập nhật vào Local Storage
-            localStorage.setItem('expenses', JSON.stringify(expenses));
-
-            // Cập nhật giao diện hoặc thực hiện các xử lý khác sau khi xóa
-            // ...
-        });
-
-
-            // Lấy danh sách chi tiêu từ local storage
-            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-
-            const expenseToEdit = expenses.find(expense => expense.id === 3);
+            const expenseToEdit = expenses.find(expense => expense.id == categoryId);
 
             // Kiểm tra xem có dữ liệu chi tiêu trong local storage không
             if (expenseToEdit) {
@@ -254,15 +256,12 @@
                 document.getElementById('money-income').value = expenseToEdit.money;
                 document.getElementById('datePicker2').value = expenseToEdit.date
 
+
             } else {
                 // Nếu không có dữ liệu chi tiêu, bạn có thể thông báo hoặc thực hiện các xử lý khác
                 console.log("Không có dữ liệu chi tiêu trong local storage.");
             }
 
-            renderCategories('category-list', 'expense');
-            renderCategories('category-list2', 'income');
-
-            // Lấy đối tượng input của ngày
             const datePicker1 = document.getElementById('datePicker1');
             const datePicker2 = document.getElementById('datePicker2');
 
@@ -317,7 +316,128 @@
             updateDatePicker(datePicker2, currentDate2);
 
 
+      // xử lí sự kiện khi bạn chọn từ datedaypicker
+            $("#datePicker1, #datePicker2").datepicker({
+                onSelect: function(dateText, inst) {
+                currentDate1 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+                updateDatePicker(datePicker1, currentDate1);
+                // hoặc cập nhật sự kiện ngày mà bạn muốn thay đổi sau nếu cần.
+                }
+            });
 
+        document.getElementById('saveTransaction').addEventListener('click', function () {
+            var url = new URL(window.location.href);
+            
+            var urlParams = url.searchParams;
+            
+            var categoryId = parseInt(urlParams.get('categoryId'));
+            
+            
+            var codeName = urlParams.get('codeName'); 
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+
+            const editingTransactionId = expenses.find(expense => expense.id === categoryId);
+            console.log(editingTransactionId);
+
+            const noteInput1 = document.getElementById('note');
+            const noteInput2 = document.getElementById('note-income');
+            const moneyInput1 = document.getElementById('money');
+            const moneyInput2 = document.getElementById('money-income');
+
+            let updatedTransaction = null;
+
+            if (editingTransactionId) {
+                if (noteInput1.value && moneyInput1.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker1.value,
+                        category: JSON.parse(localStorage.getItem('clickCate')),
+                        note: noteInput1.value,
+                        money: moneyInput1.value
+                    };
+                } else if (noteInput2.value && moneyInput2.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker2.value,
+                        category: JSON.parse(localStorage.getItem('clickCate')),
+                        note: noteInput2.value,
+                        money: moneyInput2.value
+                    };
+                }
+                // console.log(editingTransactionId);
+
+                if (updatedTransaction) {
+                    // Lưu giao dịch đã chỉnh sửa vào danh sách giao dịch (expenses)
+                    expenses.forEach((expense, index) => {
+                        if (expense.id === editingTransactionId.id) {
+                            expenses[index] = updatedTransaction;
+                        }
+                    });
+
+                    // Lưu danh sách giao dịch mới vào Local Storage
+                    localStorage.setItem(codeName, JSON.stringify(expenses));
+
+                    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+                    myToast.show();
+
+                    setTimeout(function () {
+                    myToast.hide();
+                    window.location.reload();
+                    }, 2000);
+                }
+            }
+        });
+
+        // document.getElementById('btnDeleteExpense').addEventListener('click', function () {
+        //     var url = new URL(window.location.href);
+            
+        //     var urlParams = url.searchParams;
+            
+        //     var categoryId = parseInt(urlParams.get('categoryId'));
+            
+            
+        //     var codeName = urlParams.get('codeName'); 
+            
+        //     let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+        //     expenses = expenses.filter(expense => expense.id !== categoryId);
+
+        //     localStorage.setItem(codeName, JSON.stringify(expenses));
+
+        // });
+
+        const modal = document.getElementById("myModal");
+        const confirmButton = document.getElementById("confirmButton");
+        const cancelButton = document.getElementById("cancelButton");
+
+        document.getElementById('btnDeleteExpense').addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+
+        cancelButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        confirmButton.addEventListener("click", () => {
+        modal.style.display = "none";
+
+        var url = new URL(window.location.href);
+            
+        var urlParams = url.searchParams;
+        
+        var categoryId = parseInt(urlParams.get('categoryId'));
+        
+        
+        var codeName = urlParams.get('codeName'); 
+        
+        let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+        expenses = expenses.filter(expense => expense.id !== categoryId);
+
+        localStorage.setItem(codeName, JSON.stringify(expenses));
+        });
+
+
+            renderCategories('category-list', 'expense');
+            renderCategories('category-list2', 'income');
         });
 
         function getCategories() {
@@ -330,9 +450,18 @@
         }
 
         function renderCategories(className, categoryType) {
-            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-
-            const expenseToEdit = expenses.find(expense => expense.id === 3);
+            
+            var url = new URL(window.location.href);
+            
+            var urlParams = url.searchParams;
+            
+            var categoryId = urlParams.get('categoryId');
+            
+            var codeName = urlParams.get('codeName');
+            
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+            
+            const expenseToEdit = expenses.find(expense => expense.id == categoryId);
             const categories = getCategories();
 
             
@@ -415,7 +544,7 @@
                         iconDiv.style.backgroundColor = category.iconBgColor;
                         iconDiv.style.height = '40px';
                         iconDiv.style.width = '40px';
-                        iconDiv.style.borderRadius = '18px';
+                        iconDiv.style.borderRadius = '12px';
 
                         const img = new Image();
                         img.src = dataURL;
@@ -441,16 +570,14 @@
         }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const btnChi = document.getElementById("btnChi");
-        const btnTieu = document.getElementById("btnTieu");
+        const btnChi = document.getElementById("tab-expense");
+        const btnTieu = document.getElementById("tab-invoice");
         const content1 = document.getElementById("content1");
         const content2 = document.getElementById("content2");
 
         btnChi.addEventListener("click", function () {
-            btnChi.style.background = "#29756F";
-            btnChi.style.color = "#FCFCFC";
-            btnTieu.style.background = "#F1F1FA";
-            btnTieu.style.color = "#000000";
+            btnChi.classList.add('active');
+            btnTieu.classList.remove('active');
             content2.style.opacity = 0;
             setTimeout(function () {
                 content2.style.display = "none";
@@ -466,10 +593,8 @@
         });
 
         btnTieu.addEventListener("click", function () {
-            btnTieu.style.background = "#29756F";
-            btnTieu.style.color = "#FCFCFC";
-            btnChi.style.background = "#F1F1FA";
-            btnChi.style.color = "#000000";
+            btnTieu.classList.add('active');
+            btnChi.classList.remove('active');
             content1.style.opacity = 0;
             setTimeout(function () {
                 content1.style.display = "none";
@@ -492,6 +617,10 @@
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
         });
+
+        $( function() {
+    $( "#datePicker1" ).datepicker();
+  } );
 </script>
 </html>
 
@@ -547,6 +676,16 @@
     color: #2B2B2B; font-size: 12px; font-weight: 400; word-wrap: break-word"
 }
 
+.btn-add{
+    width: 100%;
+    height: 49px;
+    background-color: #29756F;
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    margin-top: 32px;
+}
+
 .btn-add-categories{
     height: 80%;
 }
@@ -587,5 +726,69 @@ input {
     text-overflow: ellipsis; /* Khi placeholder quá dài */
 }
 
+.tab-container {
+        background-color: #F1F1FA;
+        border-radius: 21px;
+    }
 
+.tab-item {
+    padding: 12px 0;
+    text-align: center;
+    width: 50%;
+    cursor: pointer;
+}
+
+.tab-item.active {
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        width: 90%;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    #confirmButton {
+        background-color: #fd626d;
+        color: white;
+        width: 30%;
+        color: white;
+        font-weight: 600;
+        height: 45px;
+        border-radius: 6px;
+        margin-right: 3px;
+    }
+
+    #cancelButton {
+        background-color: #ccc3c3;
+        color: white;
+        width: 30%;
+        color: white;
+        font-weight: 600;
+        height: 45px;
+        border-radius: 6px;
+        margin-left: 3px;
+    }
 </style>

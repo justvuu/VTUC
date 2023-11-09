@@ -8,17 +8,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
-    <h1 class="text-center header">Nhập chi tiêu</h1>
     <div class="container mt-4">
-        <div style="width: 100%; background: #F1F1FA;border-radius: 32px;  height: 56px; position: relative">
-            <div style="width: 100%; left: 4.36px; top: 4px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
-                <button id="btnChi"  class="btn-switch active-switch" style="flex: 1 1 0; height: 48px; padding: 8px; border: none; border-radius: 32px; justify-content: center; align-items: center; gap: 10px; display: flex; background: #29756F; color: #FCFCFC; font-size: 16px;">Chi tiêu</button>
-                <button id="btnTieu" class="btn-switch" style="flex: 1 1 0; height: 48px; padding: 8px; border: none; border-radius: 32px; justify-content: center; align-items: center; gap: 10px; display: flex; background: #F1F1FA; color: #000000; font-size: 16px;">Thu nhập</button>
+        <div class="title d-flex justify-content-between mt-5 mb-3">
+            <span>
+                
+            </span>
+            <h5>Nhập chi tiêu</h5>
+            <span>
+            </span>
+        </div>
+        <div class="tab-container d-flex justify-content-between mb-3">
+            <div id="tab-expense" class="tab-item active">
+                <span>Chi tiêu</span>
             </div>
-          </div>
+            <div id="tab-invoice" class="tab-item">
+                <span>Thu nhập</span>
+            </div>
+        </div>
     </div>
 
     <div class="container mt-4" id="content1">
@@ -30,11 +41,9 @@
                 </div>    
             </div>
             <div class="col-9 d-flex">
-                <!-- <div class="d-flex"> -->
                     <button id="decrementDate1" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
-                    <input  type="text" id="datePicker1" class="form-control input-date text-center" value="1-11-2023" readonly>
+                    <input  type="text" id="datePicker1" class="form-control input-date text-center" readonly>
                     <button id="incrementDate1" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
-                <!-- </div> -->
             </div>
         </div>
 
@@ -82,7 +91,7 @@
         <div class="container">
             <div class="row" style="margin-top: 170px;">
                 <button class="btn-add" id="btnAddExpense" style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Thêm</div>
+                    <div>Thêm</div>
                 </button>
             </div>
         </div>
@@ -99,7 +108,7 @@
             <div class="col-9 d-flex">
                 <!-- <div class="d-flex"> -->
                     <button id="decrementDate2" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
-                    <input  type="text" id="datePicker2" class="form-control input-date text-center" value="13-10-2023" readonly>
+                    <input  type="text" id="datePicker2" class="form-control input-date text-center" readonly>
                     <button id="incrementDate2" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
                 <!-- </div> -->
             </div>
@@ -145,8 +154,23 @@
         <div class="container">
             <div class="row" style="margin-top: 170px;">
                 <button class="btn-add" id="btnAddIncome"  style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Thêm</div>
+                    <div>Thêm</div>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #409a17;">Thêm giao dịch thành công</strong>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast-warning" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #d9e222;">Thêm giao dịch thành công</strong>
             </div>
         </div>
     </div>
@@ -156,68 +180,96 @@
     </div>
 </body>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+  $(function() {
+  var currentDate1 = new Date();
+  var formattedDate1 = currentDate1.getDate() + '-' + (currentDate1.getMonth() + 1) + '-' + currentDate1.getFullYear();
+  $("#datePicker1").val(formattedDate1);
+  $("#datePicker1").datepicker({
+    dateFormat: 'd-m-yy',
+    onSelect: function(dateText, inst) {
+      currentDate1 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+    }
+  });
 
+  $("#decrementDate1").on('click', function() {
+    currentDate1.setDate(currentDate1.getDate() - 1);
+    $("#datePicker1").val(currentDate1.getDate() + '-' + (currentDate1.getMonth() + 1) + '-' + currentDate1.getFullYear());
+  });
+
+  $("#incrementDate1").on('click', function() {
+    currentDate1.setDate(currentDate1.getDate() + 1);
+    $("#datePicker1").val(currentDate1.getDate() + '-' + (currentDate1.getMonth() + 1) + '-' + currentDate1.getFullYear());
+  });
+
+  var currentDate2 = new Date();
+  var formattedDate2 = currentDate2.getDate() + '-' + (currentDate2.getMonth() + 1) + '-' + currentDate2.getFullYear();
+  $("#datePicker2").val(formattedDate2);
+  $("#datePicker2").datepicker({
+    dateFormat: 'd-m-yy',
+    onSelect: function(dateText, inst) {
+      currentDate2 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+    }
+  });
+
+  $("#decrementDate2").on('click', function() {
+    currentDate2.setDate(currentDate2.getDate() - 1);
+    $("#datePicker2").val(currentDate2.getDate() + '-' + (currentDate2.getMonth() + 1) + '-' + currentDate2.getFullYear());
+  });
+
+  $("#incrementDate2").on('click', function() {
+    currentDate2.setDate(currentDate2.getDate() + 1);
+    $("#datePicker2").val(currentDate2.getDate() + '-' + (currentDate2.getMonth() + 1) + '-' + currentDate2.getFullYear());
+  });
+});
+
+
+  </script>
 <script>
 
         document.addEventListener("DOMContentLoaded", function () {
             renderCategories('category-list', 'expense');
             renderCategories('category-list2', 'income');
 
-        // Lấy đối tượng input của ngày
-        const datePicker1 = document.getElementById('datePicker1');
-        const datePicker2 = document.getElementById('datePicker2');
 
-        // Lấy đối tượng nút giảm ngày
-        const decrementDateButton1 = document.getElementById('decrementDate1');
-        const decrementDateButton2 = document.getElementById('decrementDate2');
+        // Lấy phần tử input và nút "Thêm" bằng id
+        var moneyInput = document.getElementById('money');
+        var moneyInputIncome = document.getElementById('money-income');
+        var btnAddExpense = document.getElementById('btnAddExpense');
+        var btnAddIncome = document.getElementById('btnAddIncome');
 
-        // Lấy đối tượng nút tăng ngày
-        const incrementDateButton1 = document.getElementById('incrementDate1');
-        const incrementDateButton2 = document.getElementById('incrementDate2');
+        // Thêm sự kiện "input" cho input
+        moneyInput.addEventListener('input', function() {
+            // Kiểm tra điều kiện khi input có dữ liệu
+            if (moneyInput.value.trim() !== '') {
+                btnAddExpense.removeAttribute('disabled');
+            } else {
+                btnAddExpense.setAttribute('disabled', 'true');
+            }
 
-        // Tạo một đối tượng Date cho ngày hiện tại
-        let currentDate1 = new Date();
-        let currentDate2 = new Date();
 
-        // Cập nhật giá trị trường nhập liệu với ngày hiện tại
-        function updateDatePicker(input, date) {
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, cần cộng thêm 1
-            const year = date.getFullYear();
-            const formattedDate = `${day}-${month}-${year}`;
-            input.value = formattedDate;
+        });
+        moneyInputIncome.addEventListener('input', function() {
+            // Kiểm tra điều kiện khi input có dữ liệu
+            if (moneyInputIncome.value.trim() !== '') {
+                btnAddIncome.removeAttribute('disabled');
+            } else {
+                btnAddIncome.setAttribute('disabled', 'true');
+            }
+
+        });
+
+        // Kiểm tra giá trị ban đầu của input
+        if (moneyInput.value.trim() === '') {
+            btnAddExpense.setAttribute('disabled', 'true');
         }
 
-        // Thiết lập sự kiện cho nút giảm ngày - content1
-        decrementDateButton1.addEventListener('click', () => {
-            currentDate1.setDate(currentDate1.getDate() - 1);
-            updateDatePicker(datePicker1, currentDate1);
-        });
-
-        // Thiết lập sự kiện cho nút tăng ngày - content1
-        incrementDateButton1.addEventListener('click', () => {
-            currentDate1.setDate(currentDate1.getDate() + 1);
-            updateDatePicker(datePicker1, currentDate1);
-        });
-
-        // Thiết lập sự kiện cho nút giảm ngày - content2
-        decrementDateButton2.addEventListener('click', () => {
-            currentDate2.setDate(currentDate2.getDate() - 1);
-            updateDatePicker(datePicker2, currentDate2);
-        });
-
-        // Thiết lập sự kiện cho nút tăng ngày - content2
-        incrementDateButton2.addEventListener('click', () => {
-            currentDate2.setDate(currentDate2.getDate() + 1);
-            updateDatePicker(datePicker2, currentDate2);
-        });
-
-        // Cập nhật giá trị trường nhập liệu với ngày hiện tại
-        updateDatePicker(datePicker1, currentDate1);
-        updateDatePicker(datePicker2, currentDate2);
+        if (moneyInputIncome.value.trim() === '') {
+            btnAddIncome.setAttribute('disabled', 'true');
+        }
 
             
             document.getElementById('btnAddExpense').addEventListener('click', function () {
@@ -230,7 +282,7 @@
                 const money = moneyInput.value;
                 const dataCate = JSON.parse(localStorage.getItem('clickCate'))
 
-                if (dataCate && note && money) {
+                if (dataCate && money) {
                     // Tạo một đối tượng mới đại diện cho chi tiêu
                     const newExpense = {
                         id: currentId,
@@ -253,9 +305,20 @@
                     noteInput.value = '';
                     moneyInput.value = '';
 
-                    alert('Chi tiêu đã được thêm thành công.');
+                    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+                    myToast.show();
+
+                    setTimeout(function () {
+                    myToast.hide();
+                    window.location.reload();
+                    }, 2000);
                 } else {
-                    alert('Vui lòng điền đầy đủ thông tin trước khi thêm chi tiêu.');
+                    var myToast = new bootstrap.Toast(document.getElementById('myToast-warning'));
+                    myToast.show();
+
+                    setTimeout(function () {
+                    myToast.hide();
+                    }, 2000);   
                 }
             });
 
@@ -295,7 +358,17 @@
                     noteInput.value = '';
                     moneyInput.value = '';
 
-                    alert('Chi tiêu đã được thêm thành công.');
+                    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+                    myToast.show();
+                    
+                    setTimeout(function () {
+                    myToast.hide();
+                    // Tải lại trang sau khi toast ẩn đi
+                    window.location.reload();
+                    }, 2000);
+
+                    // window.location.reload();
+                    
                 } else {
                     alert('Vui lòng điền đầy đủ thông tin trước khi thêm chi tiêu.');
                 }
@@ -391,7 +464,7 @@
                         iconDiv.style.backgroundColor = category.iconBgColor;
                         iconDiv.style.height = '40px';
                         iconDiv.style.width = '40px';
-                        iconDiv.style.borderRadius = '18px';
+                        iconDiv.style.borderRadius = '12px';
 
                         const img = new Image();
                         img.src = dataURL;
@@ -417,16 +490,14 @@
         }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const btnChi = document.getElementById("btnChi");
-        const btnTieu = document.getElementById("btnTieu");
+        const btnChi = document.getElementById("tab-expense");
+        const btnTieu = document.getElementById("tab-invoice");
         const content1 = document.getElementById("content1");
         const content2 = document.getElementById("content2");
 
         btnChi.addEventListener("click", function () {
-            btnChi.style.background = "#29756F";
-            btnChi.style.color = "#FCFCFC";
-            btnTieu.style.background = "#F1F1FA";
-            btnTieu.style.color = "#000000";
+            btnChi.classList.add('active');
+            btnTieu.classList.remove('active');
             content2.style.opacity = 0;
             setTimeout(function () {
                 content2.style.display = "none";
@@ -442,10 +513,8 @@
         });
 
         btnTieu.addEventListener("click", function () {
-            btnTieu.style.background = "#29756F";
-            btnTieu.style.color = "#FCFCFC";
-            btnChi.style.background = "#F1F1FA";
-            btnChi.style.color = "#000000";
+            btnTieu.classList.add('active');
+            btnChi.classList.remove('active');
             content1.style.opacity = 0;
             setTimeout(function () {
                 content1.style.display = "none";
@@ -523,6 +592,16 @@
     color: #2B2B2B; font-size: 12px; font-weight: 400; word-wrap: break-word"
 }
 
+.btn-add{
+    width: 100%;
+    height: 49px;
+    background-color: #29756F;
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    margin-top: 32px;
+}
+
 .btn-add-categories{
     height: 80%;
 }
@@ -536,12 +615,12 @@ input {
 }
 
 .note-input {
-    text-align: left;
+    text-align: left !important;
     direction: ltr; /* Đặt hướng về bên trái */
 }
 
 .money-input {
-    text-align: right;
+    text-align: right !important;
     direction: ltr; /* Đặt hướng về bên trái */
 }
 
@@ -558,5 +637,31 @@ input {
     text-overflow: ellipsis; /* Khi placeholder quá dài */
 }
 
+.tab-container {
+        background-color: #F1F1FA;
+        border-radius: 21px;
+    }
 
+.tab-container {
+    background-color: #F1F1FA;
+    border-radius: 21px;
+}
+
+.tab-item {
+    padding: 12px 0;
+    text-align: center;
+    width: 50%;
+    cursor: pointer;
+}
+
+.tab-item.active {
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+    }
+
+button[disabled]{
+    opacity: 0.5; /* Điều chỉnh mức độ đậm của nút khi disabled */
+    cursor: not-allowed; /* Thay đổi kiểu con trỏ khi nút không thể ấn được */
+}
 </style>
