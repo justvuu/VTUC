@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
 <body>
     
     <div class="container mt-4">
+
         <div class="title d-flex justify-content-between mt-5 mb-3">
             <span>
                 
@@ -30,6 +33,7 @@
             <div id="tab-invoice" class="tab-item">
                 <span>Thu nhập</span>
             </div>
+
         </div>
     </div>
 
@@ -39,23 +43,25 @@
             <div class="col-3">
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="datePicker"><strong>Ngày:</strong></label>
-                </div>    
+                </div>
             </div>
             <div class="col-9 d-flex">
+
                     <button id="decrementDate1" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
                     <input  type="text" id="datePicker1" class="form-control input-date text-center" readonly>
                     <button id="incrementDate1" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
+
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col-3">
                 <div style="height: 100%" class="d-flex align-items-center">
-                    <label class="text-center mb-0"  for="note"><strong>Ghi chú:</strong></label>
-                </div>    
+                    <label class="text-center mb-0" for="note"><strong>Ghi chú:</strong></label>
+                </div>
             </div>
             <div class="col-9">
-                <input type="text" id="note"  class="form-control note-input" placeholder="Ghi chú...">
+                <input type="text" id="note" class="form-control note-input" placeholder="Ghi chú...">
             </div>
         </div>
 
@@ -64,7 +70,7 @@
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="money"><strong>Tiền chi:</strong></label>
                 </div>
-            </div>    
+            </div>
             <div class="col-9">
                 <input type="text" id="money" class="form-control money-input" placeholder="0đ">
             </div>
@@ -78,12 +84,12 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- <div class="mt-3" id="danhMucContainer"></div> -->
 
         <div class="container">
             <div class="category-list mt-4">
-    
+
 
             </div>
         </div>
@@ -91,26 +97,30 @@
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
+
                 <button class="btn-add" id="btnAddExpense" style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
                     <div>Thêm</div>
+
                 </button>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div class="container mt-4" id="content2">
         <div class="row">
             <div class="col-3">
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="datePicker"><strong>Ngày:</strong></label>
-                </div>    
+                </div>
             </div>
             <div class="col-9 d-flex">
                 <!-- <div class="d-flex"> -->
+
                     <button id="decrementDate2" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
                     <input  type="text" id="datePicker2" class="form-control input-date text-center" readonly>
                     <button id="incrementDate2" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
+
                 <!-- </div> -->
             </div>
         </div>
@@ -119,10 +129,11 @@
             <div class="col-3">
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="note"><strong>Ghi chú:</strong></label>
-                </div>    
+                </div>
             </div>
             <div class="col-9">
-                <input type="text" id="note-income" class="form-control text-center note-input" placeholder="Ghi chú...">
+                <input type="text" id="note-income" class="form-control text-center note-input"
+                    placeholder="Ghi chú...">
             </div>
         </div>
 
@@ -131,13 +142,13 @@
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="money"><strong>Tiền chi:</strong></label>
                 </div>
-            </div>    
+            </div>
             <div class="col-9">
                 <input type="text" id="money-income" class="form-control text-center money-input" placeholder="0đ">
             </div>
         </div>
 
-        <div class="row mt-3"> 
+        <div class="row mt-3">
             <div class="col-12">
                 <div style="height: 100%" class="d-flex align-items-center">
                     <label class="text-center mb-0" for="money"><strong>Danh mục:</strong></label>
@@ -147,19 +158,22 @@
 
         <div class="container">
             <div class="category-list2 mt-4">
-    
+
             </div>
         </div>
 
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
+
                 <button class="btn-add" id="btnAddIncome"  style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
                     <div>Thêm</div>
+
                 </button>
             </div>
         </div>
     </div>
+
 
     <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
         <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
@@ -178,6 +192,7 @@
       
     <div id="navbar">
         
+
     </div>
 </body>
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
@@ -231,9 +246,9 @@
   </script>
 <script>
 
-        document.addEventListener("DOMContentLoaded", function () {
-            renderCategories('category-list', 'expense');
-            renderCategories('category-list2', 'income');
+    document.addEventListener("DOMContentLoaded", function () {
+        renderCategories('category-list', 'expense');
+        renderCategories('category-list2', 'income');
 
 
         // Lấy phần tử input và nút "Thêm" bằng id
@@ -271,6 +286,7 @@
         if (moneyInputIncome.value.trim() === '') {
             btnAddIncome.setAttribute('disabled', 'true');
         }
+
 
             
             document.getElementById('btnAddExpense').addEventListener('click', function () {
@@ -376,16 +392,32 @@
             });
 
 
-        });
 
-        function getCategories() {
-            const categoriesJSON = localStorage.getItem('categories');
-            if (categoriesJSON) {
-                return JSON.parse(categoriesJSON);
-            } else {
-                return [];
-            }
+    });
+
+    function getCategories() {
+        const categoriesJSON = localStorage.getItem('categories');
+        if (categoriesJSON) {
+            return JSON.parse(categoriesJSON);
+        } else {
+            return [];
         }
+    }
+
+    function renderCategories(className, categoryType) {
+        // console.log(className);
+        const categories = getCategories();
+        console.log(categories);
+
+
+        const categoryList = document.querySelector(`.${className}`);
+        let selectedCategory = null;
+        var dataCate = null;
+
+
+        // Xóa tất cả các danh mục hiện có trên giao diện (nếu có)
+        categoryList.innerHTML = '';
+
 
         function renderCategories(className, categoryType) {
             // console.log(className);
@@ -481,14 +513,69 @@
                         categoryContent.appendChild(label);
                         categoryDiv.appendChild(categoryContent);
                         currentRow.appendChild(categoryDiv);
+
                     });
 
-                danhMucInCurrentRow++;
-            });
+                    const svgString = new XMLSerializer().serializeToString(svgDoc);
+                    const encodedSVG = btoa(svgString);
+                    const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
 
-            
-            
-        }
+                    // Tạo cột cho danh mục và thêm vào chuỗi HTML
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'col-4 category-item mb-3';
+
+                    const categoryContent = document.createElement('div');
+                    categoryContent.className = 'd-flex flex-column justify-content-center align-items-center category';
+                    categoryContent.style.width = '111px';
+                    categoryContent.style.height = '90px';
+                    categoryContent.style.background = 'white';
+                    categoryContent.style.borderRadius = '8px';
+                    categoryContent.style.border = '0.2px solid lightgray';
+                    categoryContent.style.cursor = 'pointer';
+
+                    // Thêm sự kiện click cho danh mục
+                    categoryContent.addEventListener('click', function () {
+                        localStorage.setItem('clickCate', JSON.stringify(category));
+                        if (selectedCategory) {
+                            selectedCategory.classList.remove('selected-category');
+                        }
+                        // Đặt danh mục hiện tại là danh mục được chọn
+                        selectedCategory = categoryContent;
+
+
+                        // Thêm lớp 'selected-category' cho danh mục hiện tại
+                        selectedCategory.classList.add('selected-category');
+                    });
+
+                    const iconDiv = document.createElement('div');
+                    iconDiv.className = 'icon d-flex justify-content-center align-items-center';
+                    iconDiv.style.backgroundColor = category.iconBgColor;
+                    iconDiv.style.height = '40px';
+                    iconDiv.style.width = '40px';
+                    iconDiv.style.borderRadius = '18px';
+
+                    const img = new Image();
+                    img.src = dataURL;
+                    img.alt = '';
+
+                    const label = document.createElement('label');
+                    label.className = 'mt-2 label-cate';
+                    label.style.textAlign = 'center';
+                    label.textContent = category.name;
+
+                    iconDiv.appendChild(img);
+                    categoryContent.appendChild(iconDiv);
+                    categoryContent.appendChild(label);
+                    categoryDiv.appendChild(categoryContent);
+                    currentRow.appendChild(categoryDiv);
+                });
+
+            danhMucInCurrentRow++;
+        });
+
+
+
+    }
 
     document.addEventListener("DOMContentLoaded", function () {
         const btnChi = document.getElementById("tab-expense");
@@ -537,11 +624,15 @@
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar').innerHTML = data;
+            const wallet_nav = document.getElementById("wallet-nav");
+            wallet_nav.setAttribute("src", "../assets/images/wallet_active.svg");
         });
 </script>
+
 </html>
 
 <style>
+
 .header {
     margin-top: 40px;
     font-size: 20px;
@@ -665,4 +756,5 @@ button[disabled]{
     opacity: 0.5; /* Điều chỉnh mức độ đậm của nút khi disabled */
     cursor: not-allowed; /* Thay đổi kiểu con trỏ khi nút không thể ấn được */
 }
+
 </style>

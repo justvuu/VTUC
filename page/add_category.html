@@ -43,7 +43,8 @@
     }
 
     .selected-icon {
-        border: 1.5px solid #000000;
+        border: 2px solid #000000;
+        padding: 3.2px 18.2px;
     }
 
     .color-select {
@@ -55,7 +56,8 @@
     }
 
     .selected-color {
-        border: 1.5px solid #000000;
+        border: 2px solid #000000;
+        padding: 18.2px 34.2px;
     }
 
     .btn-add {
@@ -224,25 +226,38 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-add inactive-btn" id="addBtn">Thêm</button>
+            <button type="button" class="btn-add inactive-btn" id="addBtn">Thêm</button>
         </form>
 
-          <!-- Toast container -->
-        <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
-            <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+        <!-- Toast container -->
+        <div class="toast-container position-fixed top-0 end-0"
+            style="z-index: 11; width: 60%;  margin-top: 15%; margin-right: 5px;">
+            <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                style="border-radius: 8px;">
                 <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
-                    <strong class="me-auto" style="color: #409a17;">Thành công</strong>
+                    <strong class="me-auto" style="color: #409a17;">Thêm mới công</strong>
                 </div>
             </div>
         </div>
 
-        <div id="navbar"></div>
+        <div class="toast-container position-fixed top-0 end-0"
+            style="z-index: 11; width: 60%;  margin-top: 15%; margin-right: 5px;">
+            <div id="errToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                style="border-radius: 8px;">
+                <div class="toast-body" style="border-radius: 8px; background-color: rgba(225, 30, 16, 0.5);">
+                    <strong class="me-auto" style="color: #e8320d;">Tên danh mục đã tồn tại</strong>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 100px;" id="navbar"></div>
 </body>
 
+
+<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
-<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
 
 <script>
     fetch('../components/navbar.html')
@@ -404,8 +419,16 @@
 
         if (isNameDuplicate) {
             // Hiển thị thông báo lỗi nếu tên danh mục bị trùng
-            toastr.error('Tên danh mục đã bị trùng', 'Lỗi');
+            // toastr.error('Tên danh mục đã bị trùng', 'Lỗi');
+            var myToast = new bootstrap.Toast(document.getElementById('errToast'));
+            myToast.show();
+
+            // Close the toast after 2 seconds
+            setTimeout(function () {
+                myToast.hide();
+            }, 2000);
         } else {
+            console.log("OKK");
             let idMax = getMaxCategoryId();
             const newCategory = {
                 id: idMax + 1,
@@ -419,26 +442,27 @@
             categories.push(newCategory);
             saveCategories(categories);
 
-           
-var myToast = new bootstrap.Toast(document.getElementById('myToast'));
-    myToast.show();
 
-    // Close the toast after 2 seconds
-    setTimeout(function () {
-        myToast.hide();
-    }, 2000);
+            var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+            myToast.show();
+
+            // Close the toast after 2 seconds
+            setTimeout(function () {
+                myToast.hide();
+                window.location.reload();
+            }, 800);
 
         }
 
-    //     // reset
-    //     document.getElementById('expenseRadio').checked = true;
-    //     document.getElementById('incomeRadio').checked = false;
-    //     name = '';
-    //     description = '';
-    //     selectedIconButton.classList.remove('selected-icon');
-    //     if (selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
-    //     document.querySelector('.btn-add').classList.add('inactive-btn');
-});
+        //     // reset
+        //     document.getElementById('expenseRadio').checked = true;
+        //     document.getElementById('incomeRadio').checked = false;
+        //     name = '';
+        //     description = '';
+        //     selectedIconButton.classList.remove('selected-icon');
+        //     if (selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
+        //     document.querySelector('.btn-add').classList.add('inactive-btn');
+    });
 </script>
 
 </html>
