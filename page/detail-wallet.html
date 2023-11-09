@@ -11,8 +11,18 @@
 
 </head>
 <body>
-    <h1 class="text-center header">Nhập chi tiêu</h1>
+    <!-- <h1 class="text-center header">Nhập chi tiêu</h1> -->
     <div class="container mt-4">
+        <div class="title d-flex justify-content-between mt-5 mb-3">
+            <span>
+                <a style="color: black;" href=""><i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </span>
+            <h5>Chỉnh sửa</h5>
+            <span>
+                <i class="fa-solid fa-pencil" style="cursor: pointer;" id="saveTransaction"></i>
+            </span>
+        </div>
         <div style="width: 100%; background: #F1F1FA;border-radius: 32px;  height: 56px; position: relative">
             <div style="width: 100%; left: 4.36px; top: 4px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
                 <button id="btnChi"  class="btn-switch active-switch" style="flex: 1 1 0; height: 48px; padding: 8px; border: none; border-radius: 32px; justify-content: center; align-items: center; gap: 10px; display: flex; background: #29756F; color: #FCFCFC; font-size: 16px;">Chi tiêu</button>
@@ -81,8 +91,8 @@
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
-                <button class="btn-add" id="btnAddExpense" style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Thêm</div>
+                <button class="btn-delete" id="btnDeleteExpense" style="width: 100%; height: 51px; background: #EC205D; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Xóa</div>
                 </button>
             </div>
         </div>
@@ -144,8 +154,8 @@
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
-                <button class="btn-add" id="btnAddIncome"  style="width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Thêm</div>
+                <button class="btn-delete" id="btnAddIncome"  style="width: 100%; height: 51px; background: #EC205D; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Xóa</div>
                 </button>
             </div>
         </div>
@@ -163,143 +173,149 @@
 <script>
 
         document.addEventListener("DOMContentLoaded", function () {
+
+
+        document.getElementById('saveTransaction').addEventListener('click', function () {
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+            const editingTransactionId = expenses.find(expense => expense.id === 3);
+            const noteInput1 = document.getElementById('note');
+            const noteInput2 = document.getElementById('note-income');
+            const moneyInput1 = document.getElementById('money');
+            const moneyInput2 = document.getElementById('money-income');
+
+            let updatedTransaction = null;
+
+            if (editingTransactionId) {
+                if (noteInput1.value && moneyInput1.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker1.value,
+                        category: JSON.parse(localStorage.getItem('clickCate')),
+                        note: noteInput1.value,
+                        money: moneyInput1.value
+                    };
+                } else if (noteInput2.value && moneyInput2.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker2.value,
+                        category: JSON.parse(localStorage.getItem('clickCate')),
+                        note: noteInput2.value,
+                        money: moneyInput2.value
+                    };
+                }
+                // console.log(editingTransactionId);
+
+                if (updatedTransaction) {
+                    // Lưu giao dịch đã chỉnh sửa vào danh sách giao dịch (expenses)
+                    expenses.forEach((expense, index) => {
+                        if (expense.id === editingTransactionId.id) {
+                            expenses[index] = updatedTransaction;
+                        }
+                    });
+
+                    console.log(expenses);
+                    // Lưu danh sách giao dịch mới vào Local Storage
+                    localStorage.setItem('expenses', JSON.stringify(expenses));
+
+                }
+            }
+        });
+
+        document.getElementById('btnDeleteExpense').addEventListener('click', function () {
+            let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            console.log(expenses);
+            // Xác định giao dịch bạn muốn xóa (có thể sử dụng id hoặc thông tin định danh khác)
+            const expenseIdToDelete = 3; // Ví dụ: bạn cần thay đổi id theo giao dịch bạn muốn xóa
+
+            // Tìm và xóa giao dịch khỏi danh sách chi tiêu (expenses)
+            expenses = expenses.filter(expense => expense.id !== expenseIdToDelete);
+
+            // Lưu danh sách chi tiêu đã cập nhật vào Local Storage
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+
+            // Cập nhật giao diện hoặc thực hiện các xử lý khác sau khi xóa
+            // ...
+        });
+
+
+            // Lấy danh sách chi tiêu từ local storage
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+            const expenseToEdit = expenses.find(expense => expense.id === 3);
+
+            // Kiểm tra xem có dữ liệu chi tiêu trong local storage không
+            if (expenseToEdit) {
+                // Ở đây bạn có thể sử dụng biến `expenses` để làm bất kỳ điều gì bạn cần
+                document.getElementById('note').value = expenseToEdit.note;
+                document.getElementById('note-income').value = expenseToEdit.note;
+                document.getElementById('datePicker1').value = expenseToEdit.date
+                document.getElementById('money').value = expenseToEdit.money;
+                document.getElementById('money-income').value = expenseToEdit.money;
+                document.getElementById('datePicker2').value = expenseToEdit.date
+
+            } else {
+                // Nếu không có dữ liệu chi tiêu, bạn có thể thông báo hoặc thực hiện các xử lý khác
+                console.log("Không có dữ liệu chi tiêu trong local storage.");
+            }
+
             renderCategories('category-list', 'expense');
             renderCategories('category-list2', 'income');
 
-        // Lấy đối tượng input của ngày
-        const datePicker1 = document.getElementById('datePicker1');
-        const datePicker2 = document.getElementById('datePicker2');
+            // Lấy đối tượng input của ngày
+            const datePicker1 = document.getElementById('datePicker1');
+            const datePicker2 = document.getElementById('datePicker2');
 
-        // Lấy đối tượng nút giảm ngày
-        const decrementDateButton1 = document.getElementById('decrementDate1');
-        const decrementDateButton2 = document.getElementById('decrementDate2');
+            // Lấy đối tượng nút giảm ngày
+            const decrementDateButton1 = document.getElementById('decrementDate1');
+            const decrementDateButton2 = document.getElementById('decrementDate2');
 
-        // Lấy đối tượng nút tăng ngày
-        const incrementDateButton1 = document.getElementById('incrementDate1');
-        const incrementDateButton2 = document.getElementById('incrementDate2');
+            // Lấy đối tượng nút tăng ngày
+            const incrementDateButton1 = document.getElementById('incrementDate1');
+            const incrementDateButton2 = document.getElementById('incrementDate2');
 
-        // Tạo một đối tượng Date cho ngày hiện tại
-        let currentDate1 = new Date();
-        let currentDate2 = new Date();
+            // Tạo một đối tượng Date cho ngày hiện tại
+            let currentDate1 = new Date(`${datePicker1.value.split('-')[2]}-${datePicker1.value.split('-')[1]}-${datePicker1.value.split('-')[0]}`);
+            let currentDate2 = new Date(`${datePicker2.value.split('-')[2]}-${datePicker2.value.split('-')[1]}-${datePicker2.value.split('-')[0]}`);
 
-        // Cập nhật giá trị trường nhập liệu với ngày hiện tại
-        function updateDatePicker(input, date) {
-            const day = date.getDate();
-            const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, cần cộng thêm 1
-            const year = date.getFullYear();
-            const formattedDate = `${day}-${month}-${year}`;
-            input.value = formattedDate;
-        }
 
-        // Thiết lập sự kiện cho nút giảm ngày - content1
-        decrementDateButton1.addEventListener('click', () => {
-            currentDate1.setDate(currentDate1.getDate() - 1);
-            updateDatePicker(datePicker1, currentDate1);
-        });
+            // Cập nhật giá trị trường nhập liệu với ngày hiện tại
+            function updateDatePicker(input, date) {
+                const day = date.getDate();
+                const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, cần cộng thêm 1
+                const year = date.getFullYear();
+                const formattedDate = `${day}-${month}-${year}`;
+                input.value = formattedDate;
+            }
 
-        // Thiết lập sự kiện cho nút tăng ngày - content1
-        incrementDateButton1.addEventListener('click', () => {
-            currentDate1.setDate(currentDate1.getDate() + 1);
-            updateDatePicker(datePicker1, currentDate1);
-        });
-
-        // Thiết lập sự kiện cho nút giảm ngày - content2
-        decrementDateButton2.addEventListener('click', () => {
-            currentDate2.setDate(currentDate2.getDate() - 1);
-            updateDatePicker(datePicker2, currentDate2);
-        });
-
-        // Thiết lập sự kiện cho nút tăng ngày - content2
-        incrementDateButton2.addEventListener('click', () => {
-            currentDate2.setDate(currentDate2.getDate() + 1);
-            updateDatePicker(datePicker2, currentDate2);
-        });
-
-        // Cập nhật giá trị trường nhập liệu với ngày hiện tại
-        updateDatePicker(datePicker1, currentDate1);
-        updateDatePicker(datePicker2, currentDate2);
-
-            
-            document.getElementById('btnAddExpense').addEventListener('click', function () {
-                var expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-                var currentId = parseInt(localStorage.getItem('currentId')) || 1;
-                const noteInput = document.getElementById('note');
-                const moneyInput = document.getElementById('money');
-
-                const note = noteInput.value;
-                const money = moneyInput.value;
-                const dataCate = JSON.parse(localStorage.getItem('clickCate'))
-
-                if (dataCate && note && money) {
-                    // Tạo một đối tượng mới đại diện cho chi tiêu
-                    const newExpense = {
-                        id: currentId,
-                        date: datePicker1.value,
-                        category: dataCate,
-                        note: note,
-                        money: money
-                    };
-
-                    currentId++;
-
-                    localStorage.setItem('currentId', currentId);
-                    // Thêm chi tiêu mới vào danh sách
-                    expenses.push(newExpense);
-
-                    // Lưu danh sách chi tiêu mới vào localStorage
-                    localStorage.setItem('expenses', JSON.stringify(expenses));
-
-                    // Xóa dữ liệu trong các input sau khi đã lưu thành công
-                    noteInput.value = '';
-                    moneyInput.value = '';
-
-                    alert('Chi tiêu đã được thêm thành công.');
-                } else {
-                    alert('Vui lòng điền đầy đủ thông tin trước khi thêm chi tiêu.');
-                }
+            // Thiết lập sự kiện cho nút giảm ngày - content1
+            decrementDateButton1.addEventListener('click', () => {
+                currentDate1.setDate(currentDate1.getDate() - 1);
+                updateDatePicker(datePicker1, currentDate1);
             });
 
-            
-            
-            document.getElementById('btnAddIncome').addEventListener('click', function () {
-                var income = JSON.parse(localStorage.getItem('income')) || [];
-                var currentIdIncome = parseInt(localStorage.getItem('currentIdIncome')) || 1;
-                const noteInput = document.getElementById('note-income');
-                const moneyInput = document.getElementById('money-income');
-
-                const note = noteInput.value;
-                const money = moneyInput.value;
-                const dataCate = JSON.parse(localStorage.getItem('clickCate'))
-
-
-                if (dataCate && note && money) {
-                    // Tạo một đối tượng mới đại diện cho chi tiêu
-                    const newIncome = {
-                        id: currentIdIncome,
-                        date: datePicker2.value,
-                        category: dataCate,
-                        note: note,
-                        money: money
-                    };
-                    currentIdIncome++;
-                    localStorage.setItem('currentIdIncome', currentIdIncome);
-
-
-                    // Thêm chi tiêu mới vào danh sách
-                    income.push(newIncome);
-
-                    // Lưu danh sách chi tiêu mới vào localStorage
-                    localStorage.setItem('income', JSON.stringify(income));
-
-                    // Xóa dữ liệu trong các input sau khi đã lưu thành công
-                    noteInput.value = '';
-                    moneyInput.value = '';
-
-                    alert('Chi tiêu đã được thêm thành công.');
-                } else {
-                    alert('Vui lòng điền đầy đủ thông tin trước khi thêm chi tiêu.');
-                }
+            // Thiết lập sự kiện cho nút tăng ngày - content1
+            incrementDateButton1.addEventListener('click', () => {
+                currentDate1.setDate(currentDate1.getDate() + 1);
+                updateDatePicker(datePicker1, currentDate1);
             });
+
+            // Thiết lập sự kiện cho nút giảm ngày - content2
+            decrementDateButton2.addEventListener('click', () => {
+                currentDate2.setDate(currentDate2.getDate() - 1);
+                updateDatePicker(datePicker2, currentDate2);
+            });
+
+            // Thiết lập sự kiện cho nút tăng ngày - content2
+            incrementDateButton2.addEventListener('click', () => {
+                currentDate2.setDate(currentDate2.getDate() + 1);
+                updateDatePicker(datePicker2, currentDate2);
+            });
+
+            // Cập nhật giá trị trường nhập liệu với ngày hiện tại
+            updateDatePicker(datePicker1, currentDate1);
+            updateDatePicker(datePicker2, currentDate2);
+
 
 
         });
@@ -314,9 +330,10 @@
         }
 
         function renderCategories(className, categoryType) {
-            // console.log(className);
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+            const expenseToEdit = expenses.find(expense => expense.id === 3);
             const categories = getCategories();
-            console.log(categories);
 
             
             const categoryList = document.querySelector(`.${className}`);
@@ -372,6 +389,13 @@
                         categoryContent.style.border = '0.2px solid lightgray';
                         categoryContent.style.cursor = 'pointer';
 
+                        if(expenseToEdit['category'].name == category.name) {
+                            selectedCategory = categoryContent;
+
+                            selectedCategory.classList.add('selected-category');
+                        }
+                        // console.log(category);
+                        // console.log(expenseToEdit['category']);
                         // Thêm sự kiện click cho danh mục
                         categoryContent.addEventListener('click', function () {
                             localStorage.setItem('clickCate', JSON.stringify(category));
@@ -380,7 +404,7 @@
                             }
                             // Đặt danh mục hiện tại là danh mục được chọn
                             selectedCategory = categoryContent;
-
+                            
 
                             // Thêm lớp 'selected-category' cho danh mục hiện tại
                             selectedCategory.classList.add('selected-category');
@@ -527,6 +551,11 @@
     height: 80%;
 }
 
+.btn-add{
+    width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    display: none;
+}
+
 input {
     width: 100%;
 }
@@ -536,12 +565,12 @@ input {
 }
 
 .note-input {
-    text-align: left;
+    text-align: left !important;
     direction: ltr; /* Đặt hướng về bên trái */
 }
 
 .money-input {
-    text-align: right;
+    text-align: right !important;
     direction: ltr; /* Đặt hướng về bên trái */
 }
 
