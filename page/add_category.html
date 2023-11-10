@@ -397,6 +397,17 @@
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
+    function checkNameDuplicate(){
+        const categories = getCategories();
+        const name = document.getElementById('name').value.trim();
+        const isNameDuplicate = categories.some(category => category.name.toLowerCase() === name.toLowerCase());
+        if (isNameDuplicate) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     // ----------- thêm mới 1 danh mục và lưu vào local storage
     addButton.addEventListener('click', function () {
@@ -412,14 +423,7 @@
             iconBgColor = selectedColorButton.dataset.bgColor;
         }
 
-        const categories = getCategories();
-
-        // Kiểm tra xem tên danh mục đã tồn tại trong danh sách chưa
-        const isNameDuplicate = categories.some(category => category.name.toLowerCase() === name.toLowerCase());
-
-        if (isNameDuplicate) {
-            // Hiển thị thông báo lỗi nếu tên danh mục bị trùng
-            // toastr.error('Tên danh mục đã bị trùng', 'Lỗi');
+        if (checkNameDuplicate() == false) {
             var myToast = new bootstrap.Toast(document.getElementById('errToast'));
             myToast.show();
 
@@ -428,7 +432,6 @@
                 myToast.hide();
             }, 2000);
         } else {
-            console.log("OKK");
             let idMax = getMaxCategoryId();
             const newCategory = {
                 id: idMax + 1,
@@ -439,9 +442,9 @@
                 iconBgColor: iconBgColor,
                 categoryType: selectedCategoryType,
             };
+            const categories = getCategories();
             categories.push(newCategory);
             saveCategories(categories);
-
 
             var myToast = new bootstrap.Toast(document.getElementById('myToast'));
             myToast.show();
@@ -450,18 +453,9 @@
             setTimeout(function () {
                 myToast.hide();
                 window.location.reload();
-            }, 800);
+            }, 2000);
 
         }
-
-        //     // reset
-        //     document.getElementById('expenseRadio').checked = true;
-        //     document.getElementById('incomeRadio').checked = false;
-        //     name = '';
-        //     description = '';
-        //     selectedIconButton.classList.remove('selected-icon');
-        //     if (selectedColorButton !== null) selectedColorButton.classList.remove('selected-color');
-        //     document.querySelector('.btn-add').classList.add('inactive-btn');
     });
 </script>
 

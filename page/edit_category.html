@@ -18,8 +18,9 @@
 
     .form-check-input[type="radio"] {
         width: 20px;
-        height: 20px; 
+        height: 20px;
     }
+
     .form-check-label {
         display: flex;
         margin-left: 5px;
@@ -228,10 +229,25 @@
             <button type="submit" class="btn-edit inactive-btn">Lưu</button>
         </form>
 
+
+        <div class="toast-container position-fixed top-0 end-0"
+            style="z-index: 11; width: 60%;  margin-top: 15%; margin-right: 5px;">
+            <div id="errToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                style="border-radius: 8px;">
+                <div class="toast-body" style="border-radius: 8px; background-color: rgba(225, 30, 16, 0.5);">
+                    <strong class="me-auto" style="color: #e8320d;">Tên danh mục đã tồn tại</strong>
+                </div>
+            </div>
+        </div>
+
         <div style="margin-top: 100px;" id="navbar"></div>
 </body>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
 <script>
     fetch('../components/navbar.html')
         .then(response => response.text())
@@ -439,6 +455,16 @@
         localStorage.setItem('categories', JSON.stringify(categories));
     }
 
+    function checkNameDuplicate(){
+        const categories = getCategories();
+        const name = document.getElementById('name').value.trim();
+        const isNameDuplicate = categories.some(category => category.name.toLowerCase() === name.toLowerCase());
+        if (isNameDuplicate) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     // ----------- sửa 1 danh mục và lưu vào local storage
     editButton.addEventListener('click', function () {
@@ -447,22 +473,31 @@
         const description = document.getElementById('description').value || null;
         const icon = selectedIconButton.dataset.icon;
 
-        let iconColor = '#000000';
-        let iconBgColor = '#C4C4C4';
-        if (selectedColorButton) {
-            iconColor = selectedColorButton.dataset.iconColor;
-            iconBgColor = selectedColorButton.dataset.bgColor;
+        if(checkNameDuplicate() == false){
+             // Hiển thị thông báo lỗi nếu tên danh mục bị trùng
+             var myToast = new bootstrap.Toast(document.getElementById('errToast'));
+            myToast.show();
+
+            setTimeout(function () {
+                myToast.hide();
+            }, 2000);
+        } else {
+            let iconColor = '#000000';
+            let iconBgColor = '#C4C4C4';
+            if (selectedColorButton) {
+                iconColor = selectedColorButton.dataset.iconColor;
+                iconBgColor = selectedColorButton.dataset.bgColor;
+            }
+
+            selectedCategory.categoryType = selectedCategoryType;
+            selectedCategory.name = name;
+            selectedCategory.description = description;
+            selectedCategory.icon = icon;
+            selectedCategory.iconColor = iconColor;
+            selectedCategory.iconBgColor = iconBgColor;
+            saveCategories(categories);
+            window.location.href = "/page/categories.html?isSuccess=true";
         }
-
-        selectedCategory.categoryType = selectedCategoryType;
-        selectedCategory.name = name;
-        selectedCategory.description = description;
-        selectedCategory.icon = icon;
-        selectedCategory.iconColor = iconColor;
-        selectedCategory.iconBgColor = iconBgColor;
-
-        saveCategories(categories);
-        window.location.href = '/page/categories.html';
     });
 </script>
 

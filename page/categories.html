@@ -37,13 +37,29 @@
             </a>
         </div>
         <div class="category-list mt-4">
-            
+
         </div>
     </div>
+
+    <!-- Toast container -->
+    <div class="toast-container position-fixed top-0 end-0"
+        style="z-index: 11; width: 60%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
+            style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #409a17;">Sửa thành công</strong>
+            </div>
+        </div>
+    </div>
+
     <div style="margin-top: 100px;" id="navbar"></div>
 </body>
 
 <script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
 <script>
     fetch('../components/navbar.html')
         .then(response => response.text())
@@ -55,61 +71,83 @@
 </script>
 
 <script>
-   function getCategories() {
-    const storedCategories = localStorage.getItem('categories');
+    // Lấy tham số truy vấn categoryIndex từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const check = urlParams.get('isSuccess');
 
-    if (storedCategories) {
-        return JSON.parse(storedCategories);
-    } else {
-        const categories = [
-            { id: 1, name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType: "expense" },
-            { id: 2, name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FFD7B2", categoryType: "expense" },
-            { id: 3, name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType: "expense" },
-            { id: 4, name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense" },
-            { id: 5, name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income" },
-        ];
-        localStorage.setItem('categories', JSON.stringify(categories));
+    if (check === "true") {
+        var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+        myToast.show();
 
-        return categories;
+        setTimeout(function () {
+            myToast.hide();
+            window.location.reload();
+        }, 2000);
+
+        const newURL = window.location.href.replace('?isSuccess=true', '');
+
+        // Thay đổi URL mà không tải lại trang
+        window.history.replaceState({ path: newURL }, '', newURL);
     }
-}
 
-function renderCategories() {
-    const categories = getCategories();
-    const categoryList = document.querySelector('.category-list');
+</script>
 
-    categoryList.innerHTML = '';
+<script>
+    function getCategories() {
+        const storedCategories = localStorage.getItem('categories');
 
-    categories.forEach((category) => {
-        const svgPath = `../assets/images/${category.icon}.svg`;
-        fetch(svgPath)
-            .then(response => response.text())
-            .then(svgText => {
-                const parser = new DOMParser();
-                const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+        if (storedCategories) {
+            return JSON.parse(storedCategories);
+        } else {
+            const categories = [
+                { id: 1, name: "Ăn uống", description: null, icon: "restaurant", iconColor: "#FD3C4A", iconBgColor: "#FDD5D7", categoryType: "expense" },
+                { id: 2, name: "Mua sắm", description: null, icon: "shopping_bag", iconColor: "#F18E33", iconBgColor: "#FFD7B2", categoryType: "expense" },
+                { id: 3, name: "Đi lại", description: null, icon: "car", iconColor: "#0077FF", iconBgColor: "#BDDCFF", categoryType: "expense" },
+                { id: 4, name: "Điện nước", description: null, icon: "recurring_bill", iconColor: "#7F3DFF", iconBgColor: "#EEE5FF", categoryType: "expense" },
+                { id: 5, name: "Tiền lương", description: null, icon: "salary", iconColor: "#00A86B", iconBgColor: "#CFFAEA", categoryType: "income" },
+            ];
+            localStorage.setItem('categories', JSON.stringify(categories));
 
-                const paths = svgDoc.querySelectorAll('path');
-                paths.forEach(path => {
-                    path.setAttribute('fill', category.iconColor); // Change 'red' to your desired color
-                });
+            return categories;
+        }
+    }
 
-                const svgString = new XMLSerializer().serializeToString(svgDoc);
-                const encodedSVG = btoa(svgString);
-                const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+    function renderCategories() {
+        const categories = getCategories();
+        const categoryList = document.querySelector('.category-list');
 
-                const img = new Image();
-                img.src = dataURL;
+        categoryList.innerHTML = '';
 
-                // Tạo một div danh mục và gán sự kiện click cho nó
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'd-flex justify-content-between align-items-center category';
-                categoryDiv.style.cursor = 'pointer';
-                categoryDiv.addEventListener('click', function() {
-                    const detailCategoryURL = `/page/detail_category.html?categoryId=${category.id}`;
-                    window.location.href = detailCategoryURL;
-                });
+        categories.forEach((category) => {
+            const svgPath = `../assets/images/${category.icon}.svg`;
+            fetch(svgPath)
+                .then(response => response.text())
+                .then(svgText => {
+                    const parser = new DOMParser();
+                    const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
 
-                categoryDiv.innerHTML = `
+                    const paths = svgDoc.querySelectorAll('path');
+                    paths.forEach(path => {
+                        path.setAttribute('fill', category.iconColor); // Change 'red' to your desired color
+                    });
+
+                    const svgString = new XMLSerializer().serializeToString(svgDoc);
+                    const encodedSVG = btoa(svgString);
+                    const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+
+                    const img = new Image();
+                    img.src = dataURL;
+
+                    // Tạo một div danh mục và gán sự kiện click cho nó
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'd-flex justify-content-between align-items-center category';
+                    categoryDiv.style.cursor = 'pointer';
+                    categoryDiv.addEventListener('click', function () {
+                        const detailCategoryURL = `/page/detail_category.html?categoryId=${category.id}`;
+                        window.location.href = detailCategoryURL;
+                    });
+
+                    categoryDiv.innerHTML = `
                     <div class="d-flex align-items-center">
                         <div class="icon me-3 d-flex justify-content-center align-items-center"
                             style="background-color: ${category.iconBgColor};">
@@ -119,9 +157,9 @@ function renderCategories() {
                     </div>
                 `;
 
-                // Thêm div danh mục vào danh sách danh mục
-                categoryList.appendChild(categoryDiv);
-            });
+                    // Thêm div danh mục vào danh sách danh mục
+                    categoryList.appendChild(categoryDiv);
+                });
         });
     }
 
