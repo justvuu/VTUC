@@ -243,7 +243,8 @@
 });
 
 
-  </script>
+</script>
+
 <script>
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -268,6 +269,7 @@
 
 
         });
+
         moneyInputIncome.addEventListener('input', function() {
             // Kiểm tra điều kiện khi input có dữ liệu
             if (moneyInputIncome.value.trim() !== '') {
@@ -404,20 +406,6 @@
         }
     }
 
-    function renderCategories(className, categoryType) {
-        // console.log(className);
-        const categories = getCategories();
-        console.log(categories);
-
-
-        const categoryList = document.querySelector(`.${className}`);
-        let selectedCategory = null;
-        var dataCate = null;
-
-
-        // Xóa tất cả các danh mục hiện có trên giao diện (nếu có)
-        categoryList.innerHTML = '';
-
 
         function renderCategories(className, categoryType) {
             // console.log(className);
@@ -516,59 +504,6 @@
 
                     });
 
-                    const svgString = new XMLSerializer().serializeToString(svgDoc);
-                    const encodedSVG = btoa(svgString);
-                    const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
-
-                    // Tạo cột cho danh mục và thêm vào chuỗi HTML
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'col-4 category-item mb-3';
-
-                    const categoryContent = document.createElement('div');
-                    categoryContent.className = 'd-flex flex-column justify-content-center align-items-center category';
-                    categoryContent.style.width = '111px';
-                    categoryContent.style.height = '90px';
-                    categoryContent.style.background = 'white';
-                    categoryContent.style.borderRadius = '8px';
-                    categoryContent.style.border = '0.2px solid lightgray';
-                    categoryContent.style.cursor = 'pointer';
-
-                    // Thêm sự kiện click cho danh mục
-                    categoryContent.addEventListener('click', function () {
-                        localStorage.setItem('clickCate', JSON.stringify(category));
-                        if (selectedCategory) {
-                            selectedCategory.classList.remove('selected-category');
-                        }
-                        // Đặt danh mục hiện tại là danh mục được chọn
-                        selectedCategory = categoryContent;
-
-
-                        // Thêm lớp 'selected-category' cho danh mục hiện tại
-                        selectedCategory.classList.add('selected-category');
-                    });
-
-                    const iconDiv = document.createElement('div');
-                    iconDiv.className = 'icon d-flex justify-content-center align-items-center';
-                    iconDiv.style.backgroundColor = category.iconBgColor;
-                    iconDiv.style.height = '40px';
-                    iconDiv.style.width = '40px';
-                    iconDiv.style.borderRadius = '18px';
-
-                    const img = new Image();
-                    img.src = dataURL;
-                    img.alt = '';
-
-                    const label = document.createElement('label');
-                    label.className = 'mt-2 label-cate';
-                    label.style.textAlign = 'center';
-                    label.textContent = category.name;
-
-                    iconDiv.appendChild(img);
-                    categoryContent.appendChild(iconDiv);
-                    categoryContent.appendChild(label);
-                    categoryDiv.appendChild(categoryContent);
-                    currentRow.appendChild(categoryDiv);
-                });
 
             danhMucInCurrentRow++;
         });
