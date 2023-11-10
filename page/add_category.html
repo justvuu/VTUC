@@ -426,8 +426,7 @@
         if (checkNameDuplicate() == false) {
             var myToast = new bootstrap.Toast(document.getElementById('errToast'));
             myToast.show();
-
-            // Close the toast after 2 seconds
+            
             setTimeout(function () {
                 myToast.hide();
             }, 2000);
@@ -449,7 +448,6 @@
             var myToast = new bootstrap.Toast(document.getElementById('myToast'));
             myToast.show();
 
-            // Close the toast after 2 seconds
             setTimeout(function () {
                 myToast.hide();
                 window.location.reload();

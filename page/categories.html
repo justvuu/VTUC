@@ -71,7 +71,7 @@
 </script>
 
 <script>
-    // Lấy tham số truy vấn categoryIndex từ URL
+    // Lấy tham số truy vấn từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const check = urlParams.get('isSuccess');
 
@@ -128,7 +128,7 @@
 
                     const paths = svgDoc.querySelectorAll('path');
                     paths.forEach(path => {
-                        path.setAttribute('fill', category.iconColor); // Change 'red' to your desired color
+                        path.setAttribute('fill', category.iconColor);
                     });
 
                     const svgString = new XMLSerializer().serializeToString(svgDoc);
@@ -157,7 +157,6 @@
                     </div>
                 `;
 
-                    // Thêm div danh mục vào danh sách danh mục
                     categoryList.appendChild(categoryDiv);
                 });
         });
