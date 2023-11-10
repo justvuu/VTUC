@@ -237,14 +237,13 @@
 
             var urlParams = url.searchParams;
 
-            var categoryId = urlParams.get('categoryId');
+            var categoryId = urlParams.get('transactionId');
 
             var codeName = urlParams.get('codeName');
+            if(codeName == "expense") codeName = "expenses";
 
 
             const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
-
-            console.log(expenses);
 
             const expenseToEdit = expenses.find(expense => expense.id == categoryId);
 
@@ -339,7 +338,6 @@
             const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
 
             const editingTransactionId = expenses.find(expense => expense.id === categoryId);
-            console.log(editingTransactionId);
 
             const noteInput1 = document.getElementById('note');
             const noteInput2 = document.getElementById('note-income');
