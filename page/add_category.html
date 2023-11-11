@@ -240,12 +240,13 @@
             </div>
         </div>
 
-        <div class="toast-container position-fixed top-0 end-0"
-            style="z-index: 11; width: 60%;  margin-top: 15%; margin-right: 5px;">
-            <div id="errToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"
-                style="border-radius: 8px;">
-                <div class="toast-body" style="border-radius: 8px; background-color: rgba(225, 30, 16, 0.5);">
-                    <strong class="me-auto" style="color: #e8320d;">Tên danh mục đã tồn tại</strong>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <p class="mb-2">Bạn có chắc chắn muốn xóa danh mục?</p>
+                <p class="mb-2 text-center w-100 fw-bolder">Xóa danh mục</p>
+                <div class="modal-buttons mt-2">
+                    <button type="button" class="btn" id="confirmButton">Đồng ý</button>
+                    <button type="button" class="btn" id="cancelButton">Hủy</button>
                 </div>
             </div>
         </div>

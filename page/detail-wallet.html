@@ -93,9 +93,12 @@
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
-                <button class="btn-delete" id="btnDeleteExpense" style="width: 100%; height: 51px; background: #EC205D; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Xóa</div>
+                <button class="btn btn-delete w-100" id="btnDeleteExpense">
+                    <div>Xóa</div>
                 </button>
+                <!-- <div class="fixed-button" style="position: relative; bottom: -344px;">
+                    <button type="button" class="btn btn-danger w-100 mt-4">Xóa</button>
+                </div> -->
             </div>
         </div>
         
@@ -156,8 +159,8 @@
 
         <div class="container">
             <div class="row" style="margin-top: 170px;">
-                <button class="btn-delete" id="btnAddIncome"  style="width: 100%; height: 51px; background: #EC205D; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <div style="width: 56.87px; color: white; font-size: 18px; font-weight: 600; word-wrap: break-word">Xóa</div>
+                <button class="btn-delete" id="btnAddIncome"  >
+                    <div >Xóa</div>
                 </button>
             </div>
         </div>
@@ -181,7 +184,7 @@
 
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <p class="mb-2">Bạn có chắc chắn muốn xóa giao dịch mục?</p>
+            <p class="mb-2">Bạn có chắc chắn muốn xóa giao dịch?</p>
             <p class="mb-2 text-center w-100 fw-bolder">Xóa giao dịch</p>
             <div class="modal-buttons mt-2">
                 <button type="button" class="btn" id="confirmButton">Đồng ý</button>
@@ -736,6 +739,16 @@ input {
     text-align: center;
     width: 50%;
     cursor: pointer;
+}
+
+.btn-delete{
+    background-color: #fd626d;
+    color: white;
+    width: 56.87px;
+    font-weight: 600;
+    height: 51px;
+    border-radius: 6px;
+    
 }
 
 .tab-item.active {
