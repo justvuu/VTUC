@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiêu</title>
+    <link rel="stylesheet" href="../assets//css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<style>
+    .btn-edit {
+        width: 100%;
+        height: 49px;
+        background-color: #29756F;
+        color: #FFFFFF;
+        border: 2px solid transparent;
+        border-radius: 5px;
+        margin-top: 32px;
+    }
+</style>
+
+<body>
+    <!-- <h1 class="text-center header">Nhập chi tiêu</h1> -->
+    <div class="container mt-4">
+        <div class="title d-flex justify-content-between mt-5 mb-3">
+            <span>
+                <a style="color: black;" href=""><i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </span>
+            <h5>Chỉnh sửa</h5>
+            <span>
+                <!-- <i class="fa-solid fa-pencil" style="cursor: pointer;" id="saveTransaction"></i> -->
+            </span>
+        </div>
+        <div class="tab-container d-flex justify-content-between mb-3">
+            <div id="tab-expense" class="tab-item active">
+                <span>Chi tiêu</span>
+            </div>
+            <div id="tab-invoice" class="tab-item">
+                <span>Thu nhập</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4" id="content1">
+
+        <div class="row">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="datePicker"><strong>Ngày:</strong></label>
+                </div>    
+            </div>
+            <div class="col-9 d-flex">
+                <button id="decrementDate1" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
+                <input  type="text" id="datePicker1" class="form-control input-date text-center" value="1-11-2023" readonly>
+                <button id="incrementDate1" class="btn btn-light"><i class="fas fa-chevron-right" ></i></button>                
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0"  for="note"><strong>Ghi chú:</strong></label>
+                </div>    
+            </div>
+            <div class="col-9">
+                <input type="text" id="note"  class="form-control note-input" placeholder="Ghi chú...">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="money"><strong>Tiền chi:</strong></label>
+                </div>
+            </div>    
+            <div class="col-9">
+                <input type="text" id="money" class="form-control money-input" placeholder="0đ">
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="money"><strong>Danh mục:</strong></label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="mt-3" id="danhMucContainer"></div> -->
+
+        <div class="container">
+            <div class="category-list mt-4">
+    
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <button id="btn-save" type="submit" class="btn-edit inactive-btn">Lưu</button>
+        </div>
+        
+    </div>
+    
+    <div class="container mt-4" id="content2">
+        <div class="row">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="datePicker"><strong>Ngày:</strong></label>
+                </div>    
+            </div>
+            <div class="col-9 d-flex">
+                <!-- <div class="d-flex"> -->
+                    <button id="decrementDate2" class="btn btn-light"><i class="fas fa-chevron-left"></i></button>                    
+                    <input  type="text" id="datePicker2" class="form-control input-date text-center" value="13-10-2023" readonly>
+                    <button id="incrementDate2" class="btn btn-light"><i class="fas fa-chevron-right"></i></button>                
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="note"><strong>Ghi chú:</strong></label>
+                </div>    
+            </div>
+            <div class="col-9">
+                <input type="text" id="note-income" class="form-control text-center note-input" placeholder="Ghi chú...">
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-3">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="money"><strong>Tiền chi:</strong></label>
+                </div>
+            </div>    
+            <div class="col-9">
+                <input type="text" id="money-income" class="form-control text-center money-input" placeholder="0đ">
+            </div>
+        </div>
+
+        <div class="row mt-3"> 
+            <div class="col-12">
+                <div style="height: 100%" class="d-flex align-items-center">
+                    <label class="text-center mb-0" for="money"><strong>Danh mục:</strong></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="category-list2 mt-4">
+    
+            </div>
+        </div>
+
+
+        <!-- <div class="container" data-bs-toggle="modal" data-bs-target="#myModal">
+            <div class="row" style="margin-top: 170px;">
+                <button class="btn-delete" id="btnAddIncome" >
+                    <div >Xóa</div>
+                </button>
+            </div>
+        </div> -->
+
+        <div class="container">
+            <button id="btn-save" type="submit" class="btn-edit inactive-btn">Lưu</button>
+        </div>
+    </div>
+      
+
+     <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(123, 210, 126, 0.5);">
+                <strong class="me-auto" style="color: #409a17;">Cập nhật thành công</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0" style="z-index: 11; width: 50%;  margin-top: 15%; margin-right: 5px;">
+        <div id="errToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 8px;">
+            <div class="toast-body" style="border-radius: 8px; background-color: rgba(236, 15, 15, 0.441);">
+                <strong class="me-auto" style="color: #df3e12;">Thêm mới thất bại</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content m-auto" style="width: 90%; border-radius: 8px;">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center font-weight-bold" id="exampleModalLabel">Xóa danh mục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center m-0 p-0">Bạn có chắc chắn muốn xóa danh mục?</p>
+                </div>
+                <div class="modal-footer justify-content-center" style="border: none;">
+                    <button onclick="handleDelete()" data-bs-dismiss="modal" aria-label="Close"
+                        style="width: 100px; height: 45px; border-radius: 8px; background-color: #fd626d; color: white;"
+                        type="button" class="btn" id="confirmButton">Đồng ý</button>
+                    <button data-bs-dismiss="modal" aria-label="Close"
+                        style="width: 100px; height: 45px; border-radius: 8px; background-color: #CCC3C3; color: white;"
+                        type="button" class="btn"  id="cancelButton">Huỷ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="navbar" style="margin-top: 100px;">
+
+        
+    </div>
+</body>
+<script src="../assets/js/bootstrap/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    $(function() {
+      $("#datePicker1").datepicker({
+        dateFormat: 'd-m-yy',
+        onSelect: function(dateText, inst) {
+          // Xử lý khi người dùng chọn ngày
+        }
+      });
+
+
+      $("#datePicker2").datepicker({
+        dateFormat: 'd-m-yy',
+        onSelect: function(dateText, inst) {
+          // Xử lý khi người dùng chọn ngày
+        }
+      });
+
+
+// code còn lại của bạn ở đây
+// ...
+
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Code của bạn để lấy dữ liệu từ storage và gán vào input đã được bảo quản nguyên trạng
+    });
+</script>
+
+<script>
+
+const handleDelete = () => {
+                 var url = new URL(window.location.href);
+            
+            var urlParams = url.searchParams;
+            
+            var categoryId = parseInt(urlParams.get('transactionId'));
+            
+            
+            var codeName = urlParams.get('codeName'); 
+            if(codeName == "expense") codeName = "expenses";
+            
+            let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+            expenses = expenses.filter(expense => expense.id !== categoryId);
+
+            localStorage.setItem(codeName, JSON.stringify(expenses));
+            var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+            myToast.show();
+
+            // Close the toast after 2 seconds
+            setTimeout(function () {
+                myToast.hide();
+                window.location.href="/page/statistic.html";
+            }, 2000);
+            
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var url = new URL(window.location.href);
+
+            var urlParams = url.searchParams;
+
+            var categoryId = urlParams.get('transactionId');
+
+            var codeName = urlParams.get('codeName');
+            if(codeName == "expense") codeName = "expenses";
+
+
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+
+            const expenseToEdit = expenses.find(expense => expense.id == categoryId);
+
+            // Kiểm tra xem có dữ liệu chi tiêu trong local storage không
+            if (expenseToEdit) {
+                // Ở đây bạn có thể sử dụng biến `expenses` để làm bất kỳ điều gì bạn cần
+                document.getElementById('note').value = expenseToEdit.note;
+                document.getElementById('note-income').value = expenseToEdit.note;
+                document.getElementById('datePicker1').value = expenseToEdit.date
+                document.getElementById('money').value = expenseToEdit.money;
+                document.getElementById('money-income').value = expenseToEdit.money;
+                document.getElementById('datePicker2').value = expenseToEdit.date
+
+
+            } else {
+                // Nếu không có dữ liệu chi tiêu, bạn có thể thông báo hoặc thực hiện các xử lý khác
+                console.log("Không có dữ liệu chi tiêu trong local storage.");
+            }
+
+            const datePicker1 = document.getElementById('datePicker1');
+            const datePicker2 = document.getElementById('datePicker2');
+
+            // Lấy đối tượng nút giảm ngày
+            const decrementDateButton1 = document.getElementById('decrementDate1');
+            const decrementDateButton2 = document.getElementById('decrementDate2');
+
+            // Lấy đối tượng nút tăng ngày
+            const incrementDateButton1 = document.getElementById('incrementDate1');
+            const incrementDateButton2 = document.getElementById('incrementDate2');
+
+            // Tạo một đối tượng Date cho ngày hiện tại
+            let currentDate1 = new Date(`${datePicker1.value.split('-')[2]}-${datePicker1.value.split('-')[1]}-${datePicker1.value.split('-')[0]}`);
+            let currentDate2 = new Date(`${datePicker2.value.split('-')[2]}-${datePicker2.value.split('-')[1]}-${datePicker2.value.split('-')[0]}`);
+
+
+            // Cập nhật giá trị trường nhập liệu với ngày hiện tại
+            function updateDatePicker(input, date) {
+                const day = date.getDate();
+                const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, cần cộng thêm 1
+                const year = date.getFullYear();
+                const formattedDate = `${day}-${month}-${year}`;
+                input.value = formattedDate;
+            }
+
+            // Thiết lập sự kiện cho nút giảm ngày - content1
+            decrementDateButton1.addEventListener('click', () => {
+                currentDate1.setDate(currentDate1.getDate() - 1);
+                updateDatePicker(datePicker1, currentDate1);
+            });
+
+            // Thiết lập sự kiện cho nút tăng ngày - content1
+            incrementDateButton1.addEventListener('click', () => {
+                currentDate1.setDate(currentDate1.getDate() + 1);
+                updateDatePicker(datePicker1, currentDate1);
+            });
+
+            // Thiết lập sự kiện cho nút giảm ngày - content2
+            decrementDateButton2.addEventListener('click', () => {
+                currentDate2.setDate(currentDate2.getDate() - 1);
+                updateDatePicker(datePicker2, currentDate2);
+            });
+
+            // Thiết lập sự kiện cho nút tăng ngày - content2
+            incrementDateButton2.addEventListener('click', () => {
+                currentDate2.setDate(currentDate2.getDate() + 1);
+                updateDatePicker(datePicker2, currentDate2);
+            });
+
+            // Cập nhật giá trị trường nhập liệu với ngày hiện tại
+            updateDatePicker(datePicker1, currentDate1);
+            updateDatePicker(datePicker2, currentDate2);
+
+
+      // xử lí sự kiện khi bạn chọn từ datedaypicker
+            $("#datePicker1, #datePicker2").datepicker({
+                onSelect: function(dateText, inst) {
+                currentDate1 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+                updateDatePicker(datePicker1, currentDate1);
+                // hoặc cập nhật sự kiện ngày mà bạn muốn thay đổi sau nếu cần.
+                }
+            });
+
+        document.getElementById('btn-save').addEventListener('click', function () {
+            var url = new URL(window.location.href);
+            
+            var urlParams = url.searchParams;
+            
+            var categoryId = parseInt(urlParams.get('transactionId'));
+            
+            
+            var codeName = urlParams.get('codeName'); 
+            if(codeName == "expense") codeName = "expenses";
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+
+            const editingTransactionId = expenses.find(expense => expense.id === categoryId);
+
+            const noteInput1 = document.getElementById('note');
+            const noteInput2 = document.getElementById('note-income');
+            const moneyInput1 = document.getElementById('money');
+            const moneyInput2 = document.getElementById('money-income');
+
+            let updatedTransaction = null;
+
+            if (editingTransactionId) {
+                const idd = localStorage.getItem("selectedCate").split('-')[1];
+                const dataCate = JSON.parse(localStorage.getItem("clickCate"));
+
+        // let categories = JSON.parse(localStorage.getItem("categories"))
+        
+        // categories =  categories.filter((category) => category.id == idd);
+        // const dataCate = categories[0];
+                if ( moneyInput1.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker1.value,
+                        category: dataCate,
+                        note: noteInput1.value,
+                        money: moneyInput1.value
+                    };
+                } else if (moneyInput2.value) {
+                    updatedTransaction = {
+                        id: editingTransactionId.id,
+                        date: datePicker2.value,
+                        category: dataCate,
+                        note: noteInput2.value,
+                        money: moneyInput2.value
+                    };
+                }
+                // console.log(editingTransactionId);
+                // console.log(updatedTransaction);
+                if (updatedTransaction) {
+                    // Lưu giao dịch đã chỉnh sửa vào danh sách giao dịch (expenses)
+                    expenses.forEach((expense, index) => {
+                        if (expense.id === editingTransactionId.id) {
+                            expenses[index] = updatedTransaction;
+                        }
+                    });
+
+                    // Lưu danh sách giao dịch mới vào Local Storage
+                    localStorage.setItem(codeName, JSON.stringify(expenses));
+
+                    var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+                    myToast.show();
+
+                    setTimeout(function () {
+                    myToast.hide();
+                    window.location.reload();
+                    }, 2000);
+                }
+            }
+        });
+
+        // document.getElementById('btnDeleteExpense').addEventListener('click', function () {
+        //     var url = new URL(window.location.href);
+            
+        //     var urlParams = url.searchParams;
+            
+        //     var categoryId = parseInt(urlParams.get('categoryId'));
+            
+            
+        //     var codeName = urlParams.get('codeName'); 
+            
+        //     let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+        //     expenses = expenses.filter(expense => expense.id !== categoryId);
+
+        //     localStorage.setItem(codeName, JSON.stringify(expenses));
+
+        // });
+
+        // const handleDelete = () => {
+        //          var url = new URL(window.location.href);
+            
+        //     var urlParams = url.searchParams;
+            
+        //     var categoryId = parseInt(urlParams.get('categoryId'));
+            
+            
+        //     var codeName = urlParams.get('codeName'); 
+            
+        //     let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+        //     expenses = expenses.filter(expense => expense.id !== categoryId);
+
+        //     localStorage.setItem(codeName, JSON.stringify(expenses));
+        // }
+        // document.getElementById('saveTransaction').addEventListener('click', function () {
+        //     var url = new URL(window.location.href);
+            
+        //     var urlParams = url.searchParams;
+            
+        //     var categoryId = parseInt(urlParams.get('categoryId'));
+            
+            
+        //     var codeName = urlParams.get('codeName'); 
+        //     const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+
+        //     const editingTransactionId = expenses.find(expense => expense.id === categoryId);
+
+        //     const noteInput1 = document.getElementById('note');
+        //     const noteInput2 = document.getElementById('note-income');
+        //     const moneyInput1 = document.getElementById('money');
+        //     const moneyInput2 = document.getElementById('money-income');
+
+        //     let updatedTransaction = null;
+
+        //     if (editingTransactionId) {
+        //         if (noteInput1.value && moneyInput1.value) {
+        //             updatedTransaction = {
+        //                 id: editingTransactionId.id,
+        //                 date: datePicker1.value,
+        //                 category: JSON.parse(localStorage.getItem('clickCate')),
+        //                 note: noteInput1.value,
+        //                 money: moneyInput1.value
+        //             };
+        //         } else if (noteInput2.value && moneyInput2.value) {
+        //             updatedTransaction = {
+        //                 id: editingTransactionId.id,
+        //                 date: datePicker2.value,
+        //                 category: JSON.parse(localStorage.getItem('clickCate')),
+        //                 note: noteInput2.value,
+        //                 money: moneyInput2.value
+        //             };
+        //         }
+        //         // console.log(editingTransactionId);
+
+        //         if (updatedTransaction) {
+        //             // Lưu giao dịch đã chỉnh sửa vào danh sách giao dịch (expenses)
+        //             expenses.forEach((expense, index) => {
+        //                 if (expense.id === editingTransactionId.id) {
+        //                     expenses[index] = updatedTransaction;
+        //                 }
+        //             });
+
+        //             // Lưu danh sách giao dịch mới vào Local Storage
+        //             localStorage.setItem(codeName, JSON.stringify(expenses));
+
+        //             var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+        //             myToast.show();
+
+        //             setTimeout(function () {
+        //             myToast.hide();
+        //             window.location.reload();
+        //             }, 2000);
+        //         }
+        //     }
+        // });
+
+        const modal = document.getElementById("myModal");
+        const confirmButton = document.getElementById("confirmButton");
+        const cancelButton = document.getElementById("cancelButton");
+
+        // document.getElementById('btnDeleteExpense').addEventListener("click", () => {
+        //     modal.style.display = "block";
+        // });
+
+        cancelButton.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        confirmButton.addEventListener("click", () => {
+        modal.style.display = "none";
+
+        var url = new URL(window.location.href);
+            
+        var urlParams = url.searchParams;
+        
+        var categoryId = parseInt(urlParams.get('categoryId'));
+        
+        
+        var codeName = urlParams.get('codeName'); 
+        
+        let expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+        expenses = expenses.filter(expense => expense.id !== categoryId);
+
+        localStorage.setItem(codeName, JSON.stringify(expenses));
+        });
+
+
+            renderCategories('category-list', 'expense');
+            renderCategories('category-list2', 'income');
+        });
+
+        function getCategories() {
+            const categoriesJSON = localStorage.getItem('categories');
+            if (categoriesJSON) {
+                return JSON.parse(categoriesJSON);
+            } else {
+                return [];
+            }
+        }
+
+        function renderCategories(className, categoryType) {
+            
+            var url = new URL(window.location.href);
+            
+            var urlParams = url.searchParams;
+            
+            var categoryId = urlParams.get('transactionId');
+            
+            var codeName = urlParams.get('codeName');
+            if(codeName == "expense") codeName = "expenses";
+            
+            const expenses = JSON.parse(localStorage.getItem(codeName)) || [];
+            
+            const expenseToEdit = expenses.find(expense => expense.id == categoryId);
+            // console.log(expenses);  
+
+            const categories = getCategories();
+
+            if(codeName == "expenses") codeName = "expense";
+            
+            const categoryList = document.querySelector(`.${className}`);
+            let selectedCategory = null;
+            var dataCate = null;
+
+
+            // Xóa tất cả các danh mục hiện có trên giao diện (nếu có)
+            categoryList.innerHTML = '';
+
+            let danhMucInCurrentRow = 0;
+            let currentRow = document.createElement('div');
+            currentRow.className = 'row mt-3';
+            categoryList.appendChild(currentRow);
+
+            const filteredCategories = categories.filter(category => category.categoryType == codeName);
+            // console.log(codeName);
+
+            filteredCategories.forEach((category) => {
+                if (danhMucInCurrentRow === 3) {
+                    currentRow = document.createElement('div');
+                    currentRow.className = 'row mt-3';
+                    categoryList.appendChild(currentRow);
+                    danhMucInCurrentRow = 0;
+                }
+
+                const svgPath = `../assets/images/${category.icon}.svg`;
+
+                fetch(svgPath)
+                    .then(response => response.text())
+                    .then(svgText => {
+                        const parser = new DOMParser();
+                        const svgDoc = parser.parseFromString(svgText, "image/svg+xml");
+
+                        const paths = svgDoc.querySelectorAll('path');
+                        paths.forEach(path => {
+                            path.setAttribute('fill', category.iconColor);
+                        });
+
+                        const svgString = new XMLSerializer().serializeToString(svgDoc);
+                        const encodedSVG = btoa(svgString);
+                        const dataURL = `data:image/svg+xml;base64,${encodedSVG}`;
+
+                        // Tạo cột cho danh mục và thêm vào chuỗi HTML
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.className = 'col-4 category-item mb-3';
+
+                        const categoryContent = document.createElement('div');
+                        categoryContent.className = 'd-flex flex-column justify-content-center align-items-center category';
+                        categoryContent.style.width = '111px';
+                        categoryContent.style.height = '90px';
+                        categoryContent.style.background = 'white';
+                        categoryContent.style.borderRadius = '8px';
+                        categoryContent.style.border = '0.2px solid lightgray';
+                        categoryContent.style.cursor = 'pointer';
+
+                        if(expenseToEdit['category'].name == category.name) {
+                            selectedCategory = categoryContent;
+
+                            selectedCategory.classList.add('selected-category');
+                        }
+                        // console.log(category);
+                        // console.log(expenseToEdit['category']);
+                        // Thêm sự kiện click cho danh mục
+                        categoryContent.addEventListener('click', function () {
+                            localStorage.setItem('clickCate', JSON.stringify(category));
+                            if (selectedCategory) {
+                                selectedCategory.classList.remove('selected-category');
+                            }
+                            // Đặt danh mục hiện tại là danh mục được chọn
+                            selectedCategory = categoryContent;
+                            
+
+                            // Thêm lớp 'selected-category' cho danh mục hiện tại
+                            selectedCategory.classList.add('selected-category');
+                        });
+
+                        const iconDiv = document.createElement('div');
+                        iconDiv.className = 'icon d-flex justify-content-center align-items-center';
+                        iconDiv.style.backgroundColor = category.iconBgColor;
+                        iconDiv.style.height = '40px';
+                        iconDiv.style.width = '40px';
+                        iconDiv.style.borderRadius = '12px';
+
+                        const img = new Image();
+                        img.src = dataURL;
+                        img.alt = '';
+
+                        const label = document.createElement('label');
+                        label.className = 'mt-2 label-cate';
+                        label.style.textAlign = 'center';
+                        label.textContent = category.name;
+
+                        iconDiv.appendChild(img);
+                        categoryContent.appendChild(iconDiv);
+                        categoryContent.appendChild(label);
+                        categoryDiv.appendChild(categoryContent);
+                        currentRow.appendChild(categoryDiv);
+                    });
+
+                danhMucInCurrentRow++;
+            });
+
+            
+            
+        }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const btnChi = document.getElementById("tab-expense");
+        const btnTieu = document.getElementById("tab-invoice");
+        const content1 = document.getElementById("content1");
+        const content2 = document.getElementById("content2");
+
+        btnChi.addEventListener("click", function () {
+            btnChi.classList.add('active');
+            btnTieu.classList.remove('active');
+            content2.style.opacity = 0;
+            setTimeout(function () {
+                content2.style.display = "none";
+            }, 300);
+
+            setTimeout(function () {
+                content1.style.display = "block";
+                content1.style.opacity = 1;
+            }, 300);
+
+            btnChi.classList.add("active-switch");
+            btnTieu.classList.remove("active-switch");
+        });
+
+        btnTieu.addEventListener("click", function () {
+            btnTieu.classList.add('active');
+            btnChi.classList.remove('active');
+            content1.style.opacity = 0;
+            setTimeout(function () {
+                content1.style.display = "none";
+            }, 300);
+
+            setTimeout(function () {
+                content2.style.display = "block";
+                content2.style.opacity = 1;
+            }, 300);
+
+            btnTieu.classList.add("active-switch");
+            btnChi.classList.remove("active-switch");
+        });
+    });
+</script>
+
+<script>
+    fetch('../components/navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+            const wallet_nav = document.getElementById("wallet-nav");
+            wallet_nav.setAttribute("src", "../assets/images/wallet_active.svg");
+        });
+
+        $( function() {
+    $( "#datePicker1" ).datepicker();
+  } );
+</script>
+</html>
+
+<style>
+.header {
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+#content2{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.input-date{
+    width: 100%; height: 40px; background: white; border-radius: 8px; border: 1px #F2EAEA solid
+}
+
+.active-switch {
+    background-color: #29756F;
+    color: #FCFCFC;
+}
+
+.btn-switch {
+    background-color: #F1F1FA;
+    color: #000000;
+}
+
+.btn-switch {
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.note-input, .money-input{
+    width: 100%; height: 40px; background: white; border-radius: 8px; border: 1px #F2EAEA solid
+}
+
+.category-img {
+    background: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 44px;
+}
+
+.label-cate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #2B2B2B; font-size: 12px; font-weight: 400; word-wrap: break-word"
+}
+
+.btn-add{
+    width: 100%;
+    height: 49px;
+    background-color: #29756F;
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    margin-top: 32px;
+}
+
+.btn-add-categories{
+    height: 80%;
+}
+
+.btn-add{
+    width: 100%; height: 51px; background: #29756F; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    display: none;
+}
+
+input {
+    width: 100%;
+}
+
+.selected-category {
+    border: 2px solid #000000 !important; /* Đổi màu khung viền khi được chọn */
+}
+
+.note-input {
+    text-align: left !important;
+    direction: ltr; /* Đặt hướng về bên trái */
+}
+
+.money-input {
+    text-align: right !important;
+    direction: ltr; /* Đặt hướng về bên trái */
+}
+
+.money-input::placeholder{
+    text-align: right;
+    
+}
+
+.note-input::placeholder{
+    text-align: left;
+    direction: ltr; /* Đặt hướng về bên trái */
+    white-space: nowrap; /* Không ngắt dòng */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Khi placeholder quá dài */
+}
+
+.tab-container {
+        background-color: #F1F1FA;
+        border-radius: 21px;
+    }
+
+.tab-item {
+    padding: 12px 0;
+    text-align: center;
+    width: 50%;
+    cursor: pointer;
+}
+
+.btn-delete{
+    background-color: #fd626d;
+    color: white;
+    width: 56.87px;
+    font-weight: 600;
+    height: 51px;
+    border-radius: 6px;
+    
+}
+
+.tab-item.active {
+        background-color: #29756F;
+        border-radius: 31px;
+        color: white;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        width: 90%;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    #confirmButton {
+        background-color: #fd626d;
+        color: white;
+        width: 30%;
+        color: white;
+        font-weight: 600;
+        height: 45px;
+        border-radius: 6px;
+        margin-right: 3px;
+    }
+
+    #cancelButton {
+        background-color: #ccc3c3;
+        color: white;
+        width: 30%;
+        color: white;
+        font-weight: 600;
+        height: 45px;
+        border-radius: 6px;
+        margin-left: 3px;
+    }
+</style>

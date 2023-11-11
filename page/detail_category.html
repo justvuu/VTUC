@@ -28,6 +28,10 @@
         bottom: -344px;
     }
 
+    .btn:hover {
+        color: white;
+    }
+
     .icon {
         width: 60px;
         height: 60px;
@@ -60,7 +64,7 @@
 
             <div class="form-group mb-4">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Mô tả:</label>
-                <input type="text" class="form-control fst-italic" id="description" readonly>
+                <input type="text" class="form-control" id="description" readonly>
             </div>
             <div class="form-group">
                 <label for="disc" class="text-start w-100 fw-bolder mb-1">Biểu tượng:</label>
@@ -118,7 +122,7 @@
         }
     }
 
-    // Lấy tham số truy vấn categoryIndex từ URL
+    // Lấy tham số truy vấn từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const categoryId = urlParams.get('categoryId');
 
@@ -137,7 +141,13 @@
 
     document.getElementById('category_name').value = selectedCategory.name;
     document.getElementById('category_type').textContent = selectedCategory.categoryType != "expense" ? "Thu nhập" : "Chi tiêu";
-    document.getElementById('description').value = selectedCategory.description != null ? selectedCategory.description : "(Không có mô tả)";
+    if(selectedCategory.description != null) {
+        document.getElementById('description').value = selectedCategory.description;
+    } else {
+        document.getElementById('description').value = "(Không có mô tả)";
+        document.getElementById('description').style.fontStyle = 'italic';
+    }
+     
 
     const iconDiv = document.querySelector('.iconDiv');
     const svgPath = `../assets/images/${selectedCategory.icon}.svg`;
